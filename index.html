@@ -257,8 +257,12 @@ footer span{font-size:0.82rem;color:var(--mid);letter-spacing:0.08em}
       </div>
     </div>
   </div>
-  <div class="hero-right">
+  <div class="hero-right" onclick="openVideo()" tabindex="0" role="button" aria-label="Play intro video" onkeydown="if(event.key==='Enter')openVideo()">
     <img src="images/denny.jpg" class="hero-portrait" alt="Denny Hultén" style="object-position:43% top">
+    <div class="portrait-veil"></div>
+    <div class="portrait-play">
+      <svg viewBox="0 0 24 24" fill="var(--text)"><polygon points="6,4 20,12 6,20"/></svg>
+    </div>
   </div>
 </section>
 
@@ -445,7 +449,7 @@ function handleOverlayClick(e){if(e.target===document.getElementById('modal'))cl
 // ── INTRO VIDEO ──────────────────────────────────────
 // TODO: replace with your actual YouTube video ID
 // e.g. for https://youtu.be/dQw4w9WgXcQ the ID is dQw4w9WgXcQ
-const INTRO_VIDEO_ID='pA8bBnuoxWw';
+const INTRO_VIDEO_ID='JUJ3qJADIDY';
 
 function openVideo(){
   document.getElementById('video-box').innerHTML=`<iframe src="https://www.youtube.com/embed/${INTRO_VIDEO_ID}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
