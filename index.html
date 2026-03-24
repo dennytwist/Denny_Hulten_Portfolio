@@ -269,7 +269,7 @@ footer span{font-size:0.82rem;color:var(--mid);letter-spacing:0.08em}
 <section id="work" style="padding:0 3.5rem">
   <div class="section-head">
     <h2 class="section-h">Selected Work</h2>
-    <span class="section-count">07 Cases</span>
+    <span class="section-count">08 Cases</span>
   </div>
   <div class="cases-grid" id="cases-grid"></div>
 </section>
@@ -325,7 +325,17 @@ footer span{font-size:0.82rem;color:var(--mid);letter-spacing:0.08em}
 
 <script>
 const CASES=[
-  {num:'01',title:"Play'n GO International Events: Early Access",img:'images/playngo.png',period:'2026–Ongoing',tag:'7 Countries',
+  {num:'01',title:'Länsförsäkringar GB&B: Level 2030',img:'images/level2030.png',period:'2026–2030',tag:'5-Year Strategy',
+   product:"Level 2030 is a five-year strategic concept for Länsförsäkringar Göteborg & Bohuslän's annual employee summit. Each year is a new level in a connected narrative arc: 2026 Earth, 2027 Forest, 2028 Sea, 2029 City, 2030 Space. The concept uses gamification mechanics to tie the company's annual goals to a unified five-year story, with pixel art visual identity running through every touchpoint. Year 1 fires up September 2026.",
+   assignment:[
+     {label:'Strategic concept',text:"Developed the full five-year gamification framework from scratch: five themed worlds, each year its own narrative environment and set of challenges. Not a visual theme applied to an existing format, but a new structural logic for how the company experiences strategy."},
+     {label:'Narrative architecture',text:"Each year's event is built around one boss (the main annual goal) and seven sub-bosses (the year's sub-goals). Teams earn Ability Cards as they complete levels, carrying those powers forward into the next year's boss fight. By 2030, the final boss in Level Rymd can only be defeated if you've collected all five cards."},
+     {label:'Programme redesign',text:"Replaced the traditional conference format (keynote, workshop, dinner) with game mechanics: Discovery Zone, Main Quest, Side Quests, Progress Ceremony, Lobby, and Evening Feast. Same content, completely different energy."},
+     {label:'Visual language',text:"Directed the pixel art visual system. Each of the five worlds has its own illustrated floating island: underground cave for Earth, forest for Forest, ocean for Sea, city for City, space for Space. All five appear in the key visual."},
+     {label:'Year bridges',text:"Designed the between-event touchpoints that keep the concept alive between annual summits. In December, environmental 'glitches' appear in the office: troll footprints on the floor, posters loading the next level. In January, the outgoing boss is officially defeated via internal film and the team receives their Ability Card."}
+   ],
+   result:'Five-year strategic concept won. Level 2030 runs 2026–2030 for Länsförsäkringar Göteborg & Bohuslän. Year 1 (Level Jord) launches September 2026.',videos:[]},
+  {num:'02',title:"Play'n GO International Events: Early Access",img:'images/playngo.png',period:'2026–Ongoing',tag:'7 Countries',
    product:"Early Access is a three-year international brand programme for Play'n GO, one of the world's leading iGaming software suppliers. 540 employees across seven countries (Sweden, Spain, UK, Malta, Hungary, Poland, Philippines), eight events per year across four locations, with a budget exceeding 100,000 EUR per event. The program uses gaming development metaphors to build a company-wide culture of self-leadership.",
    assignment:[
      {label:'Strategic reframe',text:"The client had been running employee events with declining participation. I reframed the problem: the events weren't failing because of execution. They were failing because they weren't designed around the people attending them."},
@@ -336,7 +346,7 @@ const CASES=[
      {label:'Ongoing delivery',text:'Serving as moderator/host across all events, managing venue coordination across Malta, Budapest, Växjö, and Manila, directing entertainment (Poplabbet as touring band).'}
    ],
    result:'Three-year deal secured. Participation climbed to 95%+ across all activities. The program transformed from something employees attended out of obligation to something they actively engaged with.',videos:[]},
-  {num:'02',title:'Länsförsäkringar Östgöta: The Health Journey',img:'images/halsoresan.jpeg',period:'2024–2025',tag:'Wellness Strategy',
+  {num:'03',title:'Länsförsäkringar Östgöta: The Health Journey',img:'images/halsoresan.jpeg',period:'2024–2025',tag:'Wellness Strategy',
    product:'The Health Journey was a year-long employee wellness initiative for Länsförsäkringar Östgöta, culminating in a company retreat at Högfjälls Resort in Sälen. The client originally asked for a company retreat. Through discovery, I identified that the real need was sustained employee wellness across the full year, not a single event. Built the concept, pitched it, and won the client away from their incumbent supplier entirely on the strength of the idea.',
    assignment:[
      {label:'Concept creation',text:'Developed "The Health Journey" around the principle that every participant\'s journey is unique. The organizing visual, The Health Compass, mapped four dimensions of health: Physical, Social, Emotional, and Psychological.'},
@@ -346,7 +356,7 @@ const CASES=[
      {label:'Client empowerment',text:'Made a deliberate choice to let the client\'s internal project group own the success publicly. At the retreat, the internal team received a standing ovation, even though Eventity had done the creative heavy lifting.'}
    ],
    result:'The Health Journey became the highest-earning and highest-profit project in Eventity\'s history. Won the client from their previous supplier purely on the concept and pitch.',videos:[]},
-  {num:'03',title:'Länsförsäkringar GB&B: STARS Summit',img:'images/stars.png',period:'2024',tag:'5-Year Partnership',
+  {num:'04',title:'Länsförsäkringar GB&B: STARS Summit',img:'images/stars.png',period:'2024',tag:'5-Year Partnership',
    product:'Annual summit for 550 employees of Länsförsäkringar Göteborg & Bohuslän, part of a five-year strategic creative partnership. The 2024 edition, STARS, built the entire event around astrology: zodiac signs as a framework for team identity, stage shows themed around constellations, and content that tied the stars metaphor back to the company\'s strategic direction. Participant feedback rated STARS the best summit in the partnership\'s history.',
    assignment:[
      {label:'Concept',text:'Developed the astrology/zodiac framework from scratch, not just as a visual theme but as a structural device that shaped how attendees were grouped, how entertainment was sequenced, and how the event narrative connected to the client\'s long-term goals.'},
@@ -356,7 +366,7 @@ const CASES=[
      {label:'Stakeholder coordination',text:'Served as the single point of creative alignment between project manager, client leadership, artists, production team, and suppliers across the full project lifecycle.'}
    ],
    result:'Participant feedback rated STARS the best summit in the partnership\'s five-year history.',videos:[{label:'Behind-the-scenes footage',url:'https://youtu.be/iSVYipaUSYQ'}]},
-  {num:'04',title:'Volvo Cars Product Launch EMEA & APAC',img:'images/volvo.jpeg',period:'2023',tag:'Product Launch',
+  {num:'05',title:'Volvo Cars Product Launch EMEA & APAC',img:'images/volvo.jpeg',period:'2023',tag:'Product Launch',
    product:"Entertainment programme for Volvo Cars' international product launch: two separate week-long events (EMEA, then APAC), 300 attendees from multiple countries and cultures. Core challenge: design a three-part entertainment story that lands regardless of language, cultural background, or country of origin.",
    assignment:[
      {label:'Cross-cultural entertainment',text:'Built a three-part entertainment narrative using visual storytelling, movement, and music, connecting without relying on language or local context.'},
@@ -366,7 +376,7 @@ const CASES=[
      {label:'Broadcast-ready delivery',text:"Coordinated with the production team to ensure all content met broadcast standards and integrated with Volvo's wider launch materials."}
    ],
    result:'The EMEA concept was successful enough that Volvo brought it directly to APAC the following week. A repeat engagement based on results alone.',videos:[{label:'Compilation of Event Footage',url:'https://youtu.be/Z2uKj7mzEy8'}]},
-  {num:'05',title:'Passion for Climate',img:'images/passion.jpeg',period:'2021',tag:'National Tour · Arvsfonden',
+  {num:'06',title:'Passion for Climate',img:'images/passion.jpeg',period:'2021',tag:'National Tour · Arvsfonden',
    product:'Passion for Climate was a three-year national project merging climate science with live performance, funded by Svenska Allmänna Arvsfonden in collaboration with Chalmers University. The project toured Swedish schools with a theatre show, interactive workshops, and seminars. Featured multiple times at TEDx Gothenburg.',
    assignment:[
      {label:'Won the funding',text:"Led the application to Arvsfonden and wrote the project proposal that secured three years of government funding for a format that didn't exist yet."},
@@ -376,7 +386,7 @@ const CASES=[
      {label:'Team and stakeholder management',text:'Recruited and mentored artists, managed budget and scheduling, reported to Arvsfonden and Chalmers University.'}
    ],
    result:'Three-year national programme delivered. Reached schools across Sweden. Featured at TEDx Göteborg multiple times. Fully funded by Arvsfonden in partnership with Chalmers University.',videos:[{label:'Theatre show',url:'https://youtu.be/tH-J_zeeGbg?si=L4Xgqvt3rwlbCdR0&t=14'},{label:'TEDx talk',url:'https://youtu.be/_eVDLqogkFI'},{label:'Instagram',url:'https://www.instagram.com/passionforclimate/'}]},
-  {num:'06',title:'P3 Guld: Cleo Show',img:'images/p3guld.jpeg',period:'2023',tag:'Live Television',
+  {num:'07',title:'P3 Guld: Cleo Show',img:'images/p3guld.jpeg',period:'2023',tag:'Live Television',
    product:'Co-produced the P3 Guld 2023 gala performance featuring Cleo performing Tjejerna, tjejerna, tjejerna, for live national television broadcast. A single performance that needed to work simultaneously for two different audiences: the live crowd in the venue and viewers watching at home.',
    assignment:[
      {label:'Concept development',text:'Built the visual and narrative concept, integrating music, choreography, and staging into a single piece that told a story, not just accompanied a song.'},
@@ -385,7 +395,7 @@ const CASES=[
      {label:'TV production collaboration',text:'Coordinated with TV producers, directors, and camera teams on shot design, timing, and transitions.'}
    ],
    result:'Delivered on live national television. The performance worked as both a venue experience and a broadcast production: two fundamentally different contexts served by one show.',videos:[{label:'Broadcast video',url:'https://youtu.be/2LU2xnp6zrY?si=AcwH3T0wMxghb7QZ'}]},
-  {num:'07',title:'Gothenburg Dance Festival',img:'images/gothenburg.jpg',period:'2009–2017',tag:'Festival Production',
+  {num:'08',title:'Gothenburg Dance Festival',img:'images/gothenburg.jpg',period:'2009–2017',tag:'Festival Production',
    product:"Co-created and produced Gothenburg Dance Festival, one of Scandinavia's largest urban expression competitions. 10,000+ spectators and participants across 8 consecutive years as part of the Gothenburg City Culture Festival. Battles, showcases, international guest artists, summer camps, jams, and after-parties.",
    assignment:[
      {label:'Competition format design',text:'Built the competition structure from scratch: categories, judging criteria, qualification rounds, finals format. Refined annually based on participant feedback.'},
