@@ -145,7 +145,10 @@ footer span{font-size:0.82rem;color:var(--mid);letter-spacing:0.08em}
 .hero-right:focus{outline:2px solid var(--accent);outline-offset:2px}
 .portrait-veil{position:absolute;inset:0;background:rgba(10,10,8,0);transition:background 0.35s;pointer-events:none;z-index:1}
 .hero-right:hover .portrait-veil{background:rgba(10,10,8,0.32)}
-.portrait-play{position:absolute;bottom:2rem;right:2rem;width:64px;height:64px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:transform 0.22s ease-out,box-shadow 0.22s;z-index:2;pointer-events:none}
+.portrait-play-wrap{position:absolute;bottom:2rem;right:2rem;display:flex;align-items:center;gap:0.75rem;z-index:2;pointer-events:none}
+.portrait-play-label{font-family:'Barlow Condensed',sans-serif;font-size:0.82rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(239,239,237,0.9);background:rgba(239,239,237,0.15);padding:0.4rem 0.85rem;backdrop-filter:blur(6px);transition:background 0.25s,color 0.25s}
+.hero-right:hover .portrait-play-label{background:rgba(239,239,237,0.22);color:#fff}
+.portrait-play{width:64px;height:64px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;transition:transform 0.22s ease-out,box-shadow 0.22s;flex-shrink:0}
 .hero-right:hover .portrait-play{transform:scale(1.12);box-shadow:0 0 0 10px rgba(196,255,60,0.18)}
 .portrait-play svg{width:20px;height:20px;margin-left:3px}
 
@@ -204,7 +207,9 @@ footer span{font-size:0.82rem;color:var(--mid);letter-spacing:0.08em}
   footer span{font-size:0.75rem}
 
   /* PORTRAIT PLAY */
-  .portrait-play{width:52px;height:52px;bottom:1.25rem;right:1.25rem}
+  .portrait-play-wrap{bottom:1.25rem;right:1.25rem}
+  .portrait-play{width:52px;height:52px}
+  .portrait-play-label{font-size:0.72rem;padding:0.35rem 0.65rem}
   .video-overlay{padding:0}
   .video-box{aspect-ratio:16/9}
 
@@ -260,8 +265,11 @@ footer span{font-size:0.82rem;color:var(--mid);letter-spacing:0.08em}
   <div class="hero-right" onclick="openVideo()" tabindex="0" role="button" aria-label="Play intro video" onkeydown="if(event.key==='Enter')openVideo()">
     <img src="images/denny.jpg" class="hero-portrait" alt="Denny Hultén" style="object-position:43% top">
     <div class="portrait-veil"></div>
-    <div class="portrait-play">
-      <svg viewBox="0 0 24 24" fill="var(--text)"><polygon points="6,4 20,12 6,20"/></svg>
+    <div class="portrait-play-wrap">
+      <span class="portrait-play-label">About me in 3 min</span>
+      <div class="portrait-play">
+        <svg viewBox="0 0 24 24" fill="var(--text)"><polygon points="6,4 20,12 6,20"/></svg>
+      </div>
     </div>
   </div>
 </section>
@@ -329,9 +337,9 @@ const CASES=[
    product:"Level 2030 is a five-year game world built for 550 real employees. Each year is a new level with its own environment, a main boss representing the company's biggest annual goal, sub-bosses for each sub-goal, and activities designed to make participants feel like they are playing an actual game. Complete a level and earn an Ability Card. Lose your cards and you cannot beat the final boss in 2030. Inspired by Super Mario, Minecraft, and Farmville, the pixel art world spans five levels: 2026 Earth, 2027 Forest, 2028 Sea, 2029 City, 2030 Space. The concept was seeded a year before launch: in 2025, participants got a cliffhanger sneak peek into the pixel art world, building anticipation before a single level had been played. Year 1 fires up September 2026 with Swedish pop star Veronica Maggio headlining the evening.",
    assignment:[
      {label:'Strategic concept',text:"Developed the full five-year gamification framework from scratch: five themed worlds, each with its own narrative environment, boss fight, and set of challenges. Not a visual theme applied to an existing format, but a new structural logic for how 550 people experience company strategy together."},
-     {label:'Narrative architecture',text:"Each year's event is built around one boss (the main annual goal) and seven sub-bosses (the year's sub-goals). Teams earn Ability Cards as they complete levels, carrying those powers forward into the next year's boss fight. By 2030, the final boss in Level Space can only be defeated if you've collected all five cards."},
+     {label:'Narrative architecture',text:"Everything in the game world is anchored in something real. The main boss each year represents the company's single biggest annual goal. The seven sub-bosses are the seven sub-goals the organisation has actually set for that year. The lore, the obstacles, the activities: all of it maps directly to the company's strategic priorities. Participants are not playing a game that happens to look like work. They are working through their real challenges inside a world designed to make those challenges feel worth fighting. Teams earn Ability Cards as they complete levels, carrying those powers forward into the next year's boss fight. By 2030, the final boss in Level Space can only be defeated if you have collected all five cards."},
      {label:'Programme redesign',text:"Replaced the traditional conference format (keynote, workshop, dinner) with game mechanics: Discovery Zone, Main Quest, Side Quests, Progress Ceremony, Lobby, and Evening Feast. Same strategic content, completely different energy."},
-     {label:'Visual language',text:"Directed the pixel art visual system inspired by Super Mario, Minecraft, and Farmville. Each of the five worlds has its own illustrated floating island: underground cave for Earth, forest for Forest, ocean for Sea, city for City, space for Space."},
+     {label:'Visual language',text:"Directed the pixel art visual system inspired by Super Mario, Minecraft, and Farmville. Five worlds, each a floating island with its own inhabitants and threats: a spider-infested underground cave for Earth, a troll-guarded woodland for Forest, a kraken-patrolled lighthouse platform for Sea, a rat-ruled city block for City, and an alien moonscape for Space."},
      {label:'The 2025 cliffhanger',text:"Before Level 2030 officially began, planted the seed at the 2025 summit: a reveal that gave 550 participants their first glimpse of the gamified pixel art world and a cliffhanger that made them want to come back. The concept had an audience before Year 1 even existed."},
      {label:'Year bridges',text:"Designed the between-event touchpoints that keep the concept alive all year. In December, environmental glitches appear in the office: troll footprints on floors, posters with the next level loading. In January, the outgoing boss is officially defeated via internal film and the team receives their Ability Card."},
      {label:'Entertainment',text:"Booked and directed Veronica Maggio as headline artist for the Year 1 evening event, anchoring the strategic programme to a cultural moment participants will remember."}
@@ -461,7 +469,7 @@ function handleOverlayClick(e){if(e.target===document.getElementById('modal'))cl
 // ── INTRO VIDEO ──────────────────────────────────────
 // TODO: replace with your actual YouTube video ID
 // e.g. for https://youtu.be/dQw4w9WgXcQ the ID is dQw4w9WgXcQ
-const INTRO_VIDEO_ID='JUJ3qJADIDY';
+const INTRO_VIDEO_ID='JEqo9sJRSW0';
 
 function openVideo(){
   document.getElementById('video-box').innerHTML=`<iframe src="https://www.youtube.com/embed/${INTRO_VIDEO_ID}?autoplay=1&rel=0&modestbranding=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
