@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Denny Hultén, Creative Director</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --pink:     #FFA3AC;
+  --black:    #000000;
+  --yellow:   #DDBA00;
+  --surface:  #FFF8F7;
+  --low:      #FFF0F0;
+  --high:     #FFE1E2;
+  --highest:  #FFDADC;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background: var(--pink);
+  color: var(--black);
+  overflow-x: hidden;
+}
+
+/* ──────────────────────────────────────
+   NAV
+────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.4rem 3rem;
+  background: var(--pink);
+  transition: background 0.3s, backdrop-filter 0.3s;
+}
+nav.scrolled {
+  background: rgba(255,163,172,0.7);
+  backdrop-filter: blur(20px);
+}
+.nav-logo {
+  font-size: 1.1rem; font-weight: 800; letter-spacing: -0.02em;
+  text-transform: uppercase; color: var(--black); text-decoration: none;
+}
+.nav-links { display: flex; align-items: center; gap: 2.5rem; }
+.nav-links a {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--black); text-decoration: none;
+  opacity: 0.55; transition: opacity 0.15s;
+}
+.nav-links a.active { opacity: 1; border-bottom: 2px solid var(--black); padding-bottom: 3px; }
+.nav-links a:hover { opacity: 1; }
+.nav-cta {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; background: var(--black); color: var(--surface);
+  padding: 0.65rem 1.5rem; text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.nav-cta:hover { background: var(--yellow); color: var(--black); }
+
+/* ──────────────────────────────────────
+   HERO
+────────────────────────────────────── */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 3rem 5rem;
+  padding-top: 5rem;
+}
+.hero-portrait-wrap {
+  position: absolute; top: 0; right: 0;
+  width: 58%; height: 85%;
+  overflow: hidden; z-index: 0;
+}
+.hero-portrait {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 43% top;
+  filter: grayscale(25%) contrast(1.08);
+}
+.hero-portrait-fade {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, var(--pink) 0%, transparent 30%),
+              linear-gradient(to top, var(--pink) 0%, transparent 40%);
+}
+.hero-tagline {
+  position: relative; z-index: 1;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; opacity: 0.5;
+  margin-bottom: 2rem;
+  opacity: 0; animation: fadeUp 0.5s ease-out 0.15s forwards;
+}
+.hero-heading {
+  position: relative; z-index: 1;
+  font-size: clamp(5.5rem, 14vw, 13rem);
+  font-weight: 800; letter-spacing: -0.04em;
+  text-transform: uppercase; line-height: 0.84;
+  margin-bottom: 3.5rem;
+  opacity: 0; animation: fadeUp 0.6s ease-out 0.25s forwards;
+}
+.hero-heading .outline {
+  -webkit-text-stroke: 2.5px var(--black);
+  color: transparent; display: block;
+}
+.hero-footer {
+  position: relative; z-index: 1;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 2rem; max-width: 62%;
+  opacity: 0; animation: fadeUp 0.6s ease-out 0.4s forwards;
+}
+.hero-desc {
+  font-size: 1.1rem; font-weight: 500; text-transform: uppercase;
+  line-height: 1.45; max-width: 360px;
+}
+.hero-stats { display: flex; gap: 2.5rem; flex-shrink: 0; }
+.stat-num {
+  font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em;
+  line-height: 1; display: block;
+}
+.stat-lbl {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; opacity: 0.45; margin-top: 0.25rem; display: block;
+}
+.hero-video-cta {
+  position: absolute; bottom: 3rem; right: 3rem;
+  display: flex; align-items: center; gap: 0.85rem;
+  cursor: pointer; z-index: 2;
+  opacity: 0; animation: fadeUp 0.5s ease-out 0.55s forwards;
+}
+.hero-video-cta span {
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+}
+.video-btn {
+  width: 52px; height: 52px;
+  background: var(--black); color: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; padding-left: 3px;
+  transition: background 0.2s, color 0.2s;
+}
+.hero-video-cta:hover .video-btn { background: var(--yellow); color: var(--black); }
+
+/* ──────────────────────────────────────
+   WORK
+────────────────────────────────────── */
+.work {
+  background: var(--black); color: var(--pink);
+  padding: 6rem 3rem 9rem;
+}
+.work-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 6rem;
+}
+.work-header h2 {
+  font-size: clamp(3.5rem, 8vw, 7.5rem); font-weight: 800;
+  text-transform: uppercase; letter-spacing: -0.04em; line-height: 0.86;
+}
+.work-meta {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; opacity: 0.45; padding-bottom: 0.6rem;
+}
+
+/* Cases grid: 12 col, asymmetric */
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 2rem;
+  row-gap: 4rem;
+}
+.case-item {
+  cursor: pointer; display: flex; flex-direction: column; gap: 1rem;
+  transition: opacity 0.2s;
+}
+.case-item:hover { opacity: 0.88; }
+.case-item:nth-child(1)  { grid-column: 1 / span 7; }
+.case-item:nth-child(2)  { grid-column: 8 / span 5; margin-top: 9rem; }
+.case-item:nth-child(3)  { grid-column: 1 / span 4; }
+.case-item:nth-child(4)  { grid-column: 5 / span 8; margin-top: 5rem; }
+.case-item:nth-child(5)  { grid-column: 1 / span 6; }
+.case-item:nth-child(6)  { grid-column: 7 / span 6; margin-top: 5rem; }
+.case-item:nth-child(7)  { grid-column: 2 / span 5; }
+.case-item:nth-child(8)  { grid-column: 7 / span 6; margin-top: 3rem; }
+
+.case-img-wrap {
+  position: relative; overflow: hidden;
+  background: var(--highest);
+}
+/* Aspect ratios by position */
+.case-item:nth-child(1) .case-img-wrap  { aspect-ratio: 16/9; }
+.case-item:nth-child(2) .case-img-wrap  { aspect-ratio: 1/1; }
+.case-item:nth-child(3) .case-img-wrap  { aspect-ratio: 3/4; }
+.case-item:nth-child(4) .case-img-wrap  { aspect-ratio: 16/9; }
+.case-item:nth-child(5) .case-img-wrap  { aspect-ratio: 4/5; }
+.case-item:nth-child(6) .case-img-wrap  { aspect-ratio: 4/5; }
+.case-item:nth-child(7) .case-img-wrap  { aspect-ratio: 3/4; }
+.case-item:nth-child(8) .case-img-wrap  { aspect-ratio: 16/9; }
+
+.case-img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(15%);
+  transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+  display: block;
+}
+.case-item:hover .case-img { transform: scale(1.06); }
+.case-yellow-overlay {
+  position: absolute; inset: 0;
+  background: var(--yellow); mix-blend-mode: multiply;
+  opacity: 0; transition: opacity 0.45s;
+}
+.case-item:hover .case-yellow-overlay { opacity: 0.35; }
+.case-num-badge {
+  position: absolute; top: 0; right: 0;
+  background: var(--yellow); color: var(--black);
+  font-size: 1.2rem; font-weight: 800; line-height: 1;
+  padding: 0.45rem 0.8rem;
+}
+.case-footer {
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.case-title {
+  font-size: 1.1rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: -0.01em; color: var(--pink); margin-bottom: 0.3rem; line-height: 1.1;
+}
+.case-tag {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; opacity: 0.45; color: var(--pink);
+}
+.case-arrow {
+  font-size: 1.3rem; color: var(--pink); opacity: 0.5;
+  transition: opacity 0.25s, transform 0.25s;
+  transform: rotate(-45deg); flex-shrink: 0; margin-top: 0.15rem;
+}
+.case-item:hover .case-arrow { opacity: 1; transform: rotate(-45deg) translate(3px,-3px); }
+
+/* ──────────────────────────────────────
+   ABOUT
+────────────────────────────────────── */
+.about {
+  background: var(--pink);
+  padding: 8rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8rem;
+  align-items: start;
+}
+.about-eyebrow {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; opacity: 0.45;
+  display: block; margin-bottom: 2rem;
+}
+.about-heading {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-weight: 800; text-transform: uppercase;
+  letter-spacing: -0.035em; line-height: 0.86;
+  margin-bottom: 3rem;
+}
+.about-intro {
+  font-size: 1.1rem; line-height: 1.7; font-weight: 400;
+  max-width: 480px; margin-bottom: 3rem;
+}
+.about-portrait-wrap {
+  position: relative; aspect-ratio: 4/3; overflow: hidden;
+}
+.about-portrait {
+  width: 100%; height: 100%; object-fit: cover; object-position: 43% top;
+  filter: grayscale(20%) contrast(1.05);
+}
+.about-portrait-badge {
+  position: absolute; bottom: 0; left: 0;
+  background: var(--yellow); color: var(--black);
+  font-size: 1.1rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: -0.01em; padding: 0.55rem 1.25rem;
+}
+.about-blocks { display: flex; flex-direction: column; gap: 0; }
+.about-block { padding: 2.5rem 0; }
+.about-block + .about-block {
+  margin-top: 0;
+  padding-top: 2.5rem;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.08) 0, rgba(0,0,0,0.08) 1px, transparent 1px);
+  /* using a gradient to avoid 1px solid border per design rules */
+}
+.about-block-label {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; display: block; margin-bottom: 0.85rem;
+  padding-left: 0.85rem;
+  border-left: 4px solid var(--black);
+}
+.about-block-text {
+  font-size: 1.1rem; line-height: 1.8; font-weight: 400;
+}
+
+/* ──────────────────────────────────────
+   CONTACT
+────────────────────────────────────── */
+.contact {
+  background: var(--black); color: var(--pink);
+  padding: 8rem 3rem;
+}
+.contact-heading {
+  font-size: clamp(5rem, 12vw, 11rem); font-weight: 800;
+  text-transform: uppercase; letter-spacing: -0.04em; line-height: 0.82;
+  text-align: center; margin-bottom: 3.5rem;
+}
+.contact-heading .outline {
+  -webkit-text-stroke: 2px var(--pink); color: transparent;
+}
+.contact-sub {
+  text-align: center; font-size: 1.05rem; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  opacity: 0.45; margin-bottom: 5rem; line-height: 1.5;
+}
+.contact-btns {
+  display: flex; gap: 1.5rem;
+  max-width: 800px; margin: 0 auto;
+}
+.contact-btn {
+  flex: 1; padding: 3rem 2.5rem;
+  display: flex; flex-direction: column; align-items: flex-start;
+  text-decoration: none; cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.contact-btn-primary {
+  background: var(--pink); color: var(--black);
+}
+.contact-btn-primary:hover { background: var(--yellow); }
+.contact-btn-secondary {
+  background: transparent; color: var(--pink);
+  outline: 2px solid var(--pink);
+  outline-offset: -2px;
+}
+.contact-btn-secondary:hover { background: var(--pink); color: var(--black); }
+.btn-eyebrow {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; opacity: 0.45; margin-bottom: 2rem;
+}
+.btn-title {
+  font-size: 2rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: -0.02em; margin-bottom: 2.5rem;
+}
+.btn-icon { font-size: 2.5rem; line-height: 1; margin-top: auto; }
+
+/* ──────────────────────────────────────
+   FOOTER
+────────────────────────────────────── */
+footer {
+  background: var(--black); color: var(--pink);
+  padding: 2rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  background-image: linear-gradient(to bottom, rgba(255,163,172,0.08) 0, rgba(255,163,172,0.08) 1px, transparent 1px);
+}
+.footer-logo {
+  font-size: 1rem; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase;
+}
+.footer-links { display: flex; gap: 2.5rem; }
+.footer-links a {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--pink); text-decoration: none;
+  opacity: 0.5; transition: opacity 0.15s;
+}
+.footer-links a:hover { opacity: 1; }
+.footer-copy {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; opacity: 0.3;
+}
+
+/* ──────────────────────────────────────
+   VIDEO OVERLAY
+────────────────────────────────────── */
+.video-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.92);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.22s;
+  display: flex; align-items: center; justify-content: center; padding: 2rem;
+}
+.video-overlay.open { opacity: 1; pointer-events: auto; }
+.video-box {
+  width: 100%; max-width: 900px; aspect-ratio: 16/9;
+  transform: scale(0.96); transition: transform 0.28s;
+}
+.video-overlay.open .video-box { transform: scale(1); }
+.video-box iframe { width: 100%; height: 100%; border: none; display: block; }
+
+/* ──────────────────────────────────────
+   CASE MODAL
+────────────────────────────────────── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.7);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.22s;
+  display: flex; align-items: flex-start; justify-content: center;
+  overflow-y: auto; padding: 4rem 2rem;
+}
+.modal-overlay.open { opacity: 1; pointer-events: auto; }
+.modal-box {
+  background: var(--pink); width: 100%; max-width: 1100px;
+  margin: auto;
+  transform: translateY(24px); transition: transform 0.28s;
+  position: relative;
+}
+.modal-overlay.open .modal-box { transform: translateY(0); }
+
+/* Shared close button */
+.overlay-close {
+  position: fixed; top: 0; right: 0;
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  background: var(--black); color: var(--pink); border: none;
+  padding: 1rem 1.5rem; cursor: pointer; z-index: 2100;
+  transition: background 0.15s, color 0.15s;
+}
+.overlay-close:hover { background: var(--yellow); color: var(--black); }
+
+/* Modal: split hero */
+.m-hero {
+  display: grid; grid-template-columns: 7fr 5fr;
+  background: var(--black); height: 480px;
+}
+.m-hero-img { overflow: hidden; }
+.m-hero-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(20%) contrast(1.05); opacity: 0.85;
+}
+.m-hero-info {
+  background: var(--pink); display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 3rem;
+}
+.m-proj-num {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; opacity: 0.45; margin-bottom: 1.25rem; display: block;
+}
+.m-title {
+  font-size: clamp(1.75rem, 3.5vw, 3rem); font-weight: 800;
+  text-transform: uppercase; letter-spacing: -0.03em;
+  line-height: 0.88; margin-bottom: 1.25rem;
+}
+.m-tag {
+  background: var(--black); color: var(--pink);
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; padding: 0.4rem 0.9rem; display: inline-block;
+}
+/* Yellow scroll arrow on hero */
+.m-hero-arrow {
+  position: absolute; bottom: 3rem; left: 3rem;
+  background: var(--yellow); width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--black); font-size: 1.2rem;
+}
+
+/* Modal: specs + body */
+.m-body-grid {
+  display: grid; grid-template-columns: 5fr 7fr;
+}
+.m-specs {
+  background: var(--highest);
+  padding: 3rem;
+  position: relative;
+}
+.m-specs::after {
+  content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 2px;
+  background: rgba(0,0,0,0.12);
+}
+.m-specs-eyebrow {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--yellow); margin-bottom: 2.5rem; display: block;
+}
+.m-spec-row { margin-bottom: 1.75rem; padding-bottom: 1.75rem; }
+.m-spec-row + .m-spec-row {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0, rgba(0,0,0,0.1) 1px, transparent 1px);
+}
+.m-spec-key {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; opacity: 0.45; margin-bottom: 0.35rem; display: block;
+}
+.m-spec-val {
+  font-size: 1.05rem; font-weight: 700; text-transform: uppercase;
+}
+.m-body-text { padding: 3rem; }
+.m-lbl {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; display: block; margin-bottom: 1.25rem;
+  padding-left: 0.75rem; border-left: 4px solid var(--black);
+}
+.m-product { font-size: 1.1rem; line-height: 1.8; margin-bottom: 3rem; }
+.m-result {
+  font-size: 1.1rem; line-height: 1.75; font-weight: 600;
+  border-left: 6px solid var(--yellow); padding-left: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+/* Modal: quote callout */
+.m-callout {
+  background: var(--black); color: var(--pink);
+  padding: 5rem 3rem; position: relative; overflow: hidden;
+}
+.m-callout-bg-word {
+  position: absolute; bottom: -3rem; right: -1rem;
+  font-size: 16rem; font-weight: 900; opacity: 0.04;
+  text-transform: uppercase; letter-spacing: -0.06em;
+  pointer-events: none; white-space: nowrap;
+}
+.m-callout blockquote {
+  font-size: clamp(1.5rem, 3vw, 2.4rem); font-weight: 800;
+  text-transform: uppercase; letter-spacing: -0.025em;
+  line-height: 0.92; max-width: 820px; margin-bottom: 2.5rem;
+  position: relative; z-index: 1;
+}
+.m-callout blockquote span { color: var(--yellow); }
+.m-callout-cite {
+  display: flex; align-items: center; gap: 1rem; position: relative; z-index: 1;
+}
+.m-callout-line { width: 3rem; height: 2px; background: var(--yellow); flex-shrink: 0; }
+.m-callout-author {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--yellow);
+}
+
+/* Modal: assignment list */
+.m-assignments { padding: 3rem; background: var(--low); }
+.m-assign-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2.5rem 3.5rem; margin-top: 1.5rem;
+}
+.m-assign-label {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; display: block; margin-bottom: 0.6rem;
+}
+.m-assign-text { font-size: 1.03rem; line-height: 1.75; opacity: 0.72; }
+
+/* Modal: video links */
+.m-vids { display: flex; gap: 0.65rem; flex-wrap: wrap; margin-top: 1.75rem; }
+.m-vid {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; background: var(--black); color: var(--pink);
+  padding: 0.55rem 1.1rem; text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+.m-vid:hover { background: var(--yellow); color: var(--black); }
+
+/* ──────────────────────────────────────
+   ANIMATIONS
+────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ──────────────────────────────────────
+   RESPONSIVE
+────────────────────────────────────── */
+@media (max-width: 960px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { gap: 1.5rem; }
+
+  .hero { padding: 5rem 1.5rem 3rem; }
+  .hero-portrait-wrap { width: 100%; height: 55vw; position: relative; margin-bottom: 2rem; }
+  .hero-portrait-fade { background: linear-gradient(to bottom, transparent 60%, var(--pink) 100%); }
+  .hero-heading { font-size: clamp(4rem, 16vw, 8rem); margin-bottom: 2rem; }
+  .hero-footer { max-width: 100%; flex-direction: column; align-items: flex-start; }
+  .hero-video-cta { position: static; margin-top: 2rem; opacity: 1; animation: none; }
+
+  .work { padding: 4rem 1.5rem 6rem; }
+  .cases-grid {
+    grid-template-columns: 1fr;
+    column-gap: 0; row-gap: 3rem;
+  }
+  .case-item { grid-column: 1 / span 1 !important; margin-top: 0 !important; }
+  .case-item .case-img-wrap { aspect-ratio: 16/9 !important; }
+
+  .about { grid-template-columns: 1fr; gap: 3rem; padding: 5rem 1.5rem; }
+  .about-portrait-wrap { aspect-ratio: 3/2; }
+
+  .contact { padding: 5rem 1.5rem; }
+  .contact-btns { flex-direction: column; }
+
+  footer { flex-direction: column; gap: 1.5rem; padding: 2rem 1.5rem; text-align: center; }
+
+  .m-hero { grid-template-columns: 1fr; height: auto; }
+  .m-hero-img { height: 50vw; min-height: 220px; }
+  .m-body-grid { grid-template-columns: 1fr; }
+  .m-assign-grid { grid-template-columns: 1fr; }
+  .modal-overlay { padding: 0; }
+  .modal-box { margin: 0; min-height: 100svh; }
+  .m-callout blockquote { font-size: 1.4rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Denny Hultén</a>
+  <div class="nav-links">
+    <a href="#work" class="active">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="mailto:dennyhulten@gmail.com" class="nav-cta">Inquiries</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-portrait-wrap">
+    <img src="images/denny.jpg" class="hero-portrait" alt="Denny Hultén">
+    <div class="hero-portrait-fade"></div>
+  </div>
+  <span class="hero-tagline">Creative Director · Concept. Narrative. Platform. Production.</span>
+  <h1 class="hero-heading">
+    Denny<br><span class="outline">Hultén</span>
+  </h1>
+  <div class="hero-footer">
+    <p class="hero-desc">I make things creative. I make creative things greater. Until it no longer needs me.</p>
+    <div class="hero-stats">
+      <div><span class="stat-num">20+</span><span class="stat-lbl">Years</span></div>
+      <div><span class="stat-num">7</span><span class="stat-lbl">Countries</span></div>
+      <div><span class="stat-num">10K+</span><span class="stat-lbl">Participants</span></div>
+    </div>
+  </div>
+  <div class="hero-video-cta" onclick="openVideo()" role="button" tabindex="0" aria-label="Play intro video" onkeydown="if(event.key==='Enter')openVideo()">
+    <span>About me in 3 min</span>
+    <div class="video-btn">▶</div>
+  </div>
+</section>
+
+<!-- ── WORK ── -->
+<section class="work" id="work">
+  <div class="work-header">
+    <h2>Selected<br>Work</h2>
+    <span class="work-meta">2009 to 2026 Collection</span>
+  </div>
+  <div class="cases-grid" id="cases-grid"></div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div>
+    <span class="about-eyebrow">About</span>
+    <h2 class="about-heading">Built from<br>nothing.<br>Twice.</h2>
+    <p class="about-intro">I build platforms from nothing and grow movements out of them. Co-founded Twisted Feet into the dominant cultural force for urban expression in western Sweden. Joined Eventity as a logistics event company and rebuilt it as a creative strategy agency. Third time's the charm.</p>
+    <div class="about-portrait-wrap">
+      <img src="images/denny.jpg" class="about-portrait" alt="Denny Hultén">
+      <span class="about-portrait-badge">Gothenburg, SE</span>
+    </div>
+  </div>
+  <div class="about-blocks">
+    <div class="about-block">
+      <span class="about-block-label">Scale</span>
+      <p class="about-block-text">Gothenburg Dance Festival: 10,000+ participants, eight years running. National government-funded tours. Play'n GO across seven countries. Productions with Veronica Maggio, Håkan Hellström, Petter, Molly Sandén, Cleo, Isak Danielson, Ace of Base, GRANT, Svante Randlert, Niklas Källner, and Olympic swimmer Therese Alshammar.</p>
+    </div>
+    <div class="about-block">
+      <span class="about-block-label">Approach</span>
+      <p class="about-block-text">I work on the problem behind the brief. Most clients know what they want. Few know what they need. That gap is where the best work lives, and where projects quietly go wrong if nobody looks. I find it before anyone starts building.</p>
+    </div>
+    <div class="about-block">
+      <span class="about-block-label">Currently</span>
+      <p class="about-block-text">Creative Director at Eventity. Leading Play'n GO's three-year international programme across seven countries and a five-year game world for Länsförsäkringar headlined by Veronica Maggio. Open to creative leadership in gaming, entertainment, and large-scale live programmes. Based in Gothenburg, open to relocation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <h2 class="contact-heading">Let's<br><span class="outline">talk.</span></h2>
+  <p class="contact-sub">Creative Director · Concept · Narrative · Platform · Production</p>
+  <div class="contact-btns">
+    <a href="mailto:dennyhulten@gmail.com" class="contact-btn contact-btn-primary">
+      <span class="btn-eyebrow">Email</span>
+      <span class="btn-title">Send a Message</span>
+      <span class="btn-icon">→</span>
+    </a>
+    <a href="https://www.linkedin.com/in/dennyhulten/" target="_blank" class="contact-btn contact-btn-secondary">
+      <span class="btn-eyebrow">LinkedIn</span>
+      <span class="btn-title">View Profile</span>
+      <span class="btn-icon">↗</span>
+    </a>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="footer-logo">Denny Hultén</span>
+  <div class="footer-links">
+    <a href="mailto:dennyhulten@gmail.com">dennyhulten@gmail.com</a>
+    <a href="https://www.linkedin.com/in/dennyhulten/" target="_blank">LinkedIn</a>
+  </div>
+  <span class="footer-copy">© 2026 Denny Hultén · Creative Director</span>
+</footer>
+
+<!-- ── VIDEO OVERLAY ── -->
+<div class="video-overlay" id="video-modal" onclick="handleVideoOverlayClick(event)">
+  <button class="overlay-close" onclick="closeVideo()">✕ Close</button>
+  <div class="video-box" id="video-box"></div>
+</div>
+
+<!-- ── CASE MODAL ── -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal-box" id="modal-box">
+    <button class="overlay-close" onclick="closeModal()">✕ Close</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+/* ── NAV SCROLL GLAZE ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ── CASES DATA ── */
+const CASES = [
+  {
+    num:'01', title:'Länsförsäkringar Gothenburg: Level 2030 Game World',
+    img:'images/level2030.png', period:'2026-2030', tag:'5-Year Strategy',
+    product:"Five-year strategic programme built as a game world for 550 employees. Each year is a new level with its own environment, a boss fight representing the company's biggest annual goal, and Ability Cards that carry forward to the 2030 final boss. Inspired by Super Mario, Minecraft, and Farmville. Year 1 headlined by Veronica Maggio.",
+    assignment:[
+      {label:'Concept',text:"Replaced the traditional conference format with game mechanics: same strategic content, completely different energy. Built from a blank page into a five-year narrative arc where every level, boss, and ability maps directly to the company's real annual goals."},
+      {label:'Narrative system',text:"Designed the year-bridge touchpoints that keep the world alive between events: office glitches in December, boss-defeat films in January, Ability Cards unlocked at each level. The concept doesn't just happen once a year. It lives all year."},
+      {label:'Entertainment',text:"Identified, contracted, and directed Veronica Maggio as Year 1 headline artist. Integrated the performance into the full event production schedule."},
+      {label:'Scale',text:"Five-year programme, 5 million SEK annual budget, 550 participants per year across a fully conceived game world."}
+    ],
+    result:'Five-year programme, 5 million SEK annual budget, 550 participants. Veronica Maggio headlining Year 1 in September 2026.',
+    videos:[]
+  },
+  {
+    num:'02', title:"Play'n GO International Events: Early Access",
+    img:'images/playngo.png', period:'2026-Ongoing', tag:'7 Countries',
+    product:"Three-year international employee programme for Play'n GO across seven countries (Sweden, Spain, UK, Malta, Hungary, Poland, Philippines). 540 people, eight events per year. Participation was declining. The brief was to fix it.",
+    assignment:[
+      {label:'The real problem',text:"Play'n GO had a self-leadership culture on paper: vision, values, guides. But no delivery mechanism that actually reached people. I diagnosed the gap and built Early Access as the missing piece: gaming development language native to their own world, used as a structural framework for behaviour change, not decoration."},
+      {label:'Pitch and close',text:"Presented the contrast between the old approach (declining engagement) and the new one. Secured a three-year international commitment on a single pitch."},
+      {label:'Programme delivery',text:"Managing eight annual events across four countries simultaneously: Malta, Budapest, Växjö, and Manila. Single point of creative and production accountability across all of them."},
+      {label:'Results',text:"Participation climbed to 95%+ across all activities. Employees went from attending out of obligation to actively engaging."}
+    ],
+    result:'Participation climbed to 95%+ across all activities. Three-year deal secured. Employees went from attending out of obligation to actively engaging.',
+    videos:[]
+  },
+  {
+    num:'03', title:'Länsförsäkringar Östgöta: The Health Journey',
+    img:'images/halsoresan.jpeg', period:'2024-2025', tag:'Wellness Strategy',
+    product:"Client asked for a company retreat. Discovery revealed the real need: year-long employee wellness with the retreat as the centrepiece, not the whole story. Rebuilt the brief, built the concept, and won the business. Featured Olympic swimmer Therese Alshammar.",
+    assignment:[
+      {label:'Redefining the brief',text:"Before touching the concept, I ran a discovery process that changed what we were actually building. The Health Compass (four dimensions of health) became the structural framework for the full year, not just one event."},
+      {label:'Two audiences, one pitch',text:"Built two parallel narratives: one for employees (purpose, growth, inclusion) and one for the steering board (sick leave reduction, cost savings, measurable outcomes). Both in the same deck."},
+      {label:'Client empowerment',text:"Made a deliberate choice to let the client's internal team own the success publicly. They received a standing ovation at the retreat. Eventity had done the creative work. They got the credit."},
+      {label:'Outcome',text:"Highest-earning and highest-profit project in Eventity's history. Won the client from their incumbent supplier on concept alone."}
+    ],
+    result:"Highest-earning and highest-profit project in Eventity's history. Won the client from their incumbent supplier on the concept alone.",
+    videos:[]
+  },
+  {
+    num:'04', title:'Länsförsäkringar Gothenburg: STARS Summit',
+    img:'images/stars.png', period:'2024', tag:'5-Year Partnership',
+    product:"Annual summit for 550 employees. The 2024 edition built the entire event around astrology, not as a visual theme but as a structural framework shaping how attendees were grouped, how entertainment was sequenced, and how the narrative connected to company strategy. Live performances by Petter, Molly Sandén, and Niklas Källner, with Svante Randlert as keynote.",
+    assignment:[
+      {label:'Concept',text:"Astrology as structure, not decoration. Zodiac signs shaped team groupings, entertainment sequencing, and the connection between the event narrative and the company's actual strategic direction."},
+      {label:'Entertainment direction',text:"Curated and directed all performers, briefing each act on the concept so the evening felt like a unified show, not a conference with a band at the end."},
+      {label:'Full production',text:"Led all production across the event: video content, sound design, presenter direction, environment, and bespoke animation sequences integrated into live performances."},
+      {label:'Legacy',text:"Participant feedback rated STARS the best summit in the five-year partnership's history."}
+    ],
+    result:"Participant feedback rated STARS the best summit in the five-year partnership's history.",
+    videos:[{label:'Behind-the-scenes footage',url:'https://youtu.be/iSVYipaUSYQ'}]
+  },
+  {
+    num:'05', title:'Volvo Cars Product Launch EMEA & APAC',
+    img:'images/volvo.jpeg', period:'2023', tag:'Product Launch',
+    product:"Entertainment programme for Volvo Cars' international product launch. Two separate week-long events, 300 attendees each, multiple countries and cultures. Core challenge: build a three-part entertainment story that lands regardless of language or background. EMEA featured Ace of Base, Isak Danielson, and GRANT.",
+    assignment:[
+      {label:'Universal creative concept',text:"Built a three-part entertainment narrative on visual storytelling, movement, and music, with no reliance on shared language or cultural context. Designed to connect across borders without losing its edge."},
+      {label:'Full production ownership',text:"Concept, budget, live audio, lighting, and on-site direction across both week-long events. Coordinated performers, Volvo's internal team, venue crews, and technical suppliers simultaneously."},
+      {label:'Cross-market validation',text:"Volvo took the EMEA concept directly to APAC the following week. No modifications, no adaptation. The same creative worked for an entirely different cultural market."},
+      {label:'Artists',text:"Ace of Base, Isak Danielson, and GRANT for EMEA. Concept carried unchanged to APAC."}
+    ],
+    result:'Not adapted. Copied. Volvo Cars brought the EMEA concept to APAC unchanged. The concept worked across two entirely different cultural markets without modification.',
+    videos:[{label:'Event footage compilation',url:'https://youtu.be/Z2uKj7mzEy8'}]
+  },
+  {
+    num:'06', title:'Passion for Climate',
+    img:'images/passion.jpeg', period:'2021', tag:'National Tour · Arvsfonden',
+    product:"Three-year national programme merging climate science with live performance, funded by Arvsfonden in collaboration with Chalmers University. Toured Swedish schools with a theatre show, workshops, and seminars. Cultural centrepiece: 5 Degrees, an original 75-minute scripted production toured nationally through Riksteatern and Dansnät Sverige.",
+    assignment:[
+      {label:'Won the funding',text:"Wrote the proposal that secured three years of government funding from Arvsfonden for a format that didn't exist yet."},
+      {label:'Wrote and directed 5 Degrees',text:"Lead writer and director on the 75-minute touring production. Screenwriting, ensemble direction, composer, audio engineer, and production lead across all national and international tour dates."},
+      {label:'TEDx speaker',text:"Featured multiple times at TEDx Göteborg presenting the intersection of climate science, live performance, and behavioural change."},
+      {label:'Reach',text:"Toured schools across Sweden over three years. Funded entirely by Arvsfonden with Chalmers University as research partner."}
+    ],
+    result:'Three-year national programme. Reached schools across Sweden. Multiple TEDx appearances. Fully funded by Arvsfonden.',
+    videos:[
+      {label:'Theatre show',url:'https://youtu.be/tH-J_zeeGbg?si=L4Xgqvt3rwlbCdR0&t=14'},
+      {label:'TEDx talk',url:'https://youtu.be/_eVDLqogkFI'},
+      {label:'Instagram',url:'https://www.instagram.com/passionforclimate/'}
+    ]
+  },
+  {
+    num:'07', title:'P3 Guld: Cleo Show',
+    img:'images/p3guld.jpeg', period:'2023', tag:'Live Television',
+    product:"Co-produced Cleo's gala performance at P3 Guld 2023 for live national television. One performance serving two fundamentally different audiences simultaneously: the live crowd in the venue and viewers at home.",
+    assignment:[
+      {label:'Concept',text:"Built the visual and narrative concept: music, choreography, and staging integrated into a single piece that told a story, not just accompanied a song."},
+      {label:'Choreography and performance coaching',text:"Designed all movement for dual contexts: choreography that read on the venue floor and through camera angles, which require different spatial thinking. Directed Cleo's delivery, energy, and stage presence throughout."},
+      {label:'Broadcast collaboration',text:"Coordinated with TV producers, directors, and camera teams on shot design and transitions. Zero tolerance for failure: every element locked to broadcast standard before going live."},
+      {label:'Result',text:"Delivered on live national television. One concept, two contexts, zero margin for error."}
+    ],
+    result:'Delivered on live national television. One concept, two contexts, zero margin for error.',
+    videos:[{label:'Broadcast video',url:'https://youtu.be/2LU2xnp6zrY?si=AcwH3T0wMxghb7QZ'}]
+  },
+  {
+    num:'08', title:'Gothenburg Dance Festival',
+    img:'images/gothenburg.jpg', period:'2009-2017', tag:'Festival Production',
+    product:"Co-created and produced Gothenburg Dance Festival, one of Scandinavia's largest urban expression competitions. 10,000+ spectators and participants per year, eight consecutive editions as part of the Gothenburg City Culture Festival.",
+    assignment:[
+      {label:'Built it from nothing',text:"Designed the full competition format from scratch: categories, judging criteria, qualification rounds, finals. Refined annually. Booked international dancers, judges, and workshop leaders from the global urban dance community."},
+      {label:'Community as infrastructure',text:"The festival wasn't an event. It was the infrastructure for a scene. Built partnerships with Gothenburg's cultural institutions and created the talent pipeline that fed the wider urban culture movement in western Sweden."},
+      {label:'Media production',text:"Scripted and directed all festival media across eight years: trailers, documentation, and promotional content. Built the festival's visual identity through media as much as live production."},
+      {label:'Legacy',text:"Grew from a local competition into one of Scandinavia's largest urban expression events. 10,000+ per year, eight consecutive editions."}
+    ],
+    result:"Grew from a local competition into one of Scandinavia's largest urban expression events. 10,000+ per year, eight editions.",
+    videos:[{label:'Dance Festival trailer',url:'https://youtu.be/Aa0SzGL3Dhw?si=5O7hiawmEPPjMuRy'}]
+  }
+];
+
+/* ── RENDER CASES ── */
+function renderCases() {
+  document.getElementById('cases-grid').innerHTML = CASES.map((c, i) => `
+    <div class="case-item" onclick="openModal(${i})" tabindex="0" role="button"
+         onkeydown="if(event.key==='Enter')openModal(${i})" aria-label="View case: ${c.title}">
+      <div class="case-img-wrap">
+        <img src="${c.img}" class="case-img" alt="${c.title}" loading="lazy">
+        <div class="case-yellow-overlay"></div>
+        <span class="case-num-badge">${c.num}</span>
+      </div>
+      <div class="case-footer">
+        <div>
+          <div class="case-title">${c.title}</div>
+          <div class="case-tag">${c.tag} · ${c.period}</div>
+        </div>
+        <span class="case-arrow">↗</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ── OPEN CASE MODAL ── */
+function openModal(i) {
+  const c = CASES[i];
+
+  const assignHTML = c.assignment.map(a => `
+    <div class="m-assign-item">
+      <span class="m-assign-label">${a.label}</span>
+      <p class="m-assign-text">${a.text}</p>
+    </div>
+  `).join('');
+
+  const videosHTML = c.videos.length
+    ? `<div class="m-vids">${c.videos.map(v =>
+        `<a href="${v.url}" class="m-vid" target="_blank" rel="noopener">▶ ${v.label}</a>`
+      ).join('')}</div>`
+    : '';
+
+  /* Truncate result for callout if very long */
+  const calloutText = c.result.length > 180
+    ? c.result.slice(0, c.result.lastIndexOf(' ', 180)) + '...'
+    : c.result;
+
+  /* Highlight last word of callout in yellow */
+  const calloutWords = calloutText.split(' ');
+  const last = calloutWords.pop();
+  const formattedCallout = calloutWords.join(' ') + ' <span>' + last + '</span>';
+
+  document.getElementById('modal-content').innerHTML = `
+    <div class="m-hero" style="position:relative">
+      <div class="m-hero-img"><img src="${c.img}" alt="${c.title}"></div>
+      <div class="m-hero-info">
+        <span class="m-proj-num">Project No. ${c.num}</span>
+        <h2 class="m-title">${c.title}</h2>
+        <span class="m-tag">${c.tag}</span>
+      </div>
+      <div class="m-hero-arrow" aria-hidden="true">↓</div>
+    </div>
+    <div class="m-body-grid">
+      <div class="m-specs">
+        <span class="m-specs-eyebrow">01 / Technical Specs</span>
+        <div class="m-spec-row">
+          <span class="m-spec-key">Period</span>
+          <span class="m-spec-val">${c.period}</span>
+        </div>
+        <div class="m-spec-row">
+          <span class="m-spec-key">Category</span>
+          <span class="m-spec-val">${c.tag}</span>
+        </div>
+        <div class="m-spec-row">
+          <span class="m-spec-key">Role</span>
+          <span class="m-spec-val">Creative Direction</span>
+        </div>
+        <div class="m-spec-row">
+          <span class="m-spec-key">Client</span>
+          <span class="m-spec-val">${c.title.split(':')[0].trim()}</span>
+        </div>
+      </div>
+      <div class="m-body-text">
+        <span class="m-lbl">The Project</span>
+        <p class="m-product">${c.product}</p>
+        <span class="m-lbl">Result</span>
+        <p class="m-result">${c.result}</p>
+        ${videosHTML}
+      </div>
+    </div>
+    <div class="m-callout">
+      <div class="m-callout-bg-word">${c.tag.split(' ')[0]}</div>
+      <blockquote>${formattedCallout.toUpperCase()}</blockquote>
+      <div class="m-callout-cite">
+        <span class="m-callout-line"></span>
+        <cite class="m-callout-author">${c.period} · ${c.tag}</cite>
+      </div>
+    </div>
+    <div class="m-assignments">
+      <span class="m-lbl">My Role</span>
+      <div class="m-assign-grid">${assignHTML}</div>
+    </div>
+  `;
+
+  const overlay = document.getElementById('modal');
+  overlay.classList.add('open');
+  overlay.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+/* ── VIDEO ── */
+const INTRO_VIDEO_ID = 'FcYKbmeggyM';
+
+function openVideo() {
+  document.getElementById('video-box').innerHTML =
+    `<iframe src="https://www.youtube.com/embed/${INTRO_VIDEO_ID}?autoplay=1&rel=0&modestbranding=1"
+      allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+  document.getElementById('video-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeVideo() {
+  document.getElementById('video-modal').classList.remove('open');
+  document.getElementById('video-box').innerHTML = '';
+  document.body.style.overflow = '';
+}
+function handleVideoOverlayClick(e) {
+  if (e.target === document.getElementById('video-modal')) closeVideo();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeVideo(); }
+});
+
+renderCases();
+</script>
+</body>
+</html>
