@@ -71,16 +71,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .case-card{position:relative;height:56vh;min-height:380px;overflow:hidden;outline:none}
 .card-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94)}
 .case-card:hover .card-img{transform:scale(1.07)}
-.card-veil{position:absolute;inset:0;background:rgba(10,10,8,0.76);transition:background 0.38s ease-out}
-.case-card:hover .card-veil{background:rgba(10,10,8,0.25)}
+.card-veil{position:absolute;inset:0;background:rgba(10,10,8,0.76);transition:background 0.45s ease-out}
+.case-card:hover .card-veil{background:linear-gradient(to top,rgba(10,10,8,0.94) 0%,rgba(10,10,8,0.82) 28%,rgba(10,10,8,0) 58%)}
 .card-inner{position:absolute;inset:0;padding:2rem 2.25rem;display:flex;flex-direction:column;justify-content:space-between}
 .card-top{display:flex;justify-content:space-between;align-items:flex-start}
 .card-num{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:3.5rem;color:var(--accent);line-height:1;opacity:0.2;transition:opacity 0.3s}
 .case-card:hover .card-num{opacity:1}
 .card-tag-pill{font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(239,239,237,0.5);font-weight:600;border:1px solid rgba(239,239,237,0.15);padding:0.3rem 0.7rem;transition:border-color 0.3s,color 0.3s}
 .case-card:hover .card-tag-pill{border-color:rgba(196,255,60,0.4);color:rgba(196,255,60,0.85)}
-.card-tag{font-size:0.8rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(239,239,237,0.45);margin-bottom:0.4rem;transition:color 0.3s}
-.case-card:hover .card-tag{color:rgba(239,239,237,0.75)}
+.card-tags{display:flex;flex-direction:column;gap:0.05rem;margin-bottom:0.35rem}
+.card-type-tag{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(0.95rem,1.4vw,1.3rem);letter-spacing:0.06em;text-transform:uppercase;color:rgba(239,239,237,0.92);line-height:1.3}
+.card-tag{display:none}
 .card-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(1.2rem,2vw,1.85rem);color:#EFEFED;line-height:1.1;text-transform:uppercase;letter-spacing:0.02em;margin-bottom:0.6rem}
 .card-cta{font-size:0.85rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);font-weight:700;opacity:0;transform:translateX(-8px);transition:opacity 0.25s,transform 0.25s}
 .case-card:hover .card-cta{opacity:1;transform:translateX(0)}
@@ -121,6 +122,8 @@ footer span{font-size:0.82rem;color:var(--mid);letter-spacing:0.08em}
 .modal-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(1.3rem,2.5vw,2rem);text-transform:uppercase;letter-spacing:0.02em;line-height:1.1;margin-bottom:0.4rem;color:var(--text)}
 .modal-period{font-size:0.85rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--mid)}
 .modal-tag{font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;border:1.5px solid var(--border);padding:0.4rem 0.85rem;color:var(--mid);white-space:nowrap}
+.modal-tags-band{background:var(--text);padding:1.25rem 3rem;display:flex;flex-wrap:wrap;gap:0.4rem 2rem;align-items:center}
+.modal-tag-item{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(1.1rem,2vw,1.7rem);letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);line-height:1.2}
 .modal-hdr-right{display:flex;flex-direction:column;align-items:flex-end;gap:0.6rem;flex-shrink:0}
 .modal-top{padding:2.5rem 3rem;border-bottom:1px solid var(--border)}
 .modal-role-section{padding:2.5rem 3rem}
@@ -133,7 +136,8 @@ footer span{font-size:0.82rem;color:var(--mid);letter-spacing:0.08em}
 .m-assign li{padding:1rem 0;border-bottom:1px solid var(--border)}
 .m-assign strong{display:block;font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text);margin-bottom:0.35rem}
 .m-assign p{font-size:1.05rem;line-height:1.75;font-weight:300;color:var(--mid)}
-.m-vids{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:1.5rem}
+.modal-img-wrap{position:relative;display:block}
+.m-vids{position:absolute;bottom:1.1rem;right:1.25rem;display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:flex-end}
 .m-vid{font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text);text-decoration:none;background:var(--accent);padding:0.45rem 0.9rem;transition:all 0.15s;font-weight:700;white-space:nowrap}
 .m-vid:hover{background:var(--text);color:var(--bg)}
 
@@ -216,6 +220,8 @@ footer span{font-size:0.82rem;color:var(--mid);letter-spacing:0.08em}
   .modal-overlay{padding:0}
   .modal-box{margin:0;min-height:100svh;border:none}
   .modal-img{height:32vh}
+  .modal-tags-band{padding:0.85rem 1.25rem;gap:0.3rem 1.25rem}
+  .modal-tag-item{font-size:1.05rem}
   .modal-hdr{padding:1.5rem 1.25rem 1.25rem;flex-wrap:wrap;gap:1rem}
   .modal-num{font-size:2.8rem}
   .modal-tag{display:none}
@@ -276,7 +282,7 @@ footer span{font-size:0.82rem;color:var(--mid);letter-spacing:0.08em}
 <section id="work" style="padding:0 3.5rem">
   <div class="section-head">
     <h2 class="section-h">Selected Work</h2>
-    <span class="section-count">09 Cases</span>
+    <span class="section-count">10 Cases</span>
   </div>
   <div class="cases-grid" id="cases-grid"></div>
 </section>
@@ -335,7 +341,7 @@ footer span{font-size:0.82rem;color:var(--mid);letter-spacing:0.08em}
 
 <script>
 const CASES=[
-  {num:'01',title:'Länsförsäkringar Gothenburg: Level 2030 Game World',img:'images/level2030.png',period:'2026-2030',tag:'5-Year Strategy',
+  {num:'01',title:'Länsförsäkringar Gothenburg: Level 2030 Game World',img:'images/level2030.png',period:'2026-2030',tag:'5-Year Strategy',tags:['Employee Programme','Concept Design','Game Mechanics','5-Year Strategy'],
    product:"Five-year strategic programme built as a game world for 550 employees. Each year is a new level with its own environment, a boss fight representing the company's biggest annual goal, and Ability Cards that carry forward to the 2030 final boss. Inspired by Super Mario, Minecraft, and Farmville. Year 1 headlined by Veronica Maggio.",
    assignment:[
      {label:'Concept',text:"Replaced the traditional conference format with game mechanics: same strategic content, completely different energy. Built from a blank page into a five-year narrative arc where every level, boss, and ability maps directly to the company's real annual goals."},
@@ -343,7 +349,7 @@ const CASES=[
      {label:'Entertainment',text:"Identified, contracted, and directed Veronica Maggio as Year 1 headline artist. Integrated the performance into the full event production schedule."}
    ],
    result:'Five-year programme, 5 million SEK annual budget, 550 participants. Veronica Maggio headlining Year 1 in September 2026.',videos:[]},
-  {num:'02',title:"Play'n GO International Events: Early Access",img:'images/playngo.png',period:'2026-Ongoing',tag:'7 Countries',
+  {num:'02',title:"Play'n GO International Events: Early Access",img:'images/playngo.png',period:'2026-Ongoing',tag:'7 Countries',tags:['International Programme','Change Management','Event Series','7 Countries'],
    product:"Three-year international employee programme for Play'n GO across seven countries (Sweden, Spain, UK, Malta, Hungary, Poland, Philippines). 540 people, eight events per year. Participation was declining. The brief was to fix it.",
    assignment:[
      {label:'The real problem',text:"Play'n GO had a self-leadership culture on paper: vision, values, guides. But no delivery mechanism that actually reached people. I diagnosed the gap and built Early Access as the missing piece: gaming development language native to their own world, used as a structural framework for behaviour change, not decoration."},
@@ -351,7 +357,7 @@ const CASES=[
      {label:'Programme delivery',text:"Managing eight annual events across four countries simultaneously: Malta, Budapest, Växjö, and Manila. Single point of creative and production accountability across all of them."}
    ],
    result:'Participation climbed to 95%+ across all activities. Three-year deal secured. Employees went from attending out of obligation to actively engaging.',videos:[]},
-  {num:'03',title:'Länsförsäkringar Östgöta: The Health Journey',img:'images/halsoresan.jpeg',period:'2024-2025',tag:'Wellness Strategy',
+  {num:'03',title:'Länsförsäkringar Östgöta: The Health Journey',img:'images/halsoresan.jpeg',period:'2024-2025',tag:'Wellness Strategy',tags:['Annual Conference','Wellness Strategy','Strategic Reframe'],
    product:"Client asked for a company retreat. Discovery revealed the real need: year-long employee wellness with the retreat as the centrepiece, not the whole story. Rebuilt the brief, built the concept, and won the business. Featured Olympic swimmer Therese Alshammar.",
    assignment:[
      {label:'Redefining the brief',text:"Before touching the concept, I ran a discovery process that changed what we were actually building. The Health Compass (four dimensions of health) became the structural framework for the full year, not just one event."},
@@ -359,7 +365,7 @@ const CASES=[
      {label:'Client empowerment',text:"Made a deliberate choice to let the client's internal team own the success publicly. They received a standing ovation at the retreat. Eventity had done the creative work. They got the credit."}
    ],
    result:"Highest-earning and highest-profit project in Eventity's history. Won the client from their incumbent supplier on the concept alone.",videos:[]},
-  {num:'04',title:'Länsförsäkringar Gothenburg: STARS Summit',img:'images/stars.png',period:'2024',tag:'5-Year Partnership',
+  {num:'04',title:'Länsförsäkringar Gothenburg: STARS Summit',img:'images/stars.png',period:'2024',tag:'5-Year Partnership',tags:['Corporate Gala','Live Entertainment','Art Direction'],
    product:"Annual summit for 550 employees. The 2024 edition built the entire event around astrology, not as a visual theme but as a structural framework shaping how attendees were grouped, how entertainment was sequenced, and how the narrative connected to company strategy. Live performances by Petter, Molly Sandén, and Niklas Källner, with Svante Randlert as keynote.",
    assignment:[
      {label:'Concept',text:"Astrology as structure, not decoration. Zodiac signs shaped team groupings, entertainment sequencing, and the connection between the event narrative and the company's actual strategic direction."},
@@ -367,7 +373,7 @@ const CASES=[
      {label:'Full production',text:"Led all production across the event: video content, sound design, presenter direction, environment, and bespoke animation sequences integrated into live performances."}
    ],
    result:"Participant feedback rated STARS the best summit in the five-year partnership's history.",videos:[{label:'Behind-the-scenes footage',url:'https://youtu.be/iSVYipaUSYQ'}]},
-  {num:'05',title:'Volvo Cars Product Launch EMEA & APAC',img:'images/volvo.jpeg',period:'2023',tag:'Product Launch',
+  {num:'05',title:'Volvo Cars Product Launch EMEA & APAC',img:'images/volvo.jpeg',period:'2023',tag:'Product Launch',tags:['Product Launch','International','Live Production','EMEA & APAC'],
    product:"Entertainment programme for Volvo Cars' international product launch. Two separate week-long events, 300 attendees each, multiple countries and cultures. Core challenge: build a three-part entertainment story that lands regardless of language or background. EMEA featured Ace of Base, Isak Danielson, and GRANT.",
    assignment:[
      {label:'Universal creative concept',text:"Built a three-part entertainment narrative on visual storytelling, movement, and music, with no reliance on shared language or cultural context. Designed to connect across borders without losing its edge."},
@@ -375,15 +381,7 @@ const CASES=[
      {label:'Concept so strong it crossed markets unchanged',text:"Volvo took the EMEA concept directly to APAC the following week. No modifications, no adaptation. The same creative worked for an entirely different cultural market."}
    ],
    result:'Not adapted. Copied. Volvo Cars brought the EMEA concept to APAC unchanged. The concept worked across two entirely different cultural markets without modification.',videos:[{label:'Compilation of Event Footage',url:'https://youtu.be/Z2uKj7mzEy8'}]},
-  {num:'06',title:'Passion for Climate',img:'images/passion.jpeg',period:'2021',tag:'National Tour · Arvsfonden',
-   product:"Three-year national programme merging climate science with live performance, funded by Arvsfonden in collaboration with Chalmers University. Toured Swedish schools with a theatre show, workshops, and seminars. Cultural centrepiece: 5 Degrees, an original 75-minute scripted production toured nationally through Riksteatern and Dansnät Sverige.",
-   assignment:[
-     {label:'Won the funding',text:"Wrote the proposal that secured three years of government funding from Arvsfonden for a format that didn't exist yet."},
-     {label:'Wrote and directed 5 Degrees',text:"Lead writer and director on the 75-minute touring production. Screenwriting, ensemble direction, composer, audio engineer, and production lead across all national and international tour dates."},
-     {label:'TEDx speaker',text:"Featured multiple times at TEDx Göteborg presenting the intersection of climate science, live performance, and behavioural change."}
-   ],
-   result:'Three-year national programme. Reached schools across Sweden. Multiple TEDx appearances. Fully funded by Arvsfonden.',videos:[{label:'Theatre show',url:'https://youtu.be/tH-J_zeeGbg?si=L4Xgqvt3rwlbCdR0&t=14'},{label:'TEDx talk',url:'https://youtu.be/_eVDLqogkFI'},{label:'Instagram',url:'https://www.instagram.com/passionforclimate/'}]},
-  {num:'07',title:'P3 Guld: Cleo Show',img:'images/p3guld.jpeg',period:'2023',tag:'Live Television',
+  {num:'06',title:'P3 Guld: Cleo Show',img:'images/p3guld.jpeg',period:'2023',tag:'Live Television',tags:['Live Television','Gala Performance','Choreography','Broadcast'],
    product:"Co-produced Cleo's gala performance at P3 Guld 2023 for live national television. One performance serving two fundamentally different audiences simultaneously: the live crowd in the venue and viewers at home.",
    assignment:[
      {label:'Concept',text:"Built the visual and narrative concept: music, choreography, and staging integrated into a single piece that told a story, not just accompanied a song."},
@@ -391,14 +389,30 @@ const CASES=[
      {label:'Broadcast collaboration',text:"Coordinated with TV producers, directors, and camera teams on shot design and transitions. Zero tolerance for failure: every element locked to broadcast standard before going live."}
    ],
    result:'Delivered on live national television. One concept, two contexts, zero margin for error.',videos:[{label:'Broadcast video',url:'https://youtu.be/2LU2xnp6zrY?si=AcwH3T0wMxghb7QZ'}]},
-  {num:'08',title:'Volvo VISTA World Championship Commercial',img:'images/vista.png',period:'2015-2016',tag:'Branded Commercial',
+  {num:'07',title:'5 Degrees & Passion for Climate',img:'images/passion.jpeg',period:'2015–2021',tag:'National Tour · Arvsfonden',tags:['National Tour','Theatre Direction','Social Impact','Government Funded'],
+   product:"Two intertwined bodies of work. 5 Degrees: an original 75-minute theatrical production written, directed, and choreographed from scratch — street dance meets live technology, projections, and scripted narrative. Developed with Chalmers University, funded by Kulturrådet, and toured nationally through Riksteatern and Dansnät Sverige for seven years. Passion for Climate: a three-year national programme merging climate science with live performance, funded by Arvsfonden. 5 Degrees became its cultural centrepiece — the production that made the science land in a room full of teenagers.",
+   assignment:[
+     {label:'Writing and direction',text:"Lead writer and director on 5 Degrees across its full seven-year run: concept, script, ensemble direction, composer, audio engineer, and production lead. Built the production from a blank page to national stages and kept it touring for seven years with a small team and no institutional backing beyond the initial grant."},
+     {label:'Winning Arvsfonden',text:"Wrote the proposal that secured three years of government funding from Arvsfonden for Passion for Climate — a format that didn't exist yet. Combined climate science, live performance, and behavioural change into something funders had never seen in that configuration."},
+     {label:'TEDx speaker',text:"Featured multiple times at TEDx Göteborg presenting the intersection of climate science, live performance, and behavioural change. Used the platform to build credibility and reach for the touring programme."}
+   ],
+   result:'Seven years of national touring through Riksteatern and Dansnät Sverige. Three-year government-funded programme reaching schools across Sweden. Multiple TEDx appearances.',videos:[{label:'Theatre show',url:'https://youtu.be/tH-J_zeeGbg?si=L4Xgqvt3rwlbCdR0&t=14'},{label:'TEDx talk',url:'https://youtu.be/_eVDLqogkFI'},{label:'Instagram',url:'https://www.instagram.com/passionforclimate/'}]},
+  {num:'08',title:'Community X',img:'images/communityx.jpg',period:'2017–2020',tag:'Platform Building',tags:['Platform Building','Community Architecture','Youth Culture','8,000 People / Year'],
+   product:"Built to solve a specific problem: talented young creators were stalling and leaving western Sweden because there was nowhere to go. Community X wasn't a festival or a programme. It was a model — a system for developing local community builders who could each create their own platform where they already lived. The goal wasn't to build one big thing. It was to multiply many smaller ones.",
+   assignment:[
+     {label:'Diagnosing the gap',text:"Identified why talented young people were leaving: not lack of skill or ambition, but lack of local infrastructure. No festivals, no communities, no stages to grow on where they actually lived. Community X was designed to fix that — not by creating one central hub, but by multiplying local ones."},
+     {label:'Building the model',text:"Developed the Community X framework: a coaching and mentoring model for local community builders across the region. Each participant built their own festival, event, or creative community. Designed the programme structure, ran workshops, and provided ongoing mentoring across multiple cohorts."},
+     {label:'Network growth',text:"The network grew to reach 8,000 people per year across the region — without a central organisation or central budget. Each node was independently run by a community builder who had been through the programme."}
+   ],
+   result:'Regional network reaching 8,000 people per year. Nominated as a top exemplary project nationally by Arvsfonden. Kept creative talent rooted in their communities rather than migrating to larger cities.',videos:[]},
+  {num:'09',title:'Volvo VISTA World Championship Commercial',img:'images/vista.png',period:'2015-2016',tag:'Branded Commercial',tags:['Branded Film','Choreography','Cast Direction'],
    product:"A branded film for the Volvo VISTA World Championship 2015-2016. The concept: a team of Volvo engineers so practiced together that their synchronicity shows in everything, including breakfast. Choreographed movement used as the storytelling device — no dialogue, no voiceover. Just precision teamwork made visible.",
    assignment:[
      {label:'Choreography',text:"Designed all movement for the cast. Built the precision-synchrony concept from brief into a choreographed sequence that communicated the VISTA team ethos without a word of dialogue."},
      {label:'Cast direction',text:"Directed all performers throughout the shoot: timing, energy, spatial relationships. The concept lives or dies on whether the synchrony reads on camera, and that comes entirely from how you direct bodies in a room."}
    ],
    result:'Delivered as part of the Volvo VISTA World Championship campaign. The commercial ran across the 2015-2016 competition season.',videos:[{label:'Watch the commercial',url:'https://www.youtube.com/watch?v=GfF9i8JzOxk'}]},
-  {num:'09',title:'Gothenburg Dance Festival',img:'images/gothenburg.jpg',period:'2009-2017',tag:'Festival Production',
+  {num:'10',title:'Gothenburg Dance Festival',img:'images/gothenburg.jpg',period:'2009-2017',tag:'Festival Production',tags:['Cultural Festival','Festival Production','10,000+ Participants','Built from Zero'],
    product:"Co-created and produced Gothenburg Dance Festival, one of Scandinavia's largest urban expression competitions. 10,000+ spectators and participants per year, eight consecutive editions as part of the Gothenburg City Culture Festival.",
    assignment:[
      {label:'Built it from nothing',text:"Designed the full competition format from scratch: categories, judging criteria, qualification rounds, finals. Refined annually. Booked international dancers, judges, and workshop leaders from the global urban dance community."},
@@ -419,7 +433,7 @@ function renderCases(){
           <span class="card-tag-pill">${c.period}</span>
         </div>
         <div>
-          <div class="card-tag">${c.tag}</div>
+          <div class="card-tags">${c.tags.map(t=>`<span class="card-type-tag">${t}</span>`).join('')}</div>
           <h3 class="card-title">${c.title}</h3>
           <span class="card-cta">View case →</span>
         </div>
@@ -432,7 +446,8 @@ function openModal(i){
   const aHTML=c.assignment.map(a=>`<li><strong>${a.label}</strong><p>${a.text}</p></li>`).join('');
   const vHTML=c.videos.length?`<div class="m-vids">${c.videos.map(v=>`<a href="${v.url}" class="m-vid" target="_blank">▶ ${v.label}</a>`).join('')}</div>`:'';
   document.getElementById('modal-content').innerHTML=`
-    <img class="modal-img" src="${c.img}" alt="${c.title}">
+    <div class="modal-img-wrap"><img class="modal-img" src="${c.img}" alt="${c.title}">${vHTML}</div>
+    <div class="modal-tags-band">${c.tags.map(t=>`<span class="modal-tag-item">${t}</span>`).join('')}</div>
     <div class="modal-hdr">
       <div class="modal-num">${c.num}</div>
       <div class="modal-hdr-mid"><div class="modal-title">${c.title}</div><div class="modal-period">${c.period}</div></div>
@@ -443,7 +458,6 @@ function openModal(i){
       <p class="m-product">${c.product}</p>
       <div class="m-lbl">Result</div>
       <p class="m-result">${c.result}</p>
-      ${vHTML}
     </div>
     <div class="modal-role-section">
       <div class="m-lbl">My Role</div>
