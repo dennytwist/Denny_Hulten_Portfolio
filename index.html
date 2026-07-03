@@ -39,6 +39,7 @@ body::after{content:'';position:fixed;inset:-100%;z-index:4000;pointer-events:no
 .op.cyan{color:var(--cyan)}
 .op.cyan::before{color:var(--red)}
 .op.ink{color:var(--ink)}
+.op.no-ghost::before{content:none}
 .work-op{position:relative;display:inline-block;isolation:isolate}
 .work-op span{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-0.03em;line-height:0.86;white-space:nowrap;mix-blend-mode:multiply}
 .work-op .wo-cyan{display:inline-block;color:var(--op-cyan)}
@@ -56,18 +57,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* HERO — typographic poster */
 .hero{min-height:100vh;position:relative;display:flex;flex-direction:column;justify-content:center;padding:6.5rem 2rem 5.5rem;overflow:hidden}
-.hero-photo{position:absolute;right:-2vw;top:52%;transform:translateY(-50%);width:min(430px,36vw);aspect-ratio:4/5.1;cursor:pointer;z-index:3}
-.hero-photo .ghost{position:absolute;inset:0;background:var(--red);transform:translate(-10px,10px)}
-.hero-photo .ghost img{width:100%;height:100%;object-fit:cover;object-position:43% top;filter:grayscale(1) contrast(1.2);mix-blend-mode:multiply;display:block}
-.hero-photo .duo{position:absolute;inset:0;background:var(--cyan);transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1)}
-.hero-photo .duo img{width:100%;height:100%;object-fit:cover;object-position:43% top;filter:grayscale(1) contrast(1.2);mix-blend-mode:multiply;display:block}
-.hero-photo:hover .duo{transform:translate(-5px,5px)}
+.hero-photo{position:absolute;right:0;top:0;bottom:0;width:min(38vw,600px);cursor:pointer;z-index:1;overflow:hidden;border-left:3px solid var(--ink)}
+.hero-portrait{width:100%;height:100%;object-fit:cover;object-position:50% top;filter:grayscale(1) contrast(1.05);display:block;transition:filter 0.35s ease-out}
+.hero-photo:hover .hero-portrait{filter:grayscale(1) contrast(1.1) brightness(1.04)}
 .hero-photo:focus{outline:3px solid var(--red);outline-offset:5px}
 .hero-play{position:absolute;bottom:0.85rem;right:0.85rem;display:inline-flex;align-items:center;gap:0.45rem;background:var(--red);color:var(--paper);padding:0.6rem 0.95rem;font-family:'Sometype Mono',monospace;font-size:0.78rem;letter-spacing:0.02em;white-space:nowrap;z-index:4;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--cyan);pointer-events:none;transition:transform 0.2s,box-shadow 0.2s}
 .hero-photo:hover .hero-play{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--cyan)}
 .hero-type{position:relative;z-index:2;isolation:isolate;pointer-events:none}
 .hero-stack{position:relative;z-index:2}
-.hero-line{display:block;position:relative;font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-0.035em;line-height:0.84;font-size:clamp(3.4rem,12.5vw,12rem);white-space:nowrap;opacity:0;animation:stamp 0.45s cubic-bezier(0.34,1.56,0.64,1) forwards}
+.hero-line{display:block;position:relative;font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-0.035em;line-height:0.84;font-size:clamp(2.6rem,8.5vw,8.5rem);white-space:nowrap;opacity:0;animation:stamp 0.45s cubic-bezier(0.34,1.56,0.64,1) forwards}
 .hero-line.hl-ink{color:var(--ink)}
 .hero-line.hl-red{color:var(--red)}
 .hero-line.hl-op-cyan{color:var(--op-cyan);mix-blend-mode:multiply}
@@ -119,15 +117,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .card-media{position:relative;aspect-ratio:16/10;overflow:hidden;border-bottom:3px solid var(--ink)}
 .card-media img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.05);transition:transform 0.45s ease-out,filter 0.4s ease-out}
 .card:hover .card-media img{transform:scale(1.05);filter:grayscale(0) contrast(1)}
-.card-num{position:absolute;top:0;left:0;font-family:'Archivo Black','Archivo',sans-serif;font-size:clamp(1.6rem,2.6vw,2.1rem);line-height:1;color:var(--paper);background:var(--red);padding:0.3em 0.55em 0.24em;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink);z-index:2}
+.card-head{position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:flex-start;gap:0.4rem}
+.card-num{flex-shrink:0;font-family:'Archivo Black','Archivo',sans-serif;font-size:clamp(1.6rem,2.6vw,2.1rem);line-height:1;color:var(--paper);background:var(--red);padding:0.3em 0.5em 0.24em;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink)}
 .card:nth-child(even) .card-num{background:var(--cyan);color:var(--ink)}
+.card-keys{display:flex;flex-wrap:wrap;align-items:flex-start;gap:0.4rem;padding-top:0.4rem}
+.card-key{font-family:'Sometype Mono',monospace;font-size:0.74rem;letter-spacing:0.02em;line-height:1.1;color:var(--paper);background:var(--red);padding:0.42rem 0.7rem;border:2px solid var(--ink);white-space:nowrap}
+.card:nth-child(even) .card-key{background:var(--cyan);color:var(--ink)}
 .card-body{padding:1.5rem 1.5rem 1.6rem}
-.card-tags{display:flex;flex-wrap:wrap;gap:0.45rem;margin-bottom:1rem}
-.card-tag{font-family:'Sometype Mono',monospace;font-size:0.62rem;border:2px solid var(--ink);padding:0.28rem 0.65rem;color:var(--ink);background:var(--paper);transition:all 0.18s}
-.card:hover .card-tag:nth-child(odd){background:var(--cyan)}
-.card:hover .card-tag:nth-child(even){background:var(--red);color:var(--paper)}
 .card-title{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;font-size:clamp(1.25rem,2.1vw,1.7rem);line-height:1.02;letter-spacing:-0.02em;margin-bottom:0.7rem}
-.card-desc{font-size:0.92rem;line-height:1.6;color:var(--ink);margin-bottom:1.2rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card-desc{font-size:1.05rem;line-height:1.4;font-weight:700;color:var(--ink);margin-bottom:1.3rem}
 .card-meta{display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--ink);padding-top:1rem}
 .card-period{font-family:'Sometype Mono',monospace;font-size:0.72rem;color:var(--grey)}
 .card-go{font-family:'Sometype Mono',monospace;font-size:0.72rem;color:var(--paper);background:var(--ink);padding:0.5rem 0.9rem;transition:background 0.18s,transform 0.18s}
@@ -216,7 +214,7 @@ footer span{font-family:'Sometype Mono',monospace;font-size:0.68rem;color:var(--
   .hero-corner.tl,.hero-corner.tr{display:none}
   .hero-corner.bl,.hero-corner.br{position:static;margin-top:1.5rem;text-align:left}
   .hero-line{font-size:clamp(2.6rem,13.5vw,4.6rem);white-space:normal}
-  .hero-photo{position:relative;right:auto;top:auto;transform:none;width:min(320px,80vw);margin:2.75rem auto 0}
+  .hero-photo{position:relative;right:auto;top:auto;bottom:auto;transform:none;width:100%;aspect-ratio:4/4.6;border-left:none;border-top:3px solid var(--ink);margin:2.5rem 0 0}
   .grid{grid-template-columns:1fr;gap:2rem}
   .work{padding:3.5rem 1.25rem 2.5rem}
   .about{padding:3.5rem 1.25rem}
@@ -255,24 +253,21 @@ footer span{font-family:'Sometype Mono',monospace;font-size:0.68rem;color:var(--
 </nav>
 
 <header class="hero">
-  <div class="hero-corner tl">DENNY HULTÉN<br><b>CREATIVE DIRECTOR</b></div>
-  <div class="hero-corner tr">GOTHENBURG, SE<br><b>PORTFOLIO / 2026</b></div>
+  <div class="hero-corner tl">DENNY HULTÉN<br><b>CREATIVE DIRECTOR · GOTHENBURG, SE</b></div>
   <div class="hero-type" aria-label="I work on the problem behind the brief.">
     <div class="hero-stack">
       <span class="hero-line hl-ink">I work</span>
-      <span class="hero-line hl-op-red">on the</span>
-      <span class="hero-line hl-op-cyan">problem</span>
-      <span class="hero-line hl-op-red">behind</span>
-      <span class="hero-line hl-ink hl-brief">the brief.</span>
+      <span class="hero-line hl-ink">on the</span>
+      <span class="hero-line hl-ink">problem</span>
+      <span class="hero-line hl-op-cyan">behind</span>
+      <span class="hero-line hl-op-red">the brief.</span>
     </div>
   </div>
   <div class="hero-photo" onclick="openVideo()" tabindex="0" role="button" aria-label="Play intro video" onkeydown="if(event.key==='Enter')openVideo()">
-    <div class="ghost"><img src="images/denny.jpg" alt="" aria-hidden="true"></div>
-    <div class="duo"><img src="images/denny.jpg" alt="Denny Hultén"></div>
+    <img class="hero-portrait" src="images/denny.jpg" alt="Denny Hultén">
     <div class="hero-play">▶ ABOUT ME, 3 MIN</div>
   </div>
-  <div class="hero-corner bl">CONCEPT. NARRATIVE.<br>PLATFORM. PRODUCTION.</div>
-  <div class="hero-corner br">20+ YRS / 7 COUNTRIES / 10K+ PARTICIPANTS<br><b><span class="vid" onclick="openVideo()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openVideo()">▶ INTRO VIDEO, 3 MIN</span></b></div>
+  <div class="hero-corner bl">CONCEPT. NARRATIVE. PLATFORM. PRODUCTION.<br><b>20+ YRS / 7 COUNTRIES / 10K+ PARTICIPANTS</b></div>
 </header>
 
 <div class="marquee m1" aria-hidden="true"><div class="marquee-track" id="mt1"></div></div>
@@ -280,7 +275,7 @@ footer span{font-family:'Sometype Mono',monospace;font-size:0.68rem;color:var(--
 
 <section id="work" class="work">
   <div class="work-head">
-    <h2 class="work-h"><span class="op ink" data-text="Selected">Selected</span> <span class="work-op"><span class="wo-cyan">work.</span><span class="wo-red">work.</span></span></h2>
+    <h2 class="work-h"><span class="op ink no-ghost">Selected</span> <span class="work-op"><span class="wo-cyan">work.</span><span class="wo-red">work.</span></span></h2>
     <span class="work-count">[ 8 cases ]</span>
   </div>
   <div class="grid" id="grid"></div>
@@ -414,13 +409,28 @@ const seq=NAMES.map(n=>`<span>${n} <b>✷</b></span>`).join('');
 document.getElementById('mt1').innerHTML=seq+seq;
 document.getElementById('mt2').innerHTML=seq+seq;
 
+const HOOKS=[
+  "A five-year company strategy rebuilt as a playable game world for 550 employees, headlined by Veronica Maggio.",
+  "A three-year international programme that turned falling attendance into 95%+ participation across seven countries.",
+  "Reframed a one-off retreat into a year-long wellness programme, and won the client on the concept alone.",
+  "Co-created and produced one of Scandinavia's largest urban dance festivals: 10,000+ people a year, eight editions.",
+  "An entire 550-person summit built around astrology as its structure, rated the best in a five-year partnership.",
+  "A language-proof entertainment concept Volvo ran across two continents, unchanged.",
+  "Co-produced Cleo's gala for live national TV: one concept, two audiences, zero margin for error.",
+  "An original production I wrote and directed that toured Sweden for seven years on government funding."
+];
+
 document.getElementById('grid').innerHTML=CASES.map((c,i)=>`
   <div class="card" onclick="openModal(${i})" tabindex="0" role="button" onkeydown="if(event.key==='Enter')openModal(${i})" aria-label="${c.title}">
-    <div class="card-media"><img src="${c.img}" alt="${c.title}" loading="lazy"><span class="card-num">${c.num}</span></div>
+    <div class="card-media"><img src="${c.img}" alt="${c.title}" loading="lazy">
+      <div class="card-head">
+        <span class="card-num">${c.num}</span>
+        <div class="card-keys">${c.tags.map(t=>`<span class="card-key">${t}</span>`).join('')}</div>
+      </div>
+    </div>
     <div class="card-body">
-      <div class="card-tags">${c.tags.map(t=>`<span class="card-tag">${t}</span>`).join('')}</div>
       <h3 class="card-title">${c.title}</h3>
-      <p class="card-desc">${c.product}</p>
+      <p class="card-desc">${HOOKS[i]}</p>
       <div class="card-meta">
         <span class="card-period">${c.period}</span>
         <span class="card-go">open case →</span>
