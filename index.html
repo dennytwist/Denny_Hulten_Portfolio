@@ -85,6 +85,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .hero-corner b{color:var(--red);font-weight:400}
 .hero-corner .vid{cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .hero-corner .vid:hover{color:var(--red)}
+.hero-deck{position:relative;z-index:2;max-width:24ch;margin-top:1.7rem;font-size:clamp(1.05rem,1.7vw,1.5rem);font-weight:700;line-height:1.28;color:var(--ink);opacity:0;animation:stamp 0.5s ease forwards;animation-delay:0.9s}
+.hero-deck b{color:var(--red);font-weight:700}
+.hero-clients{position:relative;z-index:2;margin-top:0.9rem;font-size:0.82rem;letter-spacing:0.01em;color:var(--ink);opacity:0;animation:stamp 0.5s ease forwards;animation-delay:1.05s}
+.hero-clients b{color:var(--red);font-weight:400;margin:0 0.15em}
+
+/* STAT BAND */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--ink);color:var(--paper);border-top:2px solid var(--ink)}
+.stat{padding:1.6rem 1.6rem 1.5rem;border-left:2px solid rgba(245,241,230,0.16)}
+.stat:first-child{border-left:none}
+.stat-n{display:block;font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:clamp(2.4rem,4.6vw,3.7rem);line-height:0.9;letter-spacing:-0.03em}
+.stat:nth-child(odd) .stat-n{color:var(--cyan)}
+.stat:nth-child(even) .stat-n{color:var(--red)}
+.stat-l{display:block;font-family:'Sometype Mono',monospace;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--paper);margin-top:0.55rem}
 
 /* DOUBLE MARQUEE */
 .marquee{overflow:hidden;padding:0.7rem 0;white-space:nowrap;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
@@ -214,7 +227,11 @@ footer span{font-family:'Sometype Mono',monospace;font-size:0.68rem;color:var(--
   .hero-corner.tl,.hero-corner.tr{display:none}
   .hero-corner.bl,.hero-corner.br{position:static;margin-top:1.5rem;text-align:left}
   .hero-line{font-size:clamp(2.6rem,13.5vw,4.6rem);white-space:normal}
+  .hero-deck{max-width:none;margin-top:1.4rem}
   .hero-photo{position:relative;right:auto;top:auto;bottom:auto;transform:none;width:100%;aspect-ratio:4/4.6;border-left:none;border-top:3px solid var(--ink);margin:2.5rem 0 0}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:nth-child(3){border-left:none}
+  .stat:nth-child(3),.stat:nth-child(4){border-top:2px solid rgba(245,241,230,0.16)}
   .grid{grid-template-columns:1fr;gap:2rem}
   .work{padding:3.5rem 1.25rem 2.5rem}
   .about{padding:3.5rem 1.25rem}
@@ -236,6 +253,7 @@ footer span{font-family:'Sometype Mono',monospace;font-size:0.68rem;color:var(--
   .card{opacity:1;transform:none;transition:none}
   .marquee-track{animation:none !important}
   .hero-line{opacity:1;animation:none}
+  .hero-deck,.hero-clients{opacity:1;animation:none}
 }
 </style>
 </head>
@@ -262,13 +280,21 @@ footer span{font-family:'Sometype Mono',monospace;font-size:0.68rem;color:var(--
       <span class="hero-line hl-op-cyan">behind</span>
       <span class="hero-line hl-op-red">the brief.</span>
     </div>
+    <p class="hero-deck">Creative director building <b>game worlds</b>, <b>festivals</b> and <b>live brand programmes</b>.</p>
+    <p class="hero-clients mono">Volvo <b>·</b> Play'n GO <b>·</b> Länsförsäkringar <b>·</b> Veronica Maggio <b>·</b> P3 Guld</p>
   </div>
   <div class="hero-photo" onclick="openVideo()" tabindex="0" role="button" aria-label="Play intro video" onkeydown="if(event.key==='Enter')openVideo()">
     <img class="hero-portrait" src="images/denny.jpg" alt="Denny Hultén">
     <div class="hero-play">▶ ABOUT ME, 3 MIN</div>
   </div>
-  <div class="hero-corner bl">CONCEPT. NARRATIVE. PLATFORM. PRODUCTION.<br><b>20+ YRS / 7 COUNTRIES / 10K+ PARTICIPANTS</b></div>
 </header>
+
+<section class="stats" aria-label="Career at a glance">
+  <div class="stat"><span class="stat-n">20+</span><span class="stat-l">years directing</span></div>
+  <div class="stat"><span class="stat-n">7</span><span class="stat-l">countries</span></div>
+  <div class="stat"><span class="stat-n">10K+</span><span class="stat-l">live participants</span></div>
+  <div class="stat"><span class="stat-n">5-yr</span><span class="stat-l">brand programmes</span></div>
+</section>
 
 <div class="marquee m1" aria-hidden="true"><div class="marquee-track" id="mt1"></div></div>
 <div class="marquee m2" aria-hidden="true"><div class="marquee-track" id="mt2"></div></div>
