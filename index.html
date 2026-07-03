@@ -97,6 +97,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .stat-n{display:block;font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:clamp(2.4rem,4.6vw,3.7rem);line-height:0.9;letter-spacing:-0.03em}
 .stat:nth-child(odd) .stat-n{color:var(--cyan)}
 .stat:nth-child(even) .stat-n{color:var(--red)}
+.stat-n.wide{font-size:clamp(1.5rem,3vw,2.6rem);text-transform:uppercase;letter-spacing:-0.02em;white-space:nowrap}
 .stat-l{display:block;font-family:'Sometype Mono',monospace;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--paper);margin-top:0.55rem}
 
 /* DOUBLE MARQUEE */
@@ -232,6 +233,7 @@ footer span{font-family:'Sometype Mono',monospace;font-size:0.68rem;color:var(--
   .stats{grid-template-columns:1fr 1fr}
   .stat:nth-child(3){border-left:none}
   .stat:nth-child(3),.stat:nth-child(4){border-top:2px solid rgba(245,241,230,0.16)}
+  .stat-n.wide{font-size:1.2rem}
   .grid{grid-template-columns:1fr;gap:2rem}
   .work{padding:3.5rem 1.25rem 2.5rem}
   .about{padding:3.5rem 1.25rem}
@@ -291,7 +293,7 @@ footer span{font-family:'Sometype Mono',monospace;font-size:0.68rem;color:var(--
 
 <section class="stats" aria-label="Career at a glance">
   <div class="stat"><span class="stat-n">20+</span><span class="stat-l">years directing</span></div>
-  <div class="stat"><span class="stat-n">7</span><span class="stat-l">countries</span></div>
+  <div class="stat"><span class="stat-n wide">Worldwide</span><span class="stat-l">productions</span></div>
   <div class="stat"><span class="stat-n">10K+</span><span class="stat-l">live participants</span></div>
   <div class="stat"><span class="stat-n">5-yr</span><span class="stat-l">brand programmes</span></div>
 </section>
