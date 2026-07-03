@@ -124,9 +124,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .card-media{position:relative;aspect-ratio:16/10;overflow:hidden;border-bottom:3px solid var(--ink)}
 .card-media img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.05);transition:transform 0.45s ease-out,filter 0.4s ease-out}
 .card:hover .card-media img{transform:scale(1.05);filter:grayscale(0) contrast(1)}
-.card-head{position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:flex-start;gap:0.4rem}
-.card-num{flex-shrink:0;font-family:'Archivo Black','Archivo',sans-serif;font-size:clamp(1.6rem,2.6vw,2.1rem);line-height:1;color:var(--paper);background:var(--red);padding:0.3em 0.5em 0.24em;border-right:3px solid var(--ink);border-bottom:3px solid var(--ink)}
-.card:nth-child(even) .card-num{background:var(--cyan);color:var(--ink)}
+.card-head{position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:flex-start;gap:0.4rem;padding:0.7rem 0.9rem}
+.card-num{flex-shrink:0;font-size:clamp(2.4rem,4vw,3.4rem);line-height:0.86}
 .card-keys{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.4rem}
 .card-key{font-family:'Sometype Mono',monospace;font-size:0.74rem;letter-spacing:0.02em;line-height:1.1;color:var(--paper);background:var(--red);padding:0.42rem 0.7rem;border:2px solid var(--ink);white-space:nowrap}
 .card:nth-child(even) .card-key{background:var(--cyan);color:var(--ink)}
@@ -448,7 +447,7 @@ document.getElementById('grid').innerHTML=CASES.map((c,i)=>`
   <div class="card" onclick="openModal(${i})" tabindex="0" role="button" onkeydown="if(event.key==='Enter')openModal(${i})" aria-label="${c.title}">
     <div class="card-media"><img src="${c.img}" alt="${c.title}" loading="lazy">
       <div class="card-head">
-        <span class="card-num">${c.num}</span>
+        <span class="card-num work-op"><span class="wo-cyan">${c.num}</span><span class="wo-red">${c.num}</span></span>
       </div>
     </div>
     <div class="card-body">
