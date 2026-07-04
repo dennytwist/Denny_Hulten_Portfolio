@@ -61,7 +61,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .hero-portrait{width:100%;height:100%;object-fit:cover;object-position:50% top;filter:grayscale(1) contrast(1.05);display:block;transition:filter 0.35s ease-out}
 .hero-photo:hover .hero-portrait{filter:grayscale(1) contrast(1.1) brightness(1.04)}
 .hero-photo:focus{outline:3px solid var(--red);outline-offset:5px}
-.hero-play{position:absolute;bottom:0.85rem;right:0.85rem;display:inline-flex;align-items:center;gap:0.45rem;background:var(--red);color:var(--paper);padding:0.6rem 0.95rem;font-family:'Sometype Mono',monospace;font-size:0.78rem;letter-spacing:0.02em;white-space:nowrap;z-index:4;border:2px solid var(--ink);box-shadow:3px 3px 0 var(--cyan);pointer-events:none;transition:transform 0.2s,box-shadow 0.2s}
+.hero-play{position:absolute;bottom:0.85rem;right:0.85rem;display:inline-flex;align-items:center;gap:0.45rem;background:var(--red);color:var(--paper);padding:0.6rem 0.95rem;font-family:'Sometype Mono',monospace;font-size:0.78rem;letter-spacing:0.02em;white-space:nowrap;z-index:4;border:none;box-shadow:3px 3px 0 var(--cyan);pointer-events:none;transition:transform 0.2s,box-shadow 0.2s}
 .hero-photo:hover .hero-play{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--cyan)}
 .hero-type{position:relative;z-index:2;isolation:isolate;pointer-events:none}
 .hero-stack{position:relative;z-index:2}
@@ -71,11 +71,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .hero-line.hl-op-cyan{color:var(--op-cyan);mix-blend-mode:multiply}
 .hero-line.hl-op-red{color:var(--op-red);mix-blend-mode:multiply}
 .hl-brief{position:relative;z-index:2}
+.hero-op{position:relative;display:block;color:transparent;isolation:isolate}
+.hero-op .ho-cyan{color:var(--op-cyan);mix-blend-mode:multiply}
+.hero-op .ho-red{position:absolute;top:0;left:0;color:var(--op-red);mix-blend-mode:multiply;transform:translate(0.075em,0.085em)}
 .hero-line:nth-child(1){animation-delay:0.15s}
 .hero-line:nth-child(2){margin-top:-0.06em;animation-delay:0.3s}
 .hero-line:nth-child(3){margin-top:-0.06em;animation-delay:0.45s}
 .hero-line:nth-child(4){margin-top:-0.06em;animation-delay:0.6s}
-.hero-line:nth-child(5){margin-top:-0.30em;animation-delay:0.75s}
+.hero-line:nth-child(5){margin-top:-0.22em;animation-delay:0.75s}
 @keyframes stamp{from{opacity:0;transform:translateY(0.25em) scale(0.98)}to{opacity:1;transform:none}}
 .hero-corner{position:absolute;font-family:'Sometype Mono',monospace;font-size:0.68rem;line-height:1.6;color:var(--ink);z-index:3}
 .hero-corner.tl{top:5rem;left:2rem}
@@ -92,13 +95,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 
 /* STAT BAND */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--ink);color:var(--paper);border-top:2px solid var(--ink)}
-.stat{padding:1.6rem 1.6rem 1.5rem;border-left:2px solid rgba(245,241,230,0.16)}
+.stat{padding:1.6rem 1.6rem 1.5rem;border-left:2px solid rgba(245,241,230,0.16);display:flex;flex-direction:column}
 .stat:first-child{border-left:none}
 .stat-n{display:block;font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:clamp(2.4rem,4.6vw,3.7rem);line-height:0.9;letter-spacing:-0.03em}
 .stat:nth-child(odd) .stat-n{color:#fff}
 .stat:nth-child(even) .stat-n{color:var(--red)}
 .stat-n.wide{font-size:clamp(1.5rem,3vw,2.6rem);text-transform:uppercase;letter-spacing:-0.02em;white-space:nowrap}
-.stat-l{display:block;font-family:'Sometype Mono',monospace;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--paper);margin-top:0.55rem}
+.stat-l{display:block;font-family:'Sometype Mono',monospace;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--paper);margin-top:auto;padding-top:0.55rem}
 
 /* DOUBLE MARQUEE */
 .marquee{overflow:hidden;padding:0.7rem 0;white-space:nowrap;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink)}
@@ -272,7 +275,7 @@ footer span{font-family:'Sometype Mono',monospace;font-size:0.68rem;color:var(--
       <span class="hero-line hl-ink">I work</span>
       <span class="hero-line hl-ink">on the</span>
       <span class="hero-line hl-ink">problem</span>
-      <span class="hero-line hl-red">behind</span>
+      <span class="hero-line hero-op"><span class="ho-cyan">behind</span><span class="ho-red">behind</span></span>
       <span class="hero-line hl-ink hl-brief">the brief.</span>
     </div>
     <p class="hero-deck">Creative director building <b>game worlds</b>, <b>festivals</b> and <b>live brand programmes</b>.</p>
