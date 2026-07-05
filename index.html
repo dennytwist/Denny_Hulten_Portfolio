@@ -118,10 +118,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:cen
 .index{list-style:none}
 .row{display:grid;grid-template-columns:3.2rem 1fr;align-items:start;gap:0.5rem 1.2rem;
   padding:1.25rem 0.2rem;border-bottom:1px solid var(--rule);cursor:pointer;position:relative;
-  opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s,background .2s,color .2s,box-shadow .2s}
+  opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s,background .2s,color .2s}
 .row:first-child{border-top:1px solid var(--rule)}
 .row.vis{opacity:1;transform:none}
-.row:hover{background:var(--ink);color:var(--paper);box-shadow:inset 4px 0 0 var(--red)}
+.row:hover{background:var(--ink);color:var(--paper)}
 .row-num{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:1.1rem;letter-spacing:-0.02em;color:var(--red);padding-top:0.15rem}
 .row-main{min-width:0}
 .row-title{display:block;font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(1.05rem,1.8vw,1.5rem);letter-spacing:-0.01em;line-height:1.08}
@@ -304,7 +304,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;padd
     <div class="meta">N°03<br>Denny Hultén<br>Creative Director</div>
   </div>
   <h2 class="about-big">I build.<br>And <span class="op"><span class="c">rebuild.</span><span class="r">rebuild.</span></span></h2>
-  <p class="about-intro">I build platforms and grow movements out of them. Co-founded Twisted Feet from nothing into the dominant cultural force for urban expression in western Sweden. Helped rebuild Eventity from a logistics event company into a creative strategy agency.</p>
+  <p class="about-intro">Co-founded Twisted Feet, a street-dance company, and grew it from nothing into a movement: the dominant cultural force for urban expression in western Sweden. Helped rebuild Eventity from a logistics event company into a creative strategy agency.</p>
   <div class="about-cols">
     <div class="about-col"><div class="k">Scale</div><p>Gothenburg Dance Festival: 10,000+ participants a year, eight editions. National government-funded theatre tours. Live productions with Veronica Maggio, Håkan Hellström, Petter, Cleo, and Ace of Base.</p></div>
     <div class="about-col"><div class="k">Leadership</div><p>At Play'n GO, I built the delivery mechanism for a self-leadership culture that lived on paper but never reached people: a behaviour-change programme now running across 540 employees. At Twisted Feet, I built the infrastructure that kept a generation of creative talent from leaving the region.</p></div>
@@ -341,7 +341,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;padd
 
 <script>
 const CASES=[
-  {num:'01',title:'Länsförsäkringar Gothenburg: Level 2030 Game World',img:'images/level2030.png',period:'2026-2030',tag:'5-Year Strategy',tags:['Employee Programme','Concept Design','Game Mechanics','5-Year Strategy'],
+  {num:'01',title:'Länsförsäkringar Gothenburg: Level 2030 Game World',img:'images/level2030.png',period:'2026-2030',tag:'5-Year Communication Strategy',tags:['Employee Programme','Concept Design','Game Mechanics','5-Year Strategy'],
    product:"Five-year strategic programme built as a game world for 550 employees. Each year is a new level with its own environment, a boss fight representing the company's biggest annual goal, and Ability Cards that carry forward to the 2030 final boss. Inspired by Super Mario, Minecraft, and Farmville. Year 1 headlined by Veronica Maggio.",
    assignment:[
      {label:'Concept',text:"Replaced the traditional conference format with game mechanics: same strategic content, completely different energy. Built from a blank page into a five-year narrative arc where every level, boss, and ability maps directly to the company's real annual goals."},
@@ -349,7 +349,7 @@ const CASES=[
      {label:'Entertainment',text:"Identified, contracted, and directed Veronica Maggio as Year 1 headline artist. Integrated the performance into the full event production schedule."}
    ],
    result:'Five-year programme, 5 million SEK annual budget, 550 participants. Veronica Maggio headlining Year 1 in September 2026.',videos:[]},
-  {num:'02',title:"Play'n GO International Events: Early Access",img:'images/playngo.png',period:'2026-Ongoing',tag:'7 Countries',tags:['International Programme','Change Management','Event Series','7 Countries'],
+  {num:'02',title:"Play'n GO International Events: Early Access",img:'images/playngo.png',period:'2026-Ongoing',tag:'7-Country Event Tour',tags:['International Programme','Change Management','Event Series','7 Countries'],
    product:"Three-year international employee programme for Play'n GO across seven countries (Sweden, Spain, UK, Malta, Hungary, Poland, Philippines). 540 people, eight events per year. Participation was declining. The brief was to fix it.",
    assignment:[
      {label:'The real problem',text:"Play'n GO had a self-leadership culture on paper: vision, values, guides. But no delivery mechanism that actually reached people. I diagnosed the gap and built Early Access as the missing piece: gaming development language native to their own world, used as a structural framework for behaviour change, not decoration."},
@@ -357,7 +357,7 @@ const CASES=[
      {label:'Programme delivery',text:"Managing eight annual events across four countries simultaneously: Malta, Budapest, Växjö, and Manila. Single point of creative and production accountability across all of them."}
    ],
    result:'Participation climbed to 95%+ across all activities. Three-year deal secured. Employees went from attending out of obligation to actively engaging.',videos:[]},
-  {num:'03',title:'Länsförsäkringar Östgöta: The Health Journey',img:'images/halsoresan.jpeg',period:'2024-2025',tag:'Wellness Strategy',tags:['Annual Conference','Wellness Strategy','Strategic Reframe'],
+  {num:'03',title:'Länsförsäkringar Östgöta: The Health Journey',img:'images/halsoresan.jpeg',period:'2024-2025',tag:'A One-Year Wellness Strategy',tags:['Annual Conference','Wellness Strategy','Strategic Reframe'],
    product:"Client asked for a company retreat. Discovery revealed the real need: year-long employee wellness with the retreat as the centrepiece, not the whole story. Rebuilt the brief, built the concept, and won the business. Featured Olympic swimmer Therese Alshammar.",
    assignment:[
      {label:'Redefining the brief',text:"Before touching the concept, I ran a discovery process that changed what we were actually building. The Health Compass (four dimensions of health) became the structural framework for the full year, not just one event."},
