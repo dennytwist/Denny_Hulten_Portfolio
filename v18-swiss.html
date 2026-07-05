@@ -118,10 +118,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:cen
 .index{list-style:none}
 .row{display:grid;grid-template-columns:3.2rem 1fr;align-items:start;gap:0.5rem 1.2rem;
   padding:1.25rem 0.2rem;border-bottom:1px solid var(--rule);cursor:pointer;position:relative;
-  opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s,background .2s,color .2s,padding .2s}
+  opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s,background .2s,color .2s,box-shadow .2s}
 .row:first-child{border-top:1px solid var(--rule)}
 .row.vis{opacity:1;transform:none}
-.row:hover{background:var(--ink);color:var(--paper);padding-left:1rem;padding-right:1rem}
+.row:hover{background:var(--ink);color:var(--paper);box-shadow:inset 4px 0 0 var(--red)}
 .row-num{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:1.1rem;letter-spacing:-0.02em;color:var(--red);padding-top:0.15rem}
 .row-main{min-width:0}
 .row-title{display:block;font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(1.05rem,1.8vw,1.5rem);letter-spacing:-0.01em;line-height:1.08}
@@ -317,7 +317,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;padd
     <h2>Contact</h2>
     <div class="meta">N°04<br>Get in touch</div>
   </div>
-  <h2 class="contact-big">Let's<br>talk.</h2>
+  <h2 class="contact-big">Let's<br>talk<span class="op"><span class="c">.</span><span class="r">.</span></span></h2>
   <div class="c-btns">
     <a href="mailto:dennyhulten@gmail.com" class="c-btn alt">dennyhulten@gmail.com</a>
     <a href="https://www.linkedin.com/in/dennyhulten/" target="_blank" class="c-btn">LinkedIn ↗</a>
