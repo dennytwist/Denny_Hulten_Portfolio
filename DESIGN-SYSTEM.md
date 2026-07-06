@@ -11,7 +11,7 @@ Reference for building anything on-brand for Denny: the portfolio site, CVs, por
 Use these exact values (CSS custom properties on `:root`):
 
 ```
---paper:    #FCFAF4   /* warm off-white background, everything sits on this */
+--paper:    #FBF7EE   /* warm off-white background, everything sits on this */
 --ink:      #15150F   /* near-black, text + borders + dark fills */
 --red:      #E5241D   /* poster red, primary accent */
 --blue:     #2323DC   /* electric ultramarine, secondary accent + duotone */
