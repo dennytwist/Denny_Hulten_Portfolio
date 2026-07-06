@@ -168,6 +168,8 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;padd
 .video-box iframe{width:100%;height:100%;border:0;display:block}
 .video-close,.modal-close{position:fixed;top:1.1rem;right:1.1rem;z-index:1002;background:var(--red);color:var(--paper);border:none;
   font-family:'Archivo',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.05em;text-transform:uppercase;padding:0.6rem 0.9rem;cursor:pointer}
+.modal-close{display:none}
+.modal-overlay.open + .modal-close{display:block}
 
 /* CASE MODAL */
 .modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(21,21,15,0.86);backdrop-filter:blur(4px);display:none;padding:var(--pad);overflow-y:auto}
@@ -341,9 +343,9 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;padd
 </div>
 
 <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
-  <button class="modal-close" onclick="closeModal()">Close ✕</button>
   <div class="modal-box"><div id="modal-content"></div></div>
 </div>
+<button class="modal-close" onclick="closeModal()">Close ✕</button>
 
 <script>
 const CASES=[
