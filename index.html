@@ -57,6 +57,15 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:var(
 .nav-status{display:inline-flex;align-items:center;gap:0.45rem;margin-left:0.9rem;padding-left:0.9rem;border-left:1px solid var(--rule);
   font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
 .nav-status i{width:6px;height:6px;background:var(--red);display:block;flex:none}
+/* The hero states name, role, employer and availability in full. While it is on screen the nav would
+   only repeat it, so the nav's role and status stay collapsed until the hero has scrolled away, at
+   which point the nav becomes the only place carrying them. Nothing is duplicated, nothing is lost.
+   Width, not display, so the transition animates and no layout jump happens on the first scroll. */
+.nav-role,.nav-status{max-width:0;opacity:0;overflow:hidden;white-space:nowrap;
+  padding-left:0;margin-left:0;border-left-color:transparent;
+  transition:max-width .3s ease,opacity .25s ease,margin-left .3s ease,padding-left .3s ease}
+body.past-hero .nav-role{max-width:14rem;opacity:1;padding-left:0.6rem}
+body.past-hero .nav-status{max-width:14rem;opacity:1;margin-left:0.9rem;padding-left:0.9rem;border-left-color:var(--rule)}
 .nav-links{display:flex;align-items:center;gap:clamp(0.9rem,2.2vw,1.8rem)}
 .nav-links a{font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;
   color:var(--ink);position:relative;padding:0.35rem 0;transition:color .15s}
@@ -530,14 +539,14 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 <header class="hero" id="top">
   <div class="frame">
     <div class="hero-top lab">
-      <span>Gothenburg, SE<span class="strip-long"> · Works internationally</span> · Open to relocation</span>
+      <span>Works internationally<span class="strip-long"> · Open to relocation</span></span>
       <span class="hero-reach"><a href="mailto:dennyhulten@gmail.com">dennyhulten@gmail.com</a><a href="tel:+46705459066">+46 70 545 90 66</a></span>
     </div>
     <div class="hero-body">
       <div class="hero-typecol">
         <div class="hero-id">
           <p class="hero-name">Denny Hultén</p>
-          <p class="hero-role"><b>Creative Director</b> · Eventity, Gothenburg · Since Oct 2023<span class="role-long"> · Directing live work since 2004</span></p>
+          <p class="hero-role"><b>Creative Director</b> · Eventity, Gothenburg<span class="role-long"> · Since Oct 2023</span></p>
         </div>
         <h1 class="hero-h">
           <span class="hline">I work on the <span class="brk" aria-hidden="true"></span><span class="key">problem</span></span>
@@ -614,7 +623,7 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
     <div class="meta">N°03<br>Denny Hultén<br><b>04</b> Chapters</div>
   </div>
   <h2 class="about-big">Creative Director<br>in Gothenburg.</h2>
-  <p class="about-span">Twenty years of live work. <span class="op"><span class="c">2004 to now.</span><span class="r">2004 to now.</span></span></p>
+  <p class="about-span">Twenty years of live work. <span class="op"><span class="c">2004 to now.</span><span class="r" aria-hidden="true">2004 to now.</span></span></p>
   <p class="about-intro"><b>Game worlds, festivals, national tours and live television.</b> Concept, direction and production in the same hands, from blank page to stage.</p>
   <ol class="about-spine">
     <li class="ch">
@@ -654,7 +663,7 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
       </div>
     </li>
   </ol>
-  <p class="about-status"><span><b>Open to work and relocation.</b> Works internationally.</span><span><a href="#contact">Get in touch &rarr;</a></span></p>
+  <p class="about-status"><span></span><span><a href="#contact">Get in touch &rarr;</a></span></p>
 </section>
 
 <section class="contact" id="contact">
@@ -663,7 +672,7 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
     <div class="meta">N°04<br>Get in touch</div>
   </div>
   <div class="c-row">
-    <h2 class="contact-big">Let's<br><span class="op"><span class="c">talk</span><span class="r">talk</span></span>.</h2>
+    <h2 class="contact-big">Let's<br><span class="op"><span class="c">talk</span><span class="r" aria-hidden="true">talk</span></span>.</h2>
     <dl class="c-spec">
       <div><dt>Based</dt><dd>Gothenburg, Sweden</dd></div>
       <div><dt>Open to</dt><dd class="red">Relocation</dd></div>
@@ -697,8 +706,8 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 </section>
 
 <footer>
-  <span>© 2026 Denny Hultén / Creative Director</span>
-  <span>Gothenburg, Sweden · CET</span>
+  <span>© 2026 Denny Hultén</span>
+  <span>CET</span>
   <span><a href="#top">Back to top ↑</a></span>
 </footer>
 
@@ -788,7 +797,7 @@ const CASES=[
    from the product/result copy in CASES above: nothing new is asserted here.
    `span` sets how much of the 12-col grid the project takes. */
 const WORK_META=[
-  {span:'wide',client:'Länsförsäkringar Gothenburg',name:'Level 2030: the strategy, built as a game world',
+  {span:'',client:'Länsförsäkringar Gothenburg',name:'Level 2030: the strategy, built as a game world',
    role:'Creative Director',scale:'550 participants · 5M SEK a year',alt:"Illustrated game-world map for Länsförsäkringar Gothenburg's Level 2030 programme."},
   {span:'',client:"Play'n GO",name:'Early Access: self-leadership, written as a game',
    role:'Creative Director',scale:'7 countries · 540 people · 95%+ participation',alt:"Play'n GO Early Access event."},
@@ -802,7 +811,7 @@ const WORK_META=[
    role:'Creative producer and director',scale:'EMEA and APAC · same show in both markets',alt:'Volvo Cars product launch event.'},
   {span:'',client:'P3 Guld',name:"Cleo's gala, built for the room and the camera at once",
    role:'Director and co-producer',scale:'One take, no second',alt:'Cleo performing at the P3 Guld gala.'},
-  {span:'wide band',client:'5 Degrees & Passion for Climate',name:'Written, directed and choreographed from scratch',
+  {span:'',client:'5 Degrees & Passion for Climate',name:'Written, directed and choreographed from scratch',
    role:'Writer and director',scale:'7 years on the road · TEDx Göteborg · Arvsfonden funded',
    alt:'The TEDx Göteborg stage, where the Passion for Climate programme was presented.'}
 ];
@@ -932,6 +941,16 @@ try{
     });
   },{rootMargin:'-45% 0px -50% 0px',threshold:0});
   ['work','about','contact'].forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el);});
+
+  /* nav role + status reveal: the hero already says both, so they only appear once it is gone.
+     Fails open, if this throws the CSS default is collapsed but the hero still carries the facts. */
+  const heroEl=document.querySelector('.hero');
+  if(heroEl){
+    const heroSpy=new IntersectionObserver(es=>{
+      es.forEach(en=>document.body.classList.toggle('past-hero',!en.isIntersecting));
+    },{threshold:0});
+    heroSpy.observe(heroEl);
+  }
 }catch(e){}
 
 /* read-position rule: fills the nav's bottom hairline in proportion to scroll depth,
