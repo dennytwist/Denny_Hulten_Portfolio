@@ -1,2 +1,9 @@
 .vercel
 .DS_Store
+
+# gauntlet working files, never deploy these publicly
+gauntlet2-progress.html
+index-gauntlet-preview.html
+index-pre-gauntlet2.html
+GAUNTLET-DECISIONS.md
+.impeccable/

@@ -44,77 +44,171 @@ a{color:inherit;text-decoration:none}
 .num-big{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;letter-spacing:-0.03em;line-height:0.8}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;
-  padding:0.85rem var(--pad);background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(7px);border-bottom:1px solid var(--ink)}
-.nav-name{font-family:'Archivo',sans-serif;font-weight:800;font-size:0.8rem;letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap}
-.nav-name b{color:var(--red)}
-.nav-links{display:flex;gap:clamp(1rem,3vw,2.4rem)}
-.nav-links a{font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);transition:color .15s}
-.nav-links a span{color:var(--grey)}
-.nav-links a:hover,.nav-links a.active{color:var(--red)}
-.nav-links a:hover span,.nav-links a.active span{color:var(--red)}
+nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  min-height:46px;padding:0 var(--pad);background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(7px);
+  border-bottom:1px solid var(--ink)}
+/* read-position rule: rides the existing hairline, reports how far through the document you are */
+nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:var(--prog,0%);background:var(--red);pointer-events:none}
+.nav-id{display:flex;align-items:center;min-width:0}
+.nav-name{font-family:'Archivo',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.05em;text-transform:uppercase;
+  white-space:nowrap;display:flex;align-items:center;gap:0.6rem}
+.nav-role{font-family:'Sometype Mono',monospace;font-weight:400;font-size:0.68rem;letter-spacing:0.08em;color:var(--grey);
+  padding-left:0.6rem;border-left:1px solid var(--rule)}
+.nav-status{display:inline-flex;align-items:center;gap:0.45rem;margin-left:0.9rem;padding-left:0.9rem;border-left:1px solid var(--rule);
+  font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.nav-status i{width:6px;height:6px;background:var(--red);display:block;flex:none}
+.nav-links{display:flex;align-items:center;gap:clamp(0.9rem,2.2vw,1.8rem)}
+.nav-links a{font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--ink);position:relative;padding:0.35rem 0;transition:color .15s}
+.nav-links a[href^="#"]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--red);
+  transform:scaleX(0);transform-origin:left;transition:transform .18s}
+.nav-links a[href^="#"]:hover,.nav-links a[href^="#"].active{color:var(--red)}
+.nav-links a[href^="#"]:hover::after,.nav-links a[href^="#"].active::after{transform:scaleX(1)}
+.nav-links a.nav-cta{background:var(--red);color:var(--paper);font-family:'Archivo',sans-serif;font-weight:700;font-size:0.7rem;
+  letter-spacing:0.08em;padding:0.45rem 0.8rem;transition:background .15s}
+.nav-links a.nav-cta:hover{background:var(--ink);color:var(--paper)}
+nav a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+[tabindex="-1"]:focus{outline:none}
+@media(max-width:1024px){.nav-status{display:none}}
 
-/* HERO */
-.hero{padding:4.4rem var(--pad) var(--pad)}
-.frame{border:2px solid var(--ink);display:flex;flex-direction:column;min-height:calc(100vh - 5.6rem)}
-.hero-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:start;padding:1rem 1.2rem;border-bottom:1px solid var(--ink)}
-.hero-top .r{text-align:right}
-.hero-top .c{font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;align-self:center}
-.hero-body{display:grid;grid-template-columns:1.35fr 0.9fr;flex:1;min-height:0}
-.hero-typecol{position:relative;isolation:isolate;padding:clamp(1rem,2.4vw,2.2rem) 1.2rem;display:flex;flex-direction:column;justify-content:center;border-right:2px solid var(--ink)}
-.hline{display:block;font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;
-  letter-spacing:-0.035em;line-height:0.85;font-size:clamp(2.4rem,8vw,8.4rem);color:var(--ink);
-  opacity:0;transform:translateY(0.2em);animation:rise .55s cubic-bezier(.2,.7,.2,1) forwards}
-.hline:nth-child(1){animation-delay:.1s}
-.hline:nth-child(2){animation-delay:.18s}
-.hline:nth-child(3){animation-delay:.26s}
-.hline:nth-child(4){animation-delay:.34s}
-.hline:nth-child(5){animation-delay:.42s}
+/* HERO
+   One screen, three bands, each with a job:
+   1 hero-top  — where he works from, and the address to write to, without scrolling
+   2 hero-body — name and level first, then the claim, then the games credential, then the face
+   3 hero-foot — three real projects, so the first screen shows work, not only a slogan */
+.hero{padding:3.7rem var(--pad) 1.4rem;min-height:100vh;display:flex}
+.frame{border:2px solid var(--ink);display:flex;flex-direction:column;flex:1;min-height:0}
+
+/* band 1: place and contact, the way the CV masthead carries them. "Open to work" already
+   sits in the fixed nav 60px above this line, so this band states the thing the nav does not:
+   that he will move for the job, and how to reach him. */
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:0.2rem 1rem;flex-wrap:wrap;
+  padding:0.45rem 1.15rem;border-bottom:1px solid var(--ink)}
+.hero-reach{display:inline-flex;flex-wrap:wrap;gap:0 0.85rem}
+.hero-reach a{border-bottom:1px solid var(--rule);transition:color .15s,border-color .15s}
+.hero-reach a:hover{color:var(--red);border-color:var(--red)}
+
+/* band 2 */
+.hero-body{display:grid;grid-template-columns:1.65fr 0.8fr;flex:1;min-height:0}
+.hero-typecol{position:relative;isolation:isolate;padding:clamp(1rem,1.8vw,1.7rem) 1.15rem;
+  display:flex;flex-direction:column;justify-content:center;gap:clamp(0.8rem,1.4vw,1.3rem);
+  border-right:2px solid var(--ink)}
+
+/* identity: the name and the level, above the claim. The slogan is the biggest thing on the
+   screen but it names nobody, so the sentence that does gets the top of the column. */
+.hero-id{opacity:0;animation:rise .5s ease forwards;animation-delay:.04s}
+.hero-name{font-family:'Archivo Black','Archivo',sans-serif;text-transform:uppercase;
+  font-size:clamp(1.3rem,1.85vw,1.75rem);letter-spacing:-0.025em;line-height:1}
+.hero-role{font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--grey);margin-top:0.3rem;line-height:1.5}
+.hero-role b{font-weight:500;color:var(--ink)}
+
+.hero-h{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;
+  letter-spacing:-0.04em;line-height:0.84;font-size:clamp(2.2rem,4.45vw,4.6rem);color:var(--ink)}
+.hline{display:block;opacity:0;transform:translateY(0.16em);animation:rise .55s cubic-bezier(.2,.7,.2,1) forwards}
+.hero-h .hline:nth-child(1){animation-delay:.1s}
+.hero-h .hline:nth-child(2){animation-delay:.18s}
+/* phone-only line breaks: the sentence is set in four short lines on a narrow screen so the
+   type can stay large instead of shrinking to fit the desktop break points */
+.brk{display:none}
 @keyframes rise{to{opacity:1;transform:none}}
-/* overprint word */
-.op{position:relative;display:inline-block;isolation:isolate;color:transparent}
-.op .c{color:var(--blue);mix-blend-mode:multiply}
-.op .r{position:absolute;top:0;left:0;color:var(--red);mix-blend-mode:multiply;transform:translate(0.05em,0.055em)}
-.hero-kick{margin-top:1.6rem;max-width:34ch;font-size:clamp(0.95rem,1.3vw,1.12rem);font-weight:500;line-height:1.45;color:var(--ink);
-  opacity:0;animation:rise .6s ease forwards;animation-delay:.55s}
-.hero-kick b{color:var(--red);font-weight:700}
+/* The key word. Tried and rejected two second-ink treatments here (a plate at the baseline
+   read as an underline, a plate across the cap read as a strike-through) — both cost more
+   legibility on the headline's load-bearing word than the motif earned. The emphasis is
+   carried by colour instead: PROBLEM is the only coloured word in the headline, so the eye
+   lands on it first and the sentence still reads in one pass. */
+.key{color:var(--red)}
+.hero-lead{max-width:58ch;font-size:clamp(0.98rem,1.25vw,1.1rem);line-height:1.45;color:var(--ink);
+  opacity:0;animation:rise .6s ease forwards;animation-delay:.26s}
+.hero-lead b{font-weight:800}
 
-.hero-photo{position:relative;background:var(--blue);overflow:hidden;cursor:pointer;min-height:340px}
-.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;
+/* the credential spine: the two things the CV hands a reader in one second and a slogan never
+   can, set as data with a label gutter so it does not read as a second paragraph. Row 1 is the
+   only place above the fold that names a games employer. */
+.hero-spine{border-top:1px solid var(--rule);padding-top:0.75rem;display:grid;gap:0.45rem;
+  opacity:0;animation:rise .6s ease forwards;animation-delay:.34s}
+.sp-row{display:grid;grid-template-columns:4.7rem minmax(0,1fr);gap:0 0.9rem;align-items:baseline}
+.sp-k{font-family:'Sometype Mono',monospace;font-size:0.63rem;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--grey);white-space:nowrap}
+.sp-k i{font-style:normal;color:var(--red)}
+.sp-v{font-size:0.83rem;line-height:1.4;font-weight:500}
+.sp-v b{font-weight:800}
+
+.hero-photo{position:relative;background:var(--blue);overflow:hidden;cursor:pointer;min-height:320px}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 14%;
   filter:grayscale(1) contrast(1.08) brightness(1.06);mix-blend-mode:lighten;display:block}
-.hero-photo::after{content:"";position:absolute;inset:0;background:var(--blue);mix-blend-mode:screen;opacity:0.12}
-/* halftone: a real element (not a pseudo) so it layers independently of each container's blue screen-tint */
-.halftone{position:absolute;inset:0;pointer-events:none;
-  background-image:radial-gradient(circle,var(--ink) 1px,transparent 1.6px);
-  background-size:6px 6px;mix-blend-mode:multiply;opacity:0.22}
-.photo-tag{position:absolute;top:0;left:0;writing-mode:vertical-rl;font-family:'Sometype Mono',monospace;font-size:0.68rem;
-  letter-spacing:0.16em;text-transform:uppercase;color:var(--paper);padding:0.8rem 0.5rem;background:var(--red);z-index:2}
+.hero-photo::after{content:"";position:absolute;inset:0;background:var(--blue);mix-blend-mode:screen;opacity:0.12;pointer-events:none}
+.hero-photo:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
 .hero-play{position:absolute;left:1rem;bottom:1rem;z-index:3;display:inline-flex;align-items:center;gap:0.5rem;
   background:var(--red);color:var(--paper);font-family:'Archivo',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.06em;
   text-transform:uppercase;padding:0.6rem 0.9rem;transition:background .18s,color .18s,transform .18s}
-.hero-play:hover{background:var(--ink);transform:translate(-3px,-3px)}
+.hero-photo:hover .hero-play{background:var(--ink);transform:translate(-3px,-3px)}
 .ico{flex:none;display:block}
-.hero-foot{display:grid;grid-template-columns:1fr auto;align-items:end;gap:1rem;padding:1rem 1.2rem;border-top:1px solid var(--ink)}
-.hero-foot p{max-width:52ch;font-size:0.82rem;color:var(--grey);line-height:1.5}
-.hero-foot .n{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:clamp(2.4rem,4.5vw,3.6rem);line-height:0.7;letter-spacing:-0.03em}
 
-/* STATS */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);margin:0 var(--pad)}
-.stat{padding:1.6rem 1.2rem 1.3rem;border-left:1px solid var(--rule);display:flex;flex-direction:column;min-height:9.5rem}
+/* band 3: the proof strip. Three real projects, each one click from the case study. */
+.hero-foot{border-top:2px solid var(--ink);padding:0.7rem 1.15rem 0.85rem;
+  opacity:0;animation:rise .6s ease forwards;animation-delay:.42s}
+.foot-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:0.55rem}
+.foot-head .more{color:var(--red);display:inline-flex;align-items:center;gap:0.4rem}
+.foot-head .more:hover{text-decoration:underline}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem}
+.tile{display:block;width:100%;text-align:left;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer}
+.tile-media{display:block;position:relative;aspect-ratio:2/1;background:var(--blue);overflow:hidden;border:1px solid var(--ink)}
+.tile-media img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.22) brightness(0.88);
+  mix-blend-mode:lighten;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.tile:hover .tile-media img,.tile:focus-visible .tile-media img{transform:scale(1.05)}
+.tile:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.tile-c{display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:0.86rem;line-height:1.2;margin-top:0.5rem;
+  transition:color .18s}
+.tile:hover .tile-c{color:var(--red)}
+.tile-m{display:block;font-family:'Sometype Mono',monospace;font-size:0.65rem;letter-spacing:0.055em;
+  text-transform:uppercase;color:var(--grey);margin-top:0.22rem;line-height:1.35}
+
+/* overprint word: now used only by the About and Contact headlines */
+.op{position:relative;display:inline-block;isolation:isolate;color:transparent}
+.op .c{color:var(--blue);mix-blend-mode:multiply}
+.op .r{position:absolute;top:0;left:0;color:var(--red);mix-blend-mode:multiply;transform:translate(0.05em,0.055em)}
+
+/* PROOF BAND — stats + roster read as one strip: 2px ink rules top and bottom, hairlines inside. */
+/* STATS: four numbers, each one a link into the project it is taken from. */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--ink);margin:0 var(--pad)}
+.stat{padding:1.5rem 1.2rem 1.15rem;border:0;border-left:1px solid var(--rule);display:flex;flex-direction:column;
+  min-height:10.4rem;text-align:left;background:none;font:inherit;color:inherit;cursor:pointer;
+  transition:background .18s,color .18s}
 .stat:first-child{border-left:none}
 .stat .k{font-family:'Sometype Mono',monospace;font-size:0.64rem;letter-spacing:0.12em;color:var(--grey);margin-bottom:auto}
 .stat .v{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:clamp(2.2rem,4.4vw,3.6rem);line-height:0.85;letter-spacing:-0.03em}
-.stat .v.sm{font-size:clamp(1.5rem,3vw,2.5rem);text-transform:uppercase}
-.stat:nth-child(2) .v{color:var(--red)}
-.stat .l{font-family:'Archivo',sans-serif;font-weight:600;font-size:0.75rem;letter-spacing:0.02em;text-transform:uppercase;margin-top:0.6rem;color:var(--ink)}
+.stat:nth-child(4) .v{color:var(--red)}
+.stat .l{font-family:'Archivo',sans-serif;font-weight:600;font-size:0.75rem;letter-spacing:0.02em;text-transform:uppercase;margin-top:0.55rem;color:var(--ink)}
+/* .src names the evidence: which project this number is taken from, and that it opens */
+.stat .src{font-family:'Sometype Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;color:var(--grey);
+  margin-top:0.5rem;display:flex;align-items:baseline;gap:0.45rem}
+.stat .src::after{content:"\2192";color:var(--red);transition:transform .18s}
+.stat:hover,.stat:focus-visible{background:var(--ink);color:var(--paper);outline:none}
+.stat:hover .v,.stat:focus-visible .v,.stat:hover .l,.stat:focus-visible .l{color:var(--paper)}
+.stat:hover .k,.stat:focus-visible .k,.stat:hover .src,.stat:focus-visible .src{color:rgba(251,247,238,0.72)}
+.stat:hover .src::after,.stat:focus-visible .src::after{color:var(--paper);transform:translateX(3px)}
+.stat:focus-visible{box-shadow:inset 0 0 0 2px var(--red)}
 
-/* CLIENTS strip */
-.clients{margin:0 var(--pad);border-bottom:2px solid var(--ink);overflow:hidden;padding:0.75rem 0}
-.cl-track{display:inline-block;white-space:nowrap;animation:scroll 40s linear infinite}
-.clients:hover .cl-track{animation-play-state:paused}
-.cl-track span{font-family:'Archivo',sans-serif;font-weight:800;font-size:0.9rem;letter-spacing:0.04em;text-transform:uppercase;margin:0 1.4rem;color:var(--ink)}
-.cl-track span::after{content:"/";color:var(--red);margin-left:1.4rem}
-@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* ROSTER: the names, held still so they can be read and compared, split into the two kinds of proof.
+   Deliberately built to NOT look like the stats above it: darker ground, a label gutter instead of a
+   label stacked on top, and names that flow rather than sit in the four stat columns. Three bands,
+   three structures, so a reader can tell at a glance that these are three different kinds of claim. */
+.clients{margin:0 var(--pad);border-top:1px solid var(--rule);border-bottom:2px solid var(--ink);
+  background:rgba(21,21,15,0.045)}
+.cl-grp{display:grid;grid-template-columns:clamp(7.5rem,13vw,11rem) minmax(0,1fr);
+  gap:0 clamp(1rem,2.4vw,2.2rem);align-items:baseline;padding:1.15rem 1.2rem 1.3rem}
+.cl-grp + .cl-grp{border-top:1px solid var(--rule)}
+.cl-k{font-family:'Sometype Mono',monospace;font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--grey);line-height:1.45}
+.cl-k b{color:var(--red);font-weight:400}
+.cl-list{list-style:none;display:flex;flex-wrap:wrap;align-items:baseline;gap:0.3rem 0}
+.cl-list li{font-family:'Archivo',sans-serif;text-transform:uppercase;line-height:1.25;display:inline-flex;align-items:baseline}
+/* the clients hired him, so they carry the weight; the artists are a supporting roster, one step down */
+.cl-grp.cl-pri .cl-list li{font-weight:800;font-size:clamp(1rem,1.55vw,1.4rem);letter-spacing:-0.005em;
+  padding-right:clamp(1rem,2vw,1.9rem)}
+.cl-grp.cl-sec .cl-list li{font-weight:600;font-size:clamp(0.78rem,0.9vw,0.9rem);letter-spacing:0.05em;color:var(--grey)}
+.cl-grp.cl-sec .cl-list li:not(:last-child)::after{content:"/";color:var(--red);margin:0 0.55rem 0 0.6rem}
 
 /* SECTION HEAD */
 .sec{padding:clamp(3rem,7vw,6rem) var(--pad) clamp(2rem,4vw,3.5rem)}
@@ -124,140 +218,308 @@ nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:cen
 .sec-head .meta{text-align:right;font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;color:var(--grey);line-height:1.5}
 .sec-head .meta b{color:var(--red);font-weight:400}
 
-/* WORK INDEX */
-.work-wrap{display:grid;grid-template-columns:1.12fr 0.88fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
-.index{list-style:none}
-.row{display:grid;grid-template-columns:3.2rem 1fr;align-items:start;gap:0.5rem 1.2rem;
-  padding:1.25rem 0.2rem;border-bottom:1px solid var(--rule);cursor:pointer;position:relative;
-  transition:opacity .5s,transform .5s,background .2s,color .2s}
-.row:first-child{border-top:1px solid var(--rule)}
+/* WORK INDEX: every project is its own piece of media, sized by how much
+   of the story it carries. 12-col grid: N°01 and N°08 run full width, the
+   rest sit two-up. */
+.work-wrap{display:grid;grid-template-columns:repeat(12,1fr);list-style:none;
+  column-gap:clamp(1rem,2.4vw,2.2rem);row-gap:clamp(2.6rem,5vw,4.6rem);
+  padding-top:clamp(1.8rem,3.4vw,3rem)}
+.pj{grid-column:span 6;display:flex;flex-direction:column;cursor:pointer;position:relative;
+  transition:opacity .5s,transform .5s}
+.pj.wide{grid-column:span 12}
 /* .pre is an opt-in hidden state applied by JS only when it can guarantee reveal; default is visible so no-JS/partial-JS/no-scroll contexts always show the content */
-.row.pre{opacity:0;transform:translateY(14px)}
-.row:hover{background:var(--ink);color:var(--paper)}
-.row-num{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:1.1rem;letter-spacing:-0.02em;color:var(--red);padding-top:0.15rem}
-.row-main{min-width:0}
-.row-kind{display:block;font-family:'Sometype Mono',monospace;font-size:0.64rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--red);margin-bottom:0.4rem}
-.row-title{display:block;font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(1.05rem,1.8vw,1.5rem);letter-spacing:-0.01em;line-height:1.08}
-.row-res{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-  margin-top:0.45rem;font-size:0.88rem;line-height:1.4;color:var(--grey)}
-.row:hover .row-res{color:rgba(236,231,219,0.75)}
-/* sticky preview panel */
-.work-preview{position:sticky;top:5.5rem;border:2px solid var(--ink);background:var(--paper)}
-.wp-media{position:relative;aspect-ratio:4/3;background:var(--blue);overflow:hidden;border-bottom:2px solid var(--ink)}
-.wp-media img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08) brightness(1.05);mix-blend-mode:lighten;display:block;transition:opacity .18s}
-.wp-body{padding:0.9rem 1rem 1rem}
-.wp-t{font-family:'Archivo',sans-serif;font-weight:700;font-size:1rem;line-height:1.12;margin-bottom:0.7rem}
-.wp-row{display:flex;justify-content:space-between;gap:1rem;font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--grey)}
-.wp-row .red{color:var(--red)}
+.pj.pre{opacity:0;transform:translateY(18px)}
+.pj:focus-visible{outline:3px solid var(--red);outline-offset:6px}
+.pj-media{position:relative;background:var(--blue);overflow:hidden;border:2px solid var(--ink);aspect-ratio:16/9}
+.pj.band .pj-media{aspect-ratio:2.72/1}
+.pj-media img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;
+  filter:grayscale(1) contrast(1.1) brightness(1.05);mix-blend-mode:lighten;display:block;
+  transition:transform .55s cubic-bezier(.2,.7,.2,1)}
+.pj:hover .pj-media img,.pj:focus-visible .pj-media img{transform:scale(1.035)}
+/* metadata band: the four things a recruiter scans, in fixed order.
+   flex:1 + margin-top:auto on the foot keeps the scale line of two side-by-side
+   projects on one baseline even when one client name wraps to two lines. */
+.pj-meta{padding-top:0.7rem;display:flex;flex-direction:column;gap:0.3rem;flex:1}
+.pj-strip{display:flex;justify-content:space-between;align-items:baseline;gap:1.2rem;
+  font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey)}
+.pj-strip .n{color:var(--red)}
+.pj-year{color:var(--ink);white-space:nowrap}
+/* overflow-wrap: "Länsförsäkringar" is 16 unbreakable characters whose min-content is 374.7px, and the
+   mobile 1fr track has an auto floor, so without this the whole document is 6px wider than a 390px phone
+   and the client name, year and OPEN CASE are clipped off the right edge of the lead card. */
+.pj-client{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;
+  letter-spacing:-0.025em;line-height:0.9;font-size:clamp(1.35rem,2.6vw,2.35rem);margin-top:0.25rem;
+  overflow-wrap:anywhere;transition:color .18s}
+.pj.wide .pj-client{font-size:clamp(1.9rem,4.6vw,4.1rem)}
+.pj-name{font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(0.95rem,1.15vw,1.12rem);line-height:1.25}
+.pj.wide .pj-name{font-size:clamp(1.05rem,1.6vw,1.35rem)}
+/* level: without it a reader cannot tell whether he ran the thing or worked on it.
+   Labelled, because the word only does its job if you know what it is naming. */
+.pj-role{font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.07em;text-transform:uppercase;
+  color:var(--ink);margin-top:0.15rem}
+.pj-role .k{color:var(--red);margin-right:0.45rem}
+.pj-foot{display:flex;justify-content:space-between;align-items:baseline;gap:1.2rem;flex-wrap:wrap;
+  margin-top:auto;padding-top:0.55rem;border-top:1px solid var(--rule-soft);
+  font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase}
+.pj-open{color:var(--red);white-space:nowrap}
+.pj:hover .pj-client{color:var(--red)}
 
-/* ABOUT */
+/* ABOUT
+   The biggest type carries the load-bearing claim: role, place, span. The line
+   under it is the second tier, not a footnote, so the dated span reads at the
+   same glance. */
 .about-big{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-0.03em;
-  font-size:clamp(2.2rem,8vw,7rem);line-height:0.84;margin:clamp(2rem,4vw,3.2rem) 0 1.6rem}
+  font-size:clamp(2.1rem,7.1vw,6.1rem);line-height:0.84;margin:clamp(2rem,4vw,3.2rem) 0 clamp(0.9rem,1.6vw,1.4rem)}
 .about-big .red{color:var(--red)}
-.about-intro{max-width:60ch;font-size:clamp(1.05rem,1.7vw,1.4rem);font-weight:500;line-height:1.4;padding-bottom:2.5rem}
-.about-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:0;border-top:1px solid var(--rule)}
-.about-col{padding:2rem 1.5rem 0 0;border-left:1px solid var(--rule)}
-.about-col:first-child{padding-left:0;border-left:none}
-.about-col:not(:first-child){padding-left:1.5rem}
-.about-col .k{font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:0.8rem}
-.about-col p{font-size:0.9rem;line-height:1.55;color:var(--ink)}
+.about-span{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;
+  letter-spacing:-0.02em;font-size:clamp(1.22rem,3.3vw,2.75rem);line-height:1;margin-bottom:clamp(1.1rem,2vw,1.7rem)}
+.about-span .red{color:var(--red)}
+.about-intro{max-width:52ch;font-size:clamp(1.02rem,1.45vw,1.24rem);font-weight:500;line-height:1.45;
+  padding-bottom:clamp(2.2rem,4.5vw,3.8rem)}
+.about-intro b{font-weight:800}
+
+/* career spine: four dated chapters, most recent first.
+   The date range is the left rail, in ink, because span is the fact a recruiter
+   is checking. The old third column mixed editions, years and headcount in one
+   slot, which invited a comparison it could not support, so each chapter now
+   carries its own evidence line instead. */
+.about-spine{list-style:none;border-top:2px solid var(--ink)}
+.ch{display:grid;grid-template-columns:6.4rem minmax(0,1fr);gap:0 clamp(1.2rem,2.6vw,2.6rem);
+  align-items:start;padding:clamp(1.5rem,2.5vw,2.2rem) 0.15rem;border-bottom:1px solid var(--rule)}
+.ch-when{padding-top:0.1rem}
+.ch-y1{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:1.28rem;letter-spacing:-0.02em;
+  line-height:1;color:var(--ink)}
+.ch-y2{font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--grey);margin-top:0.28rem}
+.ch-y2.on{color:var(--red)}
+.ch-main{min-width:0}
+.ch-cat{font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--red);margin-bottom:0.4rem}
+.ch-org{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(1.15rem,1.95vw,1.6rem);letter-spacing:-0.015em;
+  line-height:1.06;margin-bottom:0.45rem}
+.ch-body{font-size:1rem;line-height:1.5;color:var(--ink);max-width:56ch}
+.ch-ev{font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.07em;text-transform:uppercase;
+  color:var(--grey);margin-top:0.75rem;line-height:1.6}
+.ch-ev b{color:var(--ink);font-weight:400}
+/* availability: the one fact a recruiter acts on */
+.about-status{display:flex;justify-content:space-between;align-items:baseline;gap:0.8rem 1.5rem;flex-wrap:wrap;
+  padding:1.15rem 0.15rem 0;font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;
+  text-transform:uppercase;color:var(--grey)}
+.about-status b{color:var(--ink);font-weight:400}
+.about-status a{color:var(--red);border-bottom:1px solid transparent;transition:border-color .15s}
+.about-status a:hover{border-bottom-color:var(--red)}
+.about-status a:focus-visible{outline:2px solid var(--red);outline-offset:3px}
 
 /* CONTACT */
-.contact{padding:clamp(3rem,7vw,6rem) var(--pad) clamp(4rem,9vw,8rem)}
+.contact{padding:clamp(3rem,7vw,6rem) var(--pad) 0}
 .contact-big{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-0.03em;
-  font-size:clamp(2.8rem,13vw,10rem);line-height:0.82;margin-top:clamp(2rem,4vw,3.2rem)}
-.c-btns{display:flex;flex-wrap:wrap;gap:0.9rem;margin-top:2.4rem}
-.c-btn{display:inline-flex;align-items:center;gap:0.5rem;font-family:'Archivo',sans-serif;font-weight:700;font-size:0.9rem;
-  letter-spacing:0.03em;padding:0.85rem 1.4rem;border:2px solid var(--ink);transition:background .18s,color .18s,transform .18s}
-.c-btn:hover{background:var(--ink);color:var(--paper);transform:translate(-3px,-3px)}
-.c-btn.alt{background:var(--red);color:var(--paper);border-color:var(--red)}
-.c-btn.alt:hover{background:var(--ink);border-color:var(--ink)}
+  font-size:clamp(2.2rem,8.6vw,7.6rem);line-height:0.84}
+/* the close is the headline plus the three facts a recruiter checks before writing. No prose:
+   what each route is good for is already printed inside its own cell below. */
+.c-row{display:grid;grid-template-columns:1.5fr minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem);align-items:end;
+  margin-top:clamp(2rem,4vw,3.2rem)}
+.c-spec{border-top:1px solid var(--rule)}
+.c-spec div{display:flex;justify-content:space-between;gap:1rem;padding:0.6rem 0;border-bottom:1px solid var(--rule);
+  font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.04em}
+.c-spec dt{color:var(--grey);text-transform:uppercase}
+.c-spec dd{text-align:right;color:var(--ink)}
+.c-spec dd.red{color:var(--red)}
+
+/* contact grid: one cell per route, each carrying the real detail */
+.c-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  margin:clamp(2.4rem,5vw,4rem) 0 clamp(3rem,7vw,6rem)}
+.c-cell{display:flex;flex-direction:column;padding:1.5rem 1.2rem 1.4rem;border-left:1px solid var(--rule);min-height:10rem;
+  transition:background .18s,color .18s}
+.c-cell:first-child{border-left:none}
+.c-cell:hover{background:var(--ink);color:var(--paper)}
+.c-cell:focus-visible{background:var(--ink);color:var(--paper);outline:3px solid var(--blue);outline-offset:-3px}
+.c-k{font-family:'Sometype Mono',monospace;font-size:0.64rem;letter-spacing:0.12em;color:var(--grey);margin-bottom:auto}
+.c-v{display:flex;align-items:center;gap:0.45rem;margin-top:1.2rem;font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:clamp(0.92rem,1.15vw,1.06rem);letter-spacing:-0.01em;line-height:1.15}
+.c-n{margin-top:0.5rem;font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.03em;color:var(--grey);line-height:1.45}
+.c-cell:hover .c-k,.c-cell:hover .c-n,.c-cell:focus-visible .c-k,.c-cell:focus-visible .c-n{color:rgba(251,247,238,0.72)}
+.c-cell.pri{background:var(--red);color:var(--paper);border-left-color:var(--red)}
+.c-cell.pri .c-k,.c-cell.pri .c-n{color:rgba(251,247,238,0.78)}
+.c-cell.pri:hover,.c-cell.pri:focus-visible{background:var(--ink)}
 
 /* FOOTER */
-footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;padding:1.2rem var(--pad);border-top:2px solid var(--ink);
-  font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--grey)}
+footer{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:0.6rem 1.8rem;padding:1.2rem var(--pad);
+  border-top:2px solid var(--ink);font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--grey)}
+footer a{color:var(--ink);border-bottom:1px solid var(--rule);transition:color .15s,border-color .15s}
+footer a:hover{color:var(--red);border-color:var(--red)}
+footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+@media(max-width:900px){
+  .c-row{grid-template-columns:1fr;gap:1.8rem}
+  .c-grid{grid-template-columns:repeat(2,1fr)}
+  .c-cell:nth-child(3){border-left:none}
+  .c-cell:nth-child(3),.c-cell:nth-child(4){border-top:1px solid var(--rule)}
+}
+@media(max-width:560px){
+  .c-grid{grid-template-columns:1fr}
+  .c-cell{border-left:none;border-top:1px solid var(--rule);min-height:auto;padding:1.1rem 0.9rem}
+  .c-cell:first-child{border-top:none}
+  .c-v{margin-top:0.7rem}
+}
 
 /* VIDEO MODAL */
 .video-overlay{position:fixed;inset:0;z-index:1000;background:rgba(21,21,15,0.9);display:none;align-items:center;justify-content:center;padding:var(--pad)}
 .video-overlay.open{display:flex}
 .video-box{width:min(1000px,92vw);aspect-ratio:16/9;background:#000;border:2px solid var(--paper)}
 .video-box iframe{width:100%;height:100%;border:0;display:block}
-.video-close,.modal-close{position:fixed;top:1.1rem;right:1.1rem;z-index:1002;background:var(--red);color:var(--paper);border:none;
+.video-close{position:fixed;top:1.1rem;right:1.1rem;z-index:1002;background:var(--red);color:var(--paper);border:none;
   font-family:'Archivo',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.05em;text-transform:uppercase;padding:0.6rem 0.9rem;cursor:pointer;transition:background .18s,color .18s,transform .18s}
-.video-close:hover,.modal-close:hover{background:var(--ink);transform:translate(-3px,-3px)}
-.modal-close{display:none}
-.modal-overlay.open + .modal-close{display:block}
+.video-close:hover{background:var(--ink);transform:translate(-3px,-3px)}
 
 /* CASE MODAL */
-.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(21,21,15,0.86);backdrop-filter:blur(4px);display:none;padding:var(--pad);overflow-y:auto}
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(21,21,15,0.88);backdrop-filter:blur(4px);display:none;overflow-y:auto;overscroll-behavior:contain}
 .modal-overlay.open{display:block}
-.modal-box{max-width:960px;margin:1.5rem auto 3rem;background:var(--paper);border:2px solid var(--ink);position:relative}
-/* modal hero image */
+.modal-box{--mpad:clamp(1.25rem,3.4vw,2.9rem);--rail:9rem;
+  max-width:1040px;margin:0 auto;background:var(--paper);border-left:2px solid var(--ink);border-right:2px solid var(--ink);position:relative}
+.modal-box:focus{outline:none}
+/* sticky case bar: says which case you are in, and gets you out or onward from anywhere in the scroll */
+.m-bar{position:sticky;top:0;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:0.55rem 0.55rem 0.55rem var(--mpad);background:var(--paper);border-bottom:2px solid var(--ink)}
+.m-barl{display:flex;align-items:baseline;gap:0.9rem;min-width:0}
+.m-plate{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:1.15rem;line-height:1;letter-spacing:-0.03em;color:var(--ink);white-space:nowrap}
+.m-plate i{font-style:normal;font-family:'Sometype Mono',monospace;font-weight:400;font-size:0.7rem;letter-spacing:0.04em;color:var(--grey)}
+.m-kind{font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--grey);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-nav{display:flex;gap:0.35rem;flex:none}
+.m-btn{font-family:'Sometype Mono',monospace;font-size:0.74rem;letter-spacing:0.06em;text-transform:uppercase;line-height:1;
+  background:transparent;color:var(--ink);border:1.5px solid var(--ink);padding:0.5rem 0.62rem;cursor:pointer;transition:background .16s,color .16s}
+.m-btn:hover{background:var(--ink);color:var(--paper)}
+.m-btn.close{display:inline-flex;align-items:center;gap:0.5rem;background:var(--red);border-color:var(--red);color:var(--paper);font-family:'Archivo',sans-serif;font-weight:700;letter-spacing:0.05em;padding:0.5rem 0.85rem}
+.m-btn.close:hover{background:var(--ink);border-color:var(--ink)}
+.m-btn:focus-visible,.m-vid:focus-visible,.m-next:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+/* hero image: the one real artefact of the project, given the full width of the case */
 .m-hero{position:relative;background:var(--blue);border-bottom:2px solid var(--ink);overflow:hidden}
-.m-hero>img{width:100%;aspect-ratio:16/9;object-fit:cover;filter:grayscale(1) contrast(1.08) brightness(1.05);mix-blend-mode:lighten;display:block}
-.m-fig{position:absolute;top:0;left:0;writing-mode:vertical-rl;background:var(--red);color:var(--paper);
-  font-family:'Sometype Mono',monospace;font-size:0.64rem;letter-spacing:0.16em;text-transform:uppercase;padding:0.8rem 0.5rem;z-index:2}
-.m-plate{position:absolute;right:1rem;bottom:0.5rem;z-index:2;font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;
-  font-size:clamp(3.2rem,9vw,6rem);line-height:0.7;color:var(--paper);opacity:0.92;letter-spacing:-0.03em}
-.m-vids{display:flex;flex-wrap:wrap;gap:0.5rem;position:absolute;left:1rem;bottom:1rem;z-index:3}
-.m-vid{display:inline-flex;align-items:center;gap:0.4rem;background:var(--red);color:var(--paper);font-family:'Archivo',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:0.03em;padding:0.5rem 0.8rem}
-.m-vid:hover{background:var(--ink)}
+.m-hero>img{width:100%;aspect-ratio:2/1;object-fit:cover;filter:grayscale(1) contrast(1.08) brightness(1.05);mix-blend-mode:lighten;display:block}
 /* header band */
-.m-head{display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:start;padding:1.5rem var(--pad);border-bottom:2px solid var(--ink)}
-.m-eyebrow{font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-bottom:0.75rem}
-.m-title{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:clamp(1.5rem,3.2vw,2.4rem);line-height:0.98;letter-spacing:-0.02em;max-width:20ch}
-.m-tags{display:flex;flex-wrap:wrap;gap:0.4rem;justify-content:flex-end;align-content:flex-start;max-width:44%}
-.m-tag{font-family:'Sometype Mono',monospace;font-size:0.62rem;letter-spacing:0.04em;text-transform:uppercase;border:1px solid var(--ink);padding:0.3rem 0.55rem}
-/* body blocks */
-.m-block{padding:1.7rem var(--pad);border-bottom:1px solid var(--rule)}
-.m-block:last-child{border-bottom:none}
-.m-lbl{font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:0.95rem}
-.m-product{font-size:1.05rem;line-height:1.5;max-width:66ch}
-.m-result{font-size:1.05rem;line-height:1.45;font-weight:600;border-left:3px solid var(--red);padding-left:1rem;max-width:66ch}
+.m-head{padding:clamp(1.7rem,3.2vw,2.8rem) var(--mpad) clamp(1.3rem,2.2vw,1.9rem);border-bottom:2px solid var(--ink)}
+.m-eyebrow{font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-bottom:1rem}
+.m-eyebrow em{font-style:normal;color:var(--grey)}
+.m-title{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:clamp(1.8rem,4.4vw,3.3rem);line-height:0.93;letter-spacing:-0.035em;max-width:17ch}
+.m-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.4rem}
+.m-tag{font-family:'Sometype Mono',monospace;font-size:0.62rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--grey);border:1px solid var(--rule);padding:0.3rem 0.55rem}
+/* body blocks: label rail on the left sets a single spine, text column keeps a comfortable measure */
+.m-block{display:grid;grid-template-columns:var(--rail) 1fr;gap:0 clamp(1.2rem,3vw,2.4rem);
+  padding:clamp(1.6rem,3vw,2.5rem) var(--mpad);border-bottom:1px solid var(--rule)}
+.m-block:last-of-type{border-bottom:none}
+.m-lbl{font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);padding-top:0.35rem}
+.m-product{font-size:1.05rem;line-height:1.6;max-width:58ch}
+/* the result is what a recruiter is scanning for, so it is inverted and set large, directly under the title */
+.m-block.invert{background:var(--ink);color:var(--paper);border-bottom:none;padding-top:clamp(1.8rem,3.4vw,2.8rem);padding-bottom:clamp(1.8rem,3.4vw,2.8rem)}
+.m-block.invert .m-lbl{color:rgba(251,247,238,0.62)}
+.m-result{font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(1.18rem,2.2vw,1.62rem);line-height:1.28;letter-spacing:-0.018em;max-width:40ch}
+/* video links: real media rows, not chips */
+.m-vids{display:grid;gap:0}
+.m-vid{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1.1rem;
+  padding:0.85rem 0.7rem;margin-left:-0.7rem;border-top:1px solid var(--rule);transition:background .16s,color .16s}
+.m-vid:first-child{border-top:none}
+.m-vid .play{width:2.5rem;height:2.5rem;flex:none;background:var(--red);color:var(--paper);display:grid;place-items:center;transition:background .16s}
+.m-vid .lb{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:-0.01em;line-height:1.2}
+.m-vid .host{font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);white-space:nowrap}
+.m-vid:hover{background:var(--ink);color:var(--paper)}
+.m-vid:hover .host{color:rgba(251,247,238,0.7)}
+/* role: three numbered things he actually did */
 .m-assign{list-style:none;display:grid;gap:0}
-.m-assign li{display:grid;grid-template-columns:2.4rem 1fr;gap:0.4rem 1.3rem;padding:1.15rem 0;border-top:1px solid var(--rule)}
+.m-assign li{display:grid;grid-template-columns:2.6rem 1fr;gap:0.4rem 1rem;padding:1.25rem 0;border-top:1px solid var(--rule-soft)}
 .m-assign li:first-child{border-top:none;padding-top:0.2rem}
-.m-anum{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:0.95rem;color:var(--red);padding-top:0.1rem}
-.m-atext strong{display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:1.02rem;margin-bottom:0.45rem}
-.m-atext p{font-size:0.93rem;line-height:1.5;color:var(--ink);max-width:60ch}
+.m-anum{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:1.05rem;color:var(--red);padding-top:0.1rem;letter-spacing:-0.02em}
+.m-atext strong{display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:1.05rem;margin-bottom:0.45rem}
+.m-atext p{font-size:0.95rem;line-height:1.6;color:var(--ink);max-width:56ch}
+/* onward: next case without going back to the index */
+.m-next{display:grid;grid-template-columns:1fr auto;align-items:center;gap:1.5rem;width:100%;text-align:left;
+  font:inherit;color:inherit;background:var(--paper);border:none;border-top:2px solid var(--ink);cursor:pointer;
+  padding:clamp(1.5rem,3vw,2.3rem) var(--mpad);transition:background .16s,color .16s}
+.m-next:hover{background:var(--ink);color:var(--paper)}
+.m-next .k{display:block;font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--red);margin-bottom:0.55rem}
+.m-next .t{display:block;font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:clamp(1.15rem,2.4vw,1.9rem);line-height:1;letter-spacing:-0.03em;max-width:22ch}
+.m-next .arw{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.6rem;line-height:1;flex:none}
+.m-hint{font-family:'Sometype Mono',monospace;font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);
+  padding:0.9rem var(--mpad) 1.1rem;border-top:1px solid var(--rule)}
+@media(max-width:760px){
+  .m-block{grid-template-columns:1fr}
+  .m-lbl{padding-top:0;margin-bottom:0.9rem}
+  .m-kind{display:none}
+}
 @media(max-width:560px){
-  .m-head{grid-template-columns:1fr}.m-tags{justify-content:flex-start;max-width:100%}
   .m-assign li{grid-template-columns:1fr}.m-anum{padding-top:0}
+  .m-vid{grid-template-columns:auto 1fr;gap:0.9rem}
+  .m-vid .host{grid-column:2;margin-top:0.25rem}
+  .m-hero>img{aspect-ratio:4/3}
 }
 
 @media(max-width:860px){
+  .hero{min-height:0;padding-top:4rem}
   .hero-body{grid-template-columns:1fr}
   .hero-typecol{border-right:none;border-bottom:2px solid var(--ink)}
-  .hero-photo{min-height:56vh;order:-1}
+  /* the portrait is the one element that can be shrunk without losing a fact, so on a stacked
+     layout it is capped: the name, the claim and the credential have to clear the fold first */
+  .hero-photo{min-height:0;height:min(38vh,22rem);order:-1}
+  .tiles{grid-template-columns:1fr 1fr}
   .stats{grid-template-columns:repeat(2,1fr)}
   .stat:nth-child(3){border-left:none}
-  .about-cols{grid-template-columns:1fr}
-  .about-col{border-left:none;padding-left:0!important;border-top:1px solid var(--rule);padding-top:1.6rem;margin-top:1.6rem}
-  .about-col:first-child{border-top:none;margin-top:0}
-  .work-wrap{grid-template-columns:1fr}
-  .work-preview{display:none}
-  .row{grid-template-columns:2.4rem 1fr;gap:0.5rem 0.9rem}
-  .nav-links{gap:1rem}
+  .stat:nth-child(3),.stat:nth-child(4){border-top:1px solid var(--rule)}
+  /* the date rail costs too much width on a phone, so the range goes inline above the chapter */
+  .ch{grid-template-columns:minmax(0,1fr);gap:0}
+  .ch-when{display:flex;align-items:baseline;gap:0.5rem;margin-bottom:0.55rem;padding-top:0}
+  .ch-y2{margin-top:0}
+  .ch-body{max-width:none}
+  .work-wrap{grid-template-columns:1fr;row-gap:2.6rem}
+  .pj,.pj.wide{grid-column:auto}
+  .pj.band .pj-media{aspect-ratio:16/9}
+  .nav-links{gap:1.1rem}
 }
 @media(max-width:600px){
-  nav{padding:0.6rem 1.1rem;align-items:center}
-  .nav-name{font-size:0.72rem;white-space:normal;line-height:1.18}
-  .nav-role{display:block}
-  .nav-role b{display:none}
-  .nav-links{gap:0.9rem}
-  .nav-links a{font-size:0.64rem}
-  .nav-links a span{display:none}
+  nav{min-height:44px;padding:0 var(--pad);gap:0.6rem}
+  .nav-name{font-size:0.72rem;white-space:nowrap}
+  .nav-role{display:none}
+  .nav-links{gap:1rem}
+  .nav-links a{font-size:0.7rem}
+  .nav-anchor-contact{display:none}
+  .nav-cta{font-size:0.66rem;padding:0.4rem 0.62rem}
+  .cta-long{display:none}
+  /* the overprint needs size to stay crisp; below this it costs legibility, so the span goes flat red */
+  .about-span .op .r{display:none}
+  .about-span .op .c{color:var(--red);mix-blend-mode:normal}
+}
+@media(max-width:560px){
+  /* PHONE HERO. Budget for one 844px screen: strip, portrait, name, claim, lead, games row.
+     Everything here buys vertical space for that list. */
+  .hero-photo{height:15rem}
+  .hero-typecol{padding:0.9rem 0.85rem 1rem;gap:0.8rem}
+  .hero-top{padding:0.4rem 0.85rem;align-items:flex-start;font-size:0.63rem}
+  /* two lines, not four: place and contact each get one, the rest is said by the lead */
+  .strip-long,.role-long{display:none}
+  .hero-name{font-size:1.35rem}
+  .hero-role{font-size:0.62rem;letter-spacing:0.07em;margin-top:0.25rem}
+  /* four short lines instead of a smaller font: the claim stays big on a 314px column */
+  .brk{display:block}
+  .hero-h{font-size:2.2rem;letter-spacing:-0.045em}
+  .hero-lead{font-size:0.96rem}
+  /* the label gutter costs a third of the line width here, so the label sits on top instead */
+  .sp-row{grid-template-columns:minmax(0,1fr);gap:0.15rem}
+  .hero-spine{padding-top:0.6rem}
+  /* the scope line is the ONLY statement on the page that he leads rather than executes, and the phone
+     is where this reader actually opens the link, so it stays. Set tighter instead of deleted. */
+  .sp-scope{font-size:0.82rem;line-height:1.35}
 }
 @media(max-width:520px){
-  .stats{grid-template-columns:1fr;} .stat{border-left:none;border-top:1px solid var(--rule);min-height:auto}
+  .stats{grid-template-columns:1fr;} .stat{border-left:none;border-top:1px solid var(--rule);min-height:auto;padding-bottom:1rem}
   .stat:first-child{border-top:none}
-  .hero-top{grid-template-columns:1fr;gap:0.6rem}.hero-top .c{display:none}
-  .hero-top .r{text-align:left}
+  .hero-top{gap:0.3rem}
+  .tiles{grid-template-columns:1fr}
+  /* the label gutter costs too much width on a phone, so the label goes back on top of its names */
+  .cl-grp{grid-template-columns:minmax(0,1fr);gap:0.6rem 0}
+  .cl-grp.cl-pri .cl-list li{font-size:0.95rem;padding-right:1rem}
 }
 @media(prefers-reduced-motion:reduce){
-  .hline,.hero-kick{opacity:1;transform:none;animation:none}
-  .row.pre{opacity:1;transform:none}
-  .cl-track{animation:none}
+  .hline,.hero-lead,.hero-foot,.hero-id,.hero-spine{opacity:1;transform:none;animation:none}
+  .tile-media img{transition:none}
+  .pj.pre{opacity:1;transform:none}
+  .pj:hover .pj-media img,.pj:focus-visible .pj-media img{transform:none}
   .grain{display:none}
 }
 </style>
@@ -265,83 +527,170 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;padd
 <body>
 <div class="grain" aria-hidden="true"></div>
 
-<nav>
-  <a href="#top" class="nav-name">Denny Hultén<span class="nav-role"> <b>—</b> Creative Director</span></a>
+<nav aria-label="Primary">
+  <div class="nav-id">
+    <a href="#top" class="nav-name">Denny Hultén<span class="nav-role">Creative Director</span></a>
+    <span class="nav-status"><i aria-hidden="true"></i>Open to work</span>
+  </div>
   <div class="nav-links">
-    <a href="#work"><span>N°02</span> Work</a>
-    <a href="#about"><span>N°03</span> About</a>
-    <a href="#contact"><span>N°04</span> Contact</a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="nav-anchor-contact">Contact</a>
+    <a class="nav-cta" href="mailto:dennyhulten@gmail.com">Email<span class="cta-long"> Denny</span></a>
   </div>
 </nav>
 
 <header class="hero" id="top">
   <div class="frame">
-    <div class="hero-top">
-      <div class="lab">Portfolio — 2026<br>Creative Direction</div>
-      <div class="c">N°01</div>
-      <div class="lab r">Gothenburg, SE<br>Open to work &amp; relocation</div>
+    <div class="hero-top lab">
+      <span>Gothenburg, SE<span class="strip-long"> · Works internationally</span> · Open to relocation</span>
+      <span class="hero-reach"><a href="mailto:dennyhulten@gmail.com">dennyhulten@gmail.com</a><a href="tel:+46705459066">+46 70 545 90 66</a></span>
     </div>
     <div class="hero-body">
       <div class="hero-typecol">
-        <span class="hline">I work</span>
-        <span class="hline">on the</span>
-        <span class="hline op"><span class="c">problem</span><span class="r">problem</span></span>
-        <span class="hline">behind</span>
-        <span class="hline">the brief.</span>
-        <p class="hero-kick">Creative director building <b>game worlds</b>, <b>festivals</b> and <b>live brand programmes</b> that move people.</p>
+        <div class="hero-id">
+          <p class="hero-name">Denny Hultén</p>
+          <p class="hero-role"><b>Creative Director</b> · Eventity, Gothenburg · Since Oct 2023<span class="role-long"> · Directing live work since 2004</span></p>
+        </div>
+        <h1 class="hero-h">
+          <span class="hline">I work on the <span class="brk" aria-hidden="true"></span><span class="key">problem</span></span>
+          <span class="hline">behind the <span class="brk" aria-hidden="true"></span>brief.</span>
+        </h1>
+        <p class="hero-lead">Twenty years directing live work: <b>game worlds</b>, <b>festivals</b>, <b>national tours</b> and <b>live television</b>.</p>
+        <div class="hero-spine">
+          <div class="sp-row">
+            <span class="sp-k"><i>//</i> games</span>
+            <span class="sp-v"><b>Play'n GO</b>, three-year international touring employee programme across 7 countries.</span>
+          </div>
+          <div class="sp-row sp-scope">
+            <span class="sp-k"><i>//</i> scope</span>
+            <span class="sp-v">I lead the full creative chain: pitch strategy, concept, production, final sign-off.</span>
+          </div>
+        </div>
       </div>
-      <div class="hero-photo" onclick="openVideo()" tabindex="0" role="button" aria-label="Play intro video" onkeydown="if(event.key==='Enter')openVideo()">
-        <img src="images/denny.jpg" alt="Denny Hultén">
-        <div class="halftone" aria-hidden="true"></div>
-        <div class="photo-tag">Denny Hultén</div>
+      <div class="hero-photo" onclick="openVideo()" tabindex="0" role="button" aria-label="Play the three minute intro film"
+           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideo();}">
+        <img src="images/denny.jpg" alt="Denny Hultén, portrait">
         <div class="hero-play"><svg class="ico" width="10" height="12" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg>About me, 3 min</div>
       </div>
     </div>
     <div class="hero-foot">
-      <p>Twenty years directing live work, from urban dance festivals to five-year corporate game worlds. The job stays the same each time: give people a reason to show up that holds once they're in the room.</p>
-      <div class="n">01</div>
+      <div class="foot-head lab">
+        <span>Selected work</span>
+        <a class="more" href="#work">All 8 projects <svg class="ico" width="13" height="9" viewBox="0 0 13 9" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></a>
+      </div>
+      <div class="tiles">
+        <button class="tile" onclick="openModal(0)" aria-label="Open case study: Länsförsäkringar Gothenburg, Level 2030 game world">
+          <span class="tile-media"><img src="images/level2030.png" alt="Pixel-art map of the five yearly levels in the Level 2030 game world"></span>
+          <span class="tile-c">Länsförsäkringar Gothenburg</span>
+          <span class="tile-m">Five-year game world · 550 people · 2026</span>
+        </button>
+        <button class="tile" onclick="openModal(5)" aria-label="Open case study: Volvo Cars product launch, EMEA and APAC">
+          <span class="tile-media"><img src="images/volvo.jpeg" alt="Launch dinner seated in front of a floor-to-ceiling aquarium projection"></span>
+          <span class="tile-c">Volvo Cars</span>
+          <span class="tile-m">Launch show · EMEA &amp; APAC · 2023</span>
+        </button>
+        <button class="tile" onclick="openModal(6)" aria-label="Open case study: P3 Guld, Cleo gala performance on live television">
+          <span class="tile-media"><img src="images/p3guld.jpeg" alt="Cleo performing with dancers at the P3 Guld gala"></span>
+          <span class="tile-c">P3 Guld</span>
+          <span class="tile-m">Live national television · 2023</span>
+        </button>
+      </div>
     </div>
   </div>
 </header>
 
-<section class="stats" aria-label="Career at a glance">
-  <div class="stat"><span class="k">// experience</span><span class="v">20+</span><span class="l">Years directing</span></div>
-  <div class="stat"><span class="k">// reach</span><span class="v sm">Worldwide</span><span class="l">Productions</span></div>
-  <div class="stat"><span class="k">// scale</span><span class="v">10K+</span><span class="l">Live participants</span></div>
-  <div class="stat"><span class="k">// horizon</span><span class="v">5-yr</span><span class="l">Brand programmes</span></div>
+<section class="stats" aria-label="The work in numbers, each one linked to the project it comes from">
+  <a class="stat" href="#work">
+    <span class="k">// experience</span><span class="v">20+</span><span class="l">Years directing</span>
+    <span class="src">08 projects below</span>
+  </a>
+  <button class="stat" type="button" onclick="openModal(1)" aria-label="Seven countries delivered in. Open the Play'n GO case study.">
+    <span class="k">// reach</span><span class="v">7</span><span class="l">Countries delivered in</span>
+    <span class="src">Play'n GO event tour</span>
+  </button>
+  <button class="stat" type="button" onclick="openModal(3)" aria-label="Ten thousand plus live audience a year. Open the Gothenburg Dance Festival case study.">
+    <span class="k">// scale</span><span class="v">10K+</span><span class="l">Live audience a year</span>
+    <span class="src">Gothenburg Dance Festival</span>
+  </button>
+  <button class="stat" type="button" onclick="openModal(0)" aria-label="Five million SEK annual budget. Open the Level 2030 case study.">
+    <span class="k">// budget</span><span class="v">5M</span><span class="l">SEK annual budget</span>
+    <span class="src">Länsförsäkringar Level 2030</span>
+  </button>
 </section>
 
-<section class="clients" aria-hidden="true"><div class="cl-track" id="cl"></div></section>
+<section class="clients" aria-label="Clients, stages and artists">
+  <div class="cl-grp cl-pri">
+    <p class="cl-k">// clients and stages <b>06</b></p>
+    <ul class="cl-list">
+      <li>Volvo Cars</li><li>Länsförsäkringar</li><li>Play'n GO</li><li>P3 Guld</li>
+      <li>Riksteatern</li><li>TEDx Göteborg</li>
+    </ul>
+  </div>
+  <div class="cl-grp cl-sec">
+    <p class="cl-k">// artists directed <b>08</b></p>
+    <ul class="cl-list">
+      <li>Veronica Maggio</li><li>Håkan Hellström</li><li>Ace of Base</li><li>Molly Sandén</li>
+      <li>Petter</li><li>Cleo</li><li>Isak Danielson</li><li>GRANT</li>
+    </ul>
+  </div>
+</section>
 
 <section class="sec" id="work">
   <div class="sec-head">
     <h2>Work</h2>
-    <div class="meta">N°02<br><b>08</b> Projects<br>2009 — 2030</div>
+    <div class="meta">N°02<br><b>08</b> Projects<br>2009 to 2030</div>
   </div>
-  <div class="work-wrap">
-    <ol class="index" id="index"></ol>
-    <aside class="work-preview" id="wp">
-      <div class="wp-media"><img id="wp-img" src="" alt=""><div class="halftone" aria-hidden="true"></div></div>
-      <div class="wp-body">
-        <div class="wp-t" id="wp-t"></div>
-        <div class="wp-row"><span class="red" id="wp-tag"></span><span id="wp-year"></span></div>
-      </div>
-    </aside>
-  </div>
+  <ol class="work-wrap" id="index"></ol>
 </section>
 
 <section class="sec" id="about">
   <div class="sec-head">
     <h2>About</h2>
-    <div class="meta">N°03<br>Denny Hultén<br>Creative Director</div>
+    <div class="meta">N°03<br>Denny Hultén<br><b>04</b> Chapters</div>
   </div>
-  <h2 class="about-big">I build.<br>And <span class="op"><span class="c">rebuild.</span><span class="r">rebuild.</span></span></h2>
-  <p class="about-intro">Co-founded Twisted Feet, a street-dance company, and grew it from nothing into a movement: the dominant cultural force for urban expression in western Sweden. Helped rebuild Eventity from a logistics event company into a creative strategy agency.</p>
-  <div class="about-cols">
-    <div class="about-col"><div class="k">Scale</div><p>Gothenburg Dance Festival, national government-funded theatre tours, and live productions with Veronica Maggio, Håkan Hellström, Petter, Cleo, and Ace of Base.</p></div>
-    <div class="about-col"><div class="k">Leadership</div><p>At Play'n GO, I built the behaviour-change programme now running across 540 people. At Twisted Feet, I built the infrastructure that kept a generation of creative talent in the region.</p></div>
-    <div class="about-col"><div class="k">Currently</div><p>Creative Director at Eventity. Live and media production, from internal culture programmes to festivals and game worlds.</p></div>
-  </div>
+  <h2 class="about-big">Creative Director<br>in Gothenburg.</h2>
+  <p class="about-span">Twenty years of live work. <span class="op"><span class="c">2004 to now.</span><span class="r">2004 to now.</span></span></p>
+  <p class="about-intro"><b>Game worlds, festivals, national tours and live television.</b> Concept, direction and production in the same hands, from blank page to stage.</p>
+  <ol class="about-spine">
+    <li class="ch">
+      <div class="ch-when"><div class="ch-y1">2023</div><div class="ch-y2 on">to now</div></div>
+      <div class="ch-main">
+        <div class="ch-cat">Event agency</div>
+        <div class="ch-org">Creative Director, Eventity</div>
+        <p class="ch-body">Helped rebuild a logistics event company into a creative strategy agency. Leads the full creative chain, from pitch strategy to final sign-off.</p>
+        <p class="ch-ev">Länsförsäkringar · Play'n GO · <b>550 people, 5M SEK a year</b></p>
+      </div>
+    </li>
+    <li class="ch">
+      <div class="ch-when"><div class="ch-y1">2021</div><div class="ch-y2">to 2024</div></div>
+      <div class="ch-main">
+        <div class="ch-cat">Production studio</div>
+        <div class="ch-org">Creative producer and director, DAT Production</div>
+        <p class="ch-body">My own company, run in parallel with the Eventity role. Owned concept to delivery for brand clients across international markets.</p>
+        <p class="ch-ev">Volvo Cars, <b>EMEA and APAC</b> · P3 Guld, <b>live national television</b></p>
+      </div>
+    </li>
+    <li class="ch">
+      <div class="ch-when"><div class="ch-y1">2015</div><div class="ch-y2">to 2022</div></div>
+      <div class="ch-main">
+        <div class="ch-cat">National touring production</div>
+        <div class="ch-org">Writer and director, 5 Degrees</div>
+        <p class="ch-body">Took an original production from blank page to the national stage. Wrote it, directed it, choreographed it and produced the entire tour.</p>
+        <p class="ch-ev"><b>7 years touring</b> · Riksteatern and Dansnät Sverige · Kulturrådet funded</p>
+      </div>
+    </li>
+    <li class="ch">
+      <div class="ch-when"><div class="ch-y1">2004</div><div class="ch-y2">to 2022</div></div>
+      <div class="ch-main">
+        <div class="ch-cat">Live platform</div>
+        <div class="ch-org">Founder and artistic director, Twisted Feet and Gothenburg Dance Festival</div>
+        <p class="ch-body">Built and ran a commercially operating cultural institution for 18 years, and the festival that grew out of it.</p>
+        <p class="ch-ev"><b>10,000 spectators a year</b>, 8 editions · academy of <b>2,000 students a year</b></p>
+      </div>
+    </li>
+  </ol>
+  <p class="about-status"><span><b>Open to work and relocation.</b> Works internationally.</span><span><a href="#contact">Get in touch &rarr;</a></span></p>
 </section>
 
 <section class="contact" id="contact">
@@ -349,16 +698,43 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;padd
     <h2>Contact</h2>
     <div class="meta">N°04<br>Get in touch</div>
   </div>
-  <h2 class="contact-big">Let's<br>talk<span class="op"><span class="c">.</span><span class="r">.</span></span></h2>
-  <div class="c-btns">
-    <a href="mailto:dennyhulten@gmail.com" class="c-btn alt">dennyhulten@gmail.com</a>
-    <a href="https://www.linkedin.com/in/dennyhulten/" target="_blank" class="c-btn">LinkedIn<svg class="ico" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M3 9L9 3M4.5 3H9v4.5"/></svg></a>
+  <div class="c-row">
+    <h2 class="contact-big">Let's<br><span class="op"><span class="c">talk</span><span class="r">talk</span></span>.</h2>
+    <dl class="c-spec">
+      <div><dt>Based</dt><dd>Gothenburg, Sweden</dd></div>
+      <div><dt>Open to</dt><dd class="red">Relocation</dd></div>
+      <div><dt>Working in</dt><dd>Swedish, English</dd></div>
+    </dl>
+  </div>
+  <div class="c-grid">
+    <a class="c-cell pri" href="mailto:dennyhulten@gmail.com">
+      <span class="c-k">// email</span>
+      <span class="c-v">dennyhulten@gmail.com</span>
+      <span class="c-n">Best for a full brief.</span>
+    </a>
+    <a class="c-cell" href="tel:+46705459066">
+      <span class="c-k">// phone</span>
+      <span class="c-v">+46 70 545 90 66</span>
+      <span class="c-n">Call or text, CET.</span>
+    </a>
+    <a class="c-cell" href="https://www.linkedin.com/in/dennyhulten/" target="_blank" rel="noopener">
+      <span class="c-k">// linkedin</span>
+      <span class="c-v">/in/dennyhulten<svg class="ico" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M3 9L9 3M4.5 3H9v4.5"/></svg></span>
+      <span class="c-n">Full career history.</span>
+    </a>
+    <!-- TODO(Denny): when a hosted CV PDF exists, swap this href for its URL and change .c-n to "PDF, 2 pages." -->
+    <a class="c-cell" href="mailto:dennyhulten@gmail.com?subject=CV%20request" aria-label="Request the CV by email">
+      <span class="c-k">// cv</span>
+      <span class="c-v">Request the CV</span>
+      <span class="c-n">PDF, sent on request.</span>
+    </a>
   </div>
 </section>
 
 <footer>
-  <span>© Denny Hultén / Creative Director</span>
-  <span>Available worldwide</span>
+  <span>© 2026 Denny Hultén / Creative Director</span>
+  <span>Gothenburg, Sweden · CET</span>
+  <span><a href="#top">Back to top ↑</a></span>
 </footer>
 
 <div class="video-overlay" id="video-modal" onclick="if(event.target===this)closeVideo()">
@@ -367,127 +743,180 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;padd
 </div>
 
 <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
-  <div class="modal-box"><div id="modal-content"></div></div>
+  <div class="modal-box" id="modal-box" role="dialog" aria-modal="true" aria-labelledby="m-title" tabindex="-1"><div id="modal-content"></div></div>
 </div>
-<button class="modal-close" onclick="closeModal()">Close ✕</button>
 
 <script>
 const CASES=[
-  {num:'01',title:'Länsförsäkringar Gothenburg: Level 2030 Game World',img:'images/level2030.png',period:'2026-2030',tag:'5-Year Communication Strategy',tags:['Employee Programme','Concept Design','Game Mechanics','5-Year Strategy'],
-   product:"Five-year strategic programme built as a game world for 550 employees. Each year is a new level with its own environment, a boss fight representing the company's biggest annual goal, and Ability Cards that carry forward to the 2030 final boss. Inspired by Super Mario, Minecraft, and Farmville. Year 1 headlined by Veronica Maggio.",
+  {num:'01',title:'Länsförsäkringar Gothenburg: Level 2030 Game World',img:'images/level2030.png',period:'2026-2030',tag:'5-Year Communication Strategy',tags:['Employee Programme','Game Mechanics','Concept Design','550 Employees'],
+   product:"A five-year strategy for 550 employees, built as a game world. Each year is a level with its own environment and a boss fight standing for the company's biggest goal that year. Ability Cards carry forward to the 2030 final boss. Reference points: Super Mario, Minecraft, Farmville.",
    assignment:[
-     {label:'Concept',text:"Replaced the traditional conference format with game mechanics: same strategic content, completely different energy. Built from a blank page into a five-year narrative arc where every level, boss, and ability maps directly to the company's real annual goals."},
-     {label:'Narrative system',text:"Designed the year-bridge touchpoints that keep the world alive between events: office glitches in December, boss-defeat films in January, Ability Cards unlocked at each level, so there's something new to notice every month, not just at the annual event."},
-     {label:'Entertainment',text:"Identified, contracted, and directed Veronica Maggio as Year 1 headline artist. Integrated the performance into the full event production schedule."}
+     {label:'Concept',text:"Replaced the conference format with game mechanics: same strategic content, different energy. Built from a blank page into a five-year arc where every level, boss and ability maps to a real annual goal."},
+     {label:'Narrative system',text:"Designed the touchpoints that keep the world alive between events. Office glitches in December, boss-defeat films in January, Ability Cards unlocked at each level. Something new to notice every month, not only at the annual event."},
+     {label:'Artist direction',text:"Identified, contracted and directed Veronica Maggio as Year 1 headliner, then built the performance into the full production schedule."}
    ],
-   result:'Five-year programme, 5 million SEK annual budget, 550 participants. Veronica Maggio headlining Year 1 in September 2026.',videos:[]},
-  {num:'02',title:"Play'n GO International Events: Early Access",img:'images/playngo.png',period:'2026-Ongoing',tag:'7-Country Event Tour',tags:['International Programme','Change Management','Event Series','7 Countries'],
-   product:"Three-year international employee programme for Play'n GO across seven countries (Sweden, Spain, UK, Malta, Hungary, Poland, Philippines). 540 people, eight events per year. Participation was declining. The brief was to fix it.",
+   result:'Five-year programme, 5 million SEK annual budget, 550 participants. Veronica Maggio headlines Year 1 in September 2026.',videos:[]},
+  {num:'02',title:"Play'n GO International Events: Early Access",img:'images/playngo.png',period:'2026-Ongoing',tag:'3-Year Employee Programme',tags:['International Programme','Change Management','540 Employees','8 Events Per Year'],
+   product:"Three-year employee programme for Play'n GO across seven countries: Sweden, Spain, UK, Malta, Hungary, Poland, Philippines. 540 people, eight events a year. Participation was declining. The brief was to fix it.",
    assignment:[
-     {label:'The real problem',text:"Play'n GO had a self-leadership culture on paper: vision, values, guides. But no delivery mechanism that actually reached people. I diagnosed the gap and built Early Access as the missing piece: gaming development language native to their own world, turned into the actual mechanism that got people showing up, with levels, unlocks, and a visible way to track progress."},
-     {label:'Pitch and close',text:"Presented the contrast between the old approach (declining engagement) and the new one. Secured a three-year international commitment on a single pitch."},
-     {label:'Programme delivery',text:"Managing eight annual events across four countries simultaneously: Malta, Budapest, Växjö, and Manila. Single point of creative and production accountability across all of them."}
+     {label:'Diagnosis',text:"Play'n GO had a self-leadership culture on paper: vision, values, guides. Nothing delivered it to people. Early Access became the missing mechanism, written in the gaming development language their own company already speaks, with levels, unlocks and a visible way to track progress."},
+     {label:'Pitch',text:"Presented the old approach and its declining engagement against the new one. Secured a three-year international commitment on a single pitch."},
+     {label:'Programme delivery',text:"Eight annual events running across four countries at once: Malta, Budapest, Växjö, Manila. Single point of creative and production accountability for all of them."}
    ],
-   result:'Participation climbed to 95%+ across all activities. Three-year deal secured. Employees went from attending out of obligation to actively engaging.',videos:[]},
-  {num:'03',title:'Länsförsäkringar Östgöta: The Health Journey',img:'images/halsoresan.jpeg',period:'2024-2025',tag:'A One-Year Wellness Strategy',tags:['Annual Conference','Wellness Strategy','Strategic Reframe'],
-   product:"Client asked for a company retreat. Discovery revealed the real need: year-long employee wellness with the retreat as the centrepiece, not the whole story. Rebuilt the brief, built the concept, and won the business. Featured Olympic swimmer Therese Alshammar.",
+   result:'Participation climbed above 95% across all activities. Three-year international deal secured.',videos:[]},
+  {num:'03',title:'Länsförsäkringar Östgöta: The Health Journey',img:'images/halsoresan.jpeg',period:'2024-2025',tag:'One-Year Wellness Strategy',tags:['Annual Conference','Strategic Reframe','Health Compass'],
+   product:"The client asked for a company retreat. Discovery found a different need: employee wellness across the whole year, with the retreat as its centrepiece. Rebuilt the brief, built the concept, won the business. Featured Olympic swimmer Therese Alshammar.",
    assignment:[
-     {label:'Redefining the brief',text:"Before touching the concept, I ran a discovery process that changed what we were actually building. The Health Compass (four dimensions of health) became the structural framework for the full year, not just one event."},
-     {label:'Two audiences, one pitch',text:"Built two parallel narratives: one for employees (purpose, growth, inclusion) and one for the steering board (sick leave reduction, cost savings, measurable outcomes). Both in the same deck."},
-     {label:'Client empowerment',text:"Made a deliberate choice to let the client's internal team own the success publicly: they received the standing ovation at the retreat for creative work Eventity had done behind the scenes."}
+     {label:'Discovery and reframe',text:"Ran a discovery process before touching the concept, and it changed what we were building. The Health Compass, four dimensions of health, became the framework for a full year rather than a single event."},
+     {label:'Dual-audience pitch',text:"Two parallel narratives in one deck. Employees got purpose, growth and inclusion. The steering board got sick leave reduction, cost savings and measurable outcomes."},
+     {label:'Client ownership',text:"Let the client's internal team own the success publicly. They took the standing ovation at the retreat for creative work Eventity had done behind the scenes."}
    ],
-   result:"Highest-earning and highest-profit project in Eventity's history. Won the client from their incumbent supplier on the concept alone.",videos:[]},
-  {num:'04',title:'Gothenburg Dance Festival',img:'images/gothenburg.jpg',period:'2009-2017',tag:'Festival Production',tags:['Cultural Festival','Festival Production','10,000+ Participants','Built from Zero'],
-   product:"Co-created and produced Gothenburg Dance Festival, one of Scandinavia's largest urban expression competitions. 10,000+ spectators and participants per year, eight consecutive editions as part of the Gothenburg City Culture Festival.",
+   result:"Highest-earning and highest-profit project in Eventity's history. Won the client off their incumbent supplier on the concept alone.",videos:[]},
+  {num:'04',title:'Gothenburg Dance Festival',img:'images/gothenburg.jpg',period:'2009-2017',tag:'Festival Production',tags:['Cultural Festival','10,000+ Participants','Eight Editions','Built From Zero'],
+   product:"One of Scandinavia's largest urban expression competitions, co-created and produced across eight consecutive editions. 10,000+ spectators and participants a year, staged as part of the Gothenburg City Culture Festival.",
    assignment:[
-     {label:'Built it from nothing',text:"Designed the full competition format from scratch: categories, judging criteria, qualification rounds, finals. Refined annually. Booked international dancers, judges, and workshop leaders from the global urban dance community."},
-     {label:'Community as infrastructure',text:"The festival wasn't an event. It was the infrastructure for a scene. Built partnerships with Gothenburg's cultural institutions and created the talent pipeline that fed the wider urban culture movement in western Sweden."},
-     {label:'Media production',text:"Scripted and directed all festival media across eight years: trailers, documentation, and promotional content. Built the festival's visual identity through media as much as live production."}
+     {label:'Format design',text:"Designed the competition from scratch: categories, judging criteria, qualification rounds, finals. Refined it every year. Booked international dancers, judges and workshop leaders from the global urban dance community."},
+     {label:'Partnerships',text:"Built partnerships with Gothenburg's cultural institutions and created the talent pipeline that fed the wider urban culture movement in western Sweden. The festival worked as infrastructure for a scene."},
+     {label:'Media direction',text:"Scripted and directed all festival media across eight years: trailers, documentation, promotional content. The visual identity was built through media as much as through the live production."}
    ],
-   result:"The infrastructure and community credibility this built became the direct route into the Gothia Cup opening ceremony work at Ullevi years later.",videos:[{label:'Dance Festival Trailer',url:'https://youtu.be/Aa0SzGL3Dhw?si=5O7hiawmEPPjMuRy'}]},
+   result:"The community credibility it built led directly to the Gothia Cup opening ceremony at Ullevi years later.",videos:[{label:'Dance Festival Trailer',url:'https://youtu.be/Aa0SzGL3Dhw?si=5O7hiawmEPPjMuRy'}]},
   {num:'05',title:'Länsförsäkringar Gothenburg: STARS Summit',img:'images/stars.png',period:'2024',tag:'5-Year Partnership',tags:['Corporate Gala','Live Entertainment','Art Direction'],
-   product:"Annual summit for 550 employees. The 2024 edition built the entire event around astrology, not as a visual theme but as a structural framework shaping how attendees were grouped, how entertainment was sequenced, and how the narrative connected to company strategy. Live performances by Petter, Molly Sandén, and Niklas Källner, with Svante Randlert as keynote.",
+   product:"Annual summit for 550 employees, inside a five-year partnership. The 2024 edition used astrology as structure: zodiac signs set the team groupings, the entertainment sequence, and how the narrative connected back to company strategy. Live performances by Petter, Molly Sandén and Niklas Källner. Svante Randlert on keynote.",
    assignment:[
-     {label:'Concept',text:"Astrology shaped the structure: zodiac signs determined team groupings, entertainment sequencing, and how the event narrative tied back to the company's actual strategic direction."},
-     {label:'Entertainment direction',text:"Curated and directed all performers, briefing each act on the concept so the evening felt like a unified show, not a conference with a band at the end."},
-     {label:'Full production',text:"Led all production across the event: video content, sound design, presenter direction, environment, and bespoke animation sequences integrated into live performances."}
+     {label:'Concept',text:"Astrology as structure. Zodiac signs decided team groupings and entertainment sequencing, and tied the event narrative back to the company's strategic direction."},
+     {label:'Entertainment direction',text:"Curated and directed every performer, briefing each act on the concept so the evening ran as one show rather than a conference with a band at the end."},
+     {label:'Production lead',text:"Led all production across the event: video content, sound design, presenter direction, environment, and bespoke animation cut into the live performances."}
    ],
-   result:"Participant feedback rated STARS the best summit in the five-year partnership's history.",videos:[{label:'Behind-the-scenes footage',url:'https://youtu.be/iSVYipaUSYQ'}]},
-  {num:'06',title:'Volvo Cars Product Launch EMEA & APAC',img:'images/volvo.jpeg',period:'2023',tag:'Product Launch',tags:['Product Launch','International','Live Production','EMEA & APAC'],
-   product:"The entertainment show for Volvo Cars' international product launch, delivered with the lead agency. Two week-long events, 300 attendees each, across multiple countries and cultures. I was brought in to own the show: one entertainment concept that had to work across every language and culture in the room. EMEA featured Ace of Base, Isak Danielson, and GRANT.",
+   result:"Participants rated STARS the best summit in the partnership's five-year history.",videos:[{label:'Behind-the-scenes footage',url:'https://youtu.be/iSVYipaUSYQ'}]},
+  {num:'06',title:'Volvo Cars Product Launch EMEA & APAC',img:'images/volvo.jpeg',period:'2023',tag:'Product Launch',tags:['International','Live Production','Show Direction','EMEA & APAC'],
+   product:"The entertainment show for Volvo Cars' international product launch, delivered with the lead agency. Two week-long events, 300 attendees each, across multiple countries and cultures. I was brought in to own the show: one concept that had to work for every language in the room. EMEA featured Ace of Base, Isak Danielson and GRANT.",
    assignment:[
-     {label:'Universal creative concept',text:"Built a three-part entertainment narrative on visual storytelling, movement, and music, with no reliance on shared language or cultural context. Designed to connect across borders without losing its edge."},
-     {label:'Owned the show',text:"Led the show from concept to stage: live audio, lighting, and on-site direction across both week-long events. Directed the performers and worked hand in hand with the agency's production, Volvo's team, and the technical crews."},
-     {label:'Crossed markets unchanged',text:"Volvo took the show straight to APAC the following week, unchanged. The same concept worked for an entirely different cultural market."}
+     {label:'Concept',text:"A three-part entertainment narrative carried by visual storytelling, movement and music, with no reliance on shared language or cultural reference. Built to connect across borders without losing its edge."},
+     {label:'Show direction',text:"Led the show from concept to stage across both week-long events: live audio, lighting, on-site direction, performer direction. Worked hand in hand with the agency's production team, Volvo's team and the technical crews."},
+     {label:'Second market',text:"Built the show to travel: no local rewrite, no restaging between markets."}
    ],
-   result:'Proved the same entertainment concept could carry across language and culture with no local rewrite, the exact skill this kind of international, multi-market brand work depends on.',videos:[{label:'Compilation of Event Footage',url:'https://youtu.be/Z2uKj7mzEy8'}]},
-  {num:'07',title:'P3 Guld: Cleo Show',img:'images/p3guld.jpeg',period:'2023',tag:'Live Television',tags:['Live Television','Gala Performance','Choreography','Broadcast'],
-   product:"Co-produced Cleo's gala performance at P3 Guld 2023 for live national television. One performance serving two fundamentally different audiences simultaneously: the live crowd in the venue and viewers at home.",
+   result:'Volvo ran the same show again in APAC the following week, unchanged.',videos:[{label:'Compilation of Event Footage',url:'https://youtu.be/Z2uKj7mzEy8'}]},
+  {num:'07',title:'P3 Guld: Cleo Show',img:'images/p3guld.jpeg',period:'2023',tag:'Live Television',tags:['Gala Performance','Choreography','Performance Coaching','National Broadcast'],
+   product:"Cleo's gala performance at P3 Guld 2023, co-produced for live national television. One performance, two very different audiences at once: the crowd in the venue and the viewers at home.",
    assignment:[
-     {label:'Concept',text:"Built the visual and narrative concept: music, choreography, and staging integrated into a single piece that told a story, not just accompanied a song."},
-     {label:'Choreography and performance coaching',text:"Designed all movement for dual contexts: choreography that read on the venue floor and through camera angles, which require different spatial thinking. Directed Cleo's delivery, energy, and stage presence throughout."},
-     {label:'Broadcast collaboration',text:"Coordinated with TV producers, directors, and camera teams on shot design and transitions. Zero tolerance for failure: every element locked to broadcast standard before going live."}
+     {label:'Concept',text:"Built the visual and narrative concept. Music, choreography and staging worked as one piece that told a story rather than accompanying a song."},
+     {label:'Choreography and coaching',text:"Designed all movement for two contexts at once: the venue floor and the camera, which need different spatial thinking. Directed Cleo's delivery, energy and stage presence throughout."},
+     {label:'Broadcast',text:"Worked with TV producers, directors and camera teams on shot design and transitions. Every element locked to broadcast standard before going live."}
    ],
-   result:'Held up in front of one of Sweden\'s largest annual television audiences, live, with no second take.',videos:[{label:'Broadcast video',url:'https://youtu.be/2LU2xnp6zrY?si=AcwH3T0wMxghb7QZ'}]},
-  {num:'08',title:'5 Degrees & Passion for Climate',img:'images/passion.jpeg',period:'2015–2021',tag:'National Tour',tags:['National Tour','Theatre Direction','Social Impact','Government Funded'],
-   product:"Two intertwined bodies of work. 5 Degrees: an original 75-minute theatrical production written, directed, and choreographed from scratch — street dance meets live technology, projections, and scripted narrative. Developed with Chalmers University, funded by Kulturrådet, and toured nationally through Riksteatern and Dansnät Sverige for seven years. Passion for Climate: a three-year national programme merging climate science with live performance, funded by Arvsfonden. 5 Degrees became its cultural centrepiece — the production that made the science land in a room full of teenagers.",
+   result:'Broadcast live to one of Sweden\'s largest annual television audiences. No second take.',videos:[{label:'Broadcast video',url:'https://youtu.be/2LU2xnp6zrY?si=AcwH3T0wMxghb7QZ'}]},
+  {num:'08',title:'5 Degrees & Passion for Climate',img:'images/passion.jpeg',period:'2015-2022',tag:'Theatre and Climate Programme',tags:['Theatre Direction','Seven-Year Run','Social Impact','Government Funded'],
+   product:"Two linked bodies of work. 5 Degrees: an original 75-minute production, written, directed and choreographed from scratch. Street dance against live technology, projections and scripted narrative. Developed with Chalmers University, funded by Kulturrådet, toured nationally through Riksteatern and Dansnät Sverige for seven years. Passion for Climate: a three-year national programme funded by Arvsfonden, merging climate science with live performance. 5 Degrees was its cultural centrepiece, the piece that made the science land with teenagers.",
    assignment:[
-     {label:'Writing and direction',text:"Lead writer and director on 5 Degrees across its full seven-year run: concept, script, ensemble direction, composer, audio engineer, and production lead. Built the production from a blank page to national stages and kept it touring for seven years with a small team and no institutional backing beyond the initial grant."},
-     {label:'Winning Arvsfonden',text:"Wrote the proposal that secured three years of government funding from Arvsfonden for Passion for Climate — a format that didn't exist yet. Combined climate science, live performance, and behavioural change into something funders had never seen in that configuration."},
-     {label:'TEDx speaker',text:"Featured multiple times at TEDx Göteborg presenting the intersection of climate science, live performance, and behavioural change. Used the platform to build credibility and reach for the touring programme."}
+     {label:'Writing and direction',text:"Lead writer and director on 5 Degrees across its full seven-year run: concept, script, ensemble direction, composer, audio engineer, production lead. Took it from a blank page to national stages with a small team and no institutional backing beyond the initial grant."},
+     {label:'Funding',text:"Wrote the proposal that secured three years of government funding from Arvsfonden for Passion for Climate. The format did not exist yet: climate science, live performance and behavioural change in one configuration."},
+     {label:'Speaking',text:"Presented the work several times at TEDx Göteborg, on the intersection of climate science, live performance and behavioural change. Used the platform to build reach for the touring programme."}
    ],
-   result:'One production, kept touring for seven years on a single grant, becoming the reason funders trusted an idea that didn\'t exist yet.',videos:[{label:'Theatre show',url:'https://youtu.be/tH-J_zeeGbg?si=L4Xgqvt3rwlbCdR0&t=14'},{label:'TEDx talk',url:'https://youtu.be/_eVDLqogkFI'},{label:'Instagram',url:'https://www.instagram.com/passionforclimate/'}]}
+   result:'Seven years of national touring on one production. Three years of government funding for the programme it anchored.',videos:[{label:'Theatre show',url:'https://youtu.be/tH-J_zeeGbg?si=L4Xgqvt3rwlbCdR0&t=14'},{label:'TEDx talk',url:'https://youtu.be/_eVDLqogkFI'},{label:'Instagram',url:'https://www.instagram.com/passionforclimate/'}]}
 ];
 
-const NAMES=['Veronica Maggio','Volvo Cars',"Play'n GO",'P3 Guld','Länsförsäkringar','Molly Sandén','Petter','Cleo','Ace of Base','Isak Danielson','GRANT','Håkan Hellström','TEDx Göteborg','Riksteatern'];
-const seq=NAMES.map(n=>`<span>${n}</span>`).join('');
-document.getElementById('cl').innerHTML=seq+seq;
+/* the client and artist roster is static markup in the HTML: proof should not depend on JS */
 
-/* work index */
+/* work index
+   WORK_META splits each case title into the name a recruiter recognises (client
+   or production) plus what the thing actually was, and carries the one scale
+   figure worth reading before opening the case. Every value below is lifted
+   from the product/result copy in CASES above: nothing new is asserted here.
+   `span` sets how much of the 12-col grid the project takes. */
+const WORK_META=[
+  {span:'wide',client:'Länsförsäkringar Gothenburg',name:'Level 2030: the strategy, built as a game world',
+   role:'Creative Director',scale:'550 participants · 5M SEK a year',alt:"Illustrated game-world map for Länsförsäkringar Gothenburg's Level 2030 programme."},
+  {span:'',client:"Play'n GO",name:'Early Access: self-leadership, written as a game',
+   role:'Creative Director',scale:'7 countries · 540 people · 95%+ participation',alt:"Play'n GO Early Access event."},
+  {span:'',client:'Länsförsäkringar Östgöta',name:'The Health Journey: rebuilt the brief, won the business',
+   role:'Creative Director',scale:'Won off the incumbent, on concept alone',alt:'The Health Journey conference stage.'},
+  {span:'',client:'Gothenburg Dance Festival',name:'Urban dance competition, built from zero',
+   role:'Founder and artistic director',scale:'10,000+ a year · 8 editions',alt:'Dancers on stage at Gothenburg Dance Festival.'},
+  {span:'',client:'Länsförsäkringar Gothenburg',name:'STARS Summit: the annual gala inside the partnership',
+   role:'Creative Director',scale:'Petter · Molly Sandén · Svante Randlert',alt:'STARS Summit stage design.'},
+  {span:'',client:'Volvo Cars',name:'Two week-long launch events, one entertainment show',
+   role:'Creative producer and director',scale:'EMEA and APAC · same show in both markets',alt:'Volvo Cars product launch event.'},
+  {span:'',client:'P3 Guld',name:"Cleo's gala, built for the room and the camera at once",
+   role:'Director and co-producer',scale:'One take, no second',alt:'Cleo performing at the P3 Guld gala.'},
+  {span:'wide band',client:'5 Degrees & Passion for Climate',name:'Written, directed and choreographed from scratch',
+   role:'Writer and director',scale:'7 years on the road · TEDx Göteborg · Arvsfonden funded',
+   alt:'The TEDx Göteborg stage, where the Passion for Climate programme was presented.'}
+];
 const reduceMotion=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-document.getElementById('index').innerHTML=CASES.map((c,i)=>`
-  <li class="row${reduceMotion?'':' pre'}" onclick="openModal(${i})" tabindex="0" role="button" aria-label="${c.title}" onkeydown="if(event.key==='Enter')openModal(${i})">
-    <span class="row-num">${c.num}</span>
-    <div class="row-main">
-      <span class="row-kind">${c.tag}</span>
-      <span class="row-title">${c.title}</span>
-      <span class="row-res">${c.result}</span>
+document.getElementById('index').innerHTML=CASES.map((c,i)=>{
+  const m=WORK_META[i],period=c.period.replace(/[–—]/g,'-');
+  return `
+  <li class="pj ${m.span}${reduceMotion?'':' pre'}" onclick="openModal(${i})" tabindex="0" role="button"
+      aria-label="Open case study: ${m.client}, ${m.name}, ${period}"
+      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal(${i})}">
+    <div class="pj-media"><img src="${c.img}" alt="${m.alt}"></div>
+    <div class="pj-meta">
+      <div class="pj-strip"><span><span class="n">N°${c.num}</span> ${c.tag}</span><span class="pj-year">${period}</span></div>
+      <div class="pj-client">${m.client}</div>
+      <div class="pj-name">${m.name}</div>
+      <div class="pj-role"><span class="k">Role</span> ${m.role}</div>
+      <div class="pj-foot"><span class="pj-scale">${m.scale}</span><span class="pj-open">Open case ↗</span></div>
     </div>
-  </li>`).join('');
+  </li>`;}).join('');
 
-/* sticky preview panel */
-const wpImg=document.getElementById('wp-img'),wpT=document.getElementById('wp-t'),
-      wpTag=document.getElementById('wp-tag'),wpYear=document.getElementById('wp-year');
-function setPreview(i){const c=CASES[i];wpImg.src=c.img;wpImg.alt=c.title;wpT.textContent=c.title;wpTag.textContent=c.tag;wpYear.textContent=c.period;}
-document.querySelectorAll('.row').forEach((r,i)=>r.addEventListener('mouseenter',()=>setPreview(i)));
-setPreview(0);
-
+let curCase=0,lastFocus=null;
+const TOTAL=String(CASES.length).padStart(2,'0');
+function videoHost(u){
+  if(/youtu/.test(u))return 'YouTube';
+  if(/instagram/.test(u))return 'Instagram';
+  try{return new URL(u).hostname.replace(/^www\./,'');}catch(e){return 'Watch';}
+}
 function openModal(i){
-  const c=CASES[i];
+  const o=document.getElementById('modal');
+  if(!o.classList.contains('open'))lastFocus=document.activeElement;
+  curCase=((i%CASES.length)+CASES.length)%CASES.length;
+  const c=CASES[curCase],nx=CASES[(curCase+1)%CASES.length];
   const aHTML=c.assignment.map((a,idx)=>`<li><span class="m-anum">${String(idx+1).padStart(2,'0')}</span><div class="m-atext"><strong>${a.label}</strong><p>${a.text}</p></div></li>`).join('');
-  const vHTML=c.videos.length?`<div class="m-vids">${c.videos.map(v=>`<a href="${v.url}" class="m-vid" target="_blank"><svg class="ico" width="9" height="11" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg>${v.label}</a>`).join('')}</div>`:'';
+  const vHTML=c.videos.length?`<div class="m-block"><div class="m-lbl">// Watch</div><div class="m-vids">${c.videos.map(v=>`
+      <a href="${v.url}" class="m-vid" target="_blank" rel="noopener">
+        <span class="play" aria-hidden="true"><svg width="11" height="13" viewBox="0 0 10 12" fill="currentColor"><path d="M0 0l10 6-10 6z"/></svg></span>
+        <span class="lb">${v.label}</span>
+        <span class="host">${videoHost(v.url).toLowerCase()===v.label.toLowerCase()?'':videoHost(v.url)+' '}&#8599;</span>
+      </a>`).join('')}</div></div>`:'';
   document.getElementById('modal-content').innerHTML=`
+    <div class="m-bar">
+      <div class="m-barl">
+        <span class="m-plate">${c.num}<i>/${TOTAL}</i></span>
+        <span class="m-kind">${c.tag}</span>
+      </div>
+      <div class="m-nav">
+        <button class="m-btn" onclick="stepCase(-1)" aria-label="Previous case">&#8592;</button>
+        <button class="m-btn" onclick="stepCase(1)" aria-label="Next case">&#8594;</button>
+        <button class="m-btn close" onclick="closeModal()">Close<span aria-hidden="true">&#10005;</span></button>
+      </div>
+    </div>
     <div class="m-hero">
       <img src="${c.img}" alt="${c.title}">
-      <div class="halftone" aria-hidden="true"></div>
-      <div class="m-fig">Case ${c.num}</div>
-      <div class="m-plate">${c.num}</div>
-      ${vHTML}
     </div>
     <div class="m-head">
-      <div>
-        <div class="m-eyebrow">${c.tag} ·<br>Case ${c.num} — ${c.period}</div>
-        <h3 class="m-title">${c.title}</h3>
-      </div>
+      <div class="m-eyebrow">${c.tag} <em>/</em> ${c.period}</div>
+      <h3 class="m-title" id="m-title">${c.title}</h3>
       <div class="m-tags">${c.tags.map(t=>`<span class="m-tag">${t}</span>`).join('')}</div>
     </div>
+    <div class="m-block invert"><div class="m-lbl">// Result</div><p class="m-result">${c.result}</p></div>
+    ${vHTML}
     <div class="m-block"><div class="m-lbl">// The project</div><p class="m-product">${c.product}</p></div>
-    <div class="m-block"><div class="m-lbl">// Result</div><p class="m-result">${c.result}</p></div>
-    <div class="m-block"><div class="m-lbl">// My role</div><ol class="m-assign">${aHTML}</ol></div>`;
-  const o=document.getElementById('modal');
+    <div class="m-block"><div class="m-lbl">// My role</div><ol class="m-assign">${aHTML}</ol></div>
+    <button class="m-next" onclick="stepCase(1)">
+      <span><span class="k">Next case / N&deg;${nx.num}</span><span class="t">${nx.title}</span></span>
+      <span class="arw" aria-hidden="true">&#8594;</span>
+    </button>
+    <div class="m-hint">Esc closes &middot; &#8592; &#8594; move between cases</div>`;
   o.classList.add('open');o.scrollTop=0;document.body.style.overflow='hidden';
+  document.getElementById('modal-box').focus();
 }
-function closeModal(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
+function stepCase(d){openModal(curCase+d);}
+function closeModal(){
+  const o=document.getElementById('modal');
+  if(!o.classList.contains('open'))return;
+  o.classList.remove('open');document.body.style.overflow='';
+  if(lastFocus&&lastFocus.focus)lastFocus.focus();
+  lastFocus=null;
+}
 
 const INTRO_VIDEO_ID='FcYKbmeggyM';
 function openVideo(){
@@ -500,21 +929,36 @@ function closeVideo(){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeVideo();}});
 
-/* reveal: rows default to visible (see .pre in CSS); this only removes .pre where JS
-   opted a row into the hidden pre-state above. If IntersectionObserver throws, or a
-   row is never scrolled into view by a human, the timeout below still guarantees every
-   row becomes visible — no content stays permanently gated behind a scroll event. */
+/* case modal keyboard: arrows step between cases, Tab stays inside the dialog */
+document.addEventListener('keydown',e=>{
+  const o=document.getElementById('modal');
+  if(!o||!o.classList.contains('open'))return;
+  if(e.key==='ArrowRight'){e.preventDefault();stepCase(1);return;}
+  if(e.key==='ArrowLeft'){e.preventDefault();stepCase(-1);return;}
+  if(e.key!=='Tab')return;
+  const f=[...o.querySelectorAll('a[href],button')].filter(el=>el.offsetWidth||el.offsetHeight);
+  if(!f.length)return;
+  const first=f[0],last=f[f.length-1],box=document.getElementById('modal-box');
+  if(e.shiftKey&&(document.activeElement===first||document.activeElement===box)){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+});
+
+/* reveal: cards default to visible (see .pre in CSS); this only removes .pre where JS
+   opted a card into the hidden pre-state above. If IntersectionObserver throws, or a
+   card is never scrolled into view by a human, the fallback below still guarantees every
+   card becomes visible: no content stays permanently gated behind a scroll event. */
 try{
-  const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.remove('pre');io.unobserve(en.target);}})},{threshold:0.1});
-  document.querySelectorAll('.row.pre').forEach(el=>io.observe(el));
+  const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.remove('pre');io.unobserve(en.target);}})},{threshold:0.06,rootMargin:'0px 0px -4% 0px'});
+  document.querySelectorAll('.pj.pre').forEach(el=>io.observe(el));
 }catch(e){
-  document.querySelectorAll('.row.pre').forEach(el=>el.classList.remove('pre'));
+  document.querySelectorAll('.pj.pre').forEach(el=>el.classList.remove('pre'));
 }
-setTimeout(()=>document.querySelectorAll('.row.pre').forEach(el=>el.classList.remove('pre')),1200);
+setTimeout(()=>document.querySelectorAll('.pj.pre').forEach(el=>el.classList.remove('pre')),1600);
 
 /* nav scroll-spy */
+const navEl=document.querySelector('nav');
 try{
-  const navLinks=[...document.querySelectorAll('.nav-links a')];
+  const navLinks=[...document.querySelectorAll('.nav-links a[href^="#"]')];
   const spy=new IntersectionObserver(es=>{
     es.forEach(en=>{
       if(en.isIntersecting){
@@ -525,16 +969,38 @@ try{
   ['work','about','contact'].forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el);});
 }catch(e){}
 
-/* marquee: pause on tap for touch devices (hover already pauses for mouse/trackpad) */
-const clientsEl=document.querySelector('.clients');
-if(clientsEl){
-  let paused=false;
-  clientsEl.addEventListener('touchstart',()=>{
-    paused=!paused;
-    const track=clientsEl.querySelector('.cl-track');
-    if(track)track.style.animationPlayState=paused?'paused':'running';
-  },{passive:true});
+/* read-position rule: fills the nav's bottom hairline in proportion to scroll depth,
+   so the persistent chrome reports document length and position at zero pixel cost. */
+if(navEl){
+  let ticking=false;
+  const setProg=()=>{
+    ticking=false;
+    const d=document.documentElement;
+    const max=d.scrollHeight-d.clientHeight;
+    const p=max>4?Math.min(1,Math.max(0,(window.scrollY||d.scrollTop)/max)):0;
+    navEl.style.setProperty('--prog',(p*100).toFixed(2)+'%');
+  };
+  const onScroll=()=>{if(!ticking){ticking=true;requestAnimationFrame(setProg);}};
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  setProg();
+
+  /* in-page nav links land below the fixed bar instead of under it, and move keyboard
+     focus to the section they jump to. */
+  navEl.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const t=document.getElementById(a.getAttribute('href').slice(1));
+      if(!t)return;
+      e.preventDefault();
+      const y=t.getBoundingClientRect().top+window.scrollY-(navEl.offsetHeight+10);
+      const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+      window.scrollTo({top:Math.max(0,y),behavior:reduce?'auto':'smooth'});
+      t.setAttribute('tabindex','-1');
+      t.focus({preventScroll:true});
+    });
+  });
 }
+
 </script>
 </body>
 </html>
