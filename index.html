@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Denny Hultén — Creative Director</title>
+<meta name="description" content="Denny Hultén — Creative Director. Twenty years directing live work, from urban dance festivals to five-year corporate game worlds: Volvo Cars, Gothia Cup, P3 Guld, Play'n GO, Länsförsäkringar.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Denny Hultén — Creative Director">
+<meta property="og:description" content="Twenty years directing live work, from urban dance festivals to five-year corporate game worlds: Volvo Cars, Gothia Cup, P3 Guld, Play'n GO, Länsförsäkringar.">
+<meta property="og:url" content="https://denny-hulten-portfolio.vercel.app">
+<meta property="og:image" content="https://denny-hulten-portfolio.vercel.app/images/denny.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Denny Hultén — Creative Director">
+<meta name="twitter:description" content="Twenty years directing live work, from urban dance festivals to five-year corporate game worlds: Volvo Cars, Gothia Cup, P3 Guld, Play'n GO, Länsförsäkringar.">
+<meta name="twitter:image" content="https://denny-hulten-portfolio.vercel.app/images/denny.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Black&family=Sometype+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -41,8 +51,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:cen
 .nav-links{display:flex;gap:clamp(1rem,3vw,2.4rem)}
 .nav-links a{font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink);transition:color .15s}
 .nav-links a span{color:var(--grey)}
-.nav-links a:hover{color:var(--red)}
-.nav-links a:hover span{color:var(--red)}
+.nav-links a:hover,.nav-links a.active{color:var(--red)}
+.nav-links a:hover span,.nav-links a.active span{color:var(--red)}
 
 /* HERO */
 .hero{padding:4.4rem var(--pad) var(--pad)}
@@ -115,9 +125,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:cen
 .index{list-style:none}
 .row{display:grid;grid-template-columns:3.2rem 1fr;align-items:start;gap:0.5rem 1.2rem;
   padding:1.25rem 0.2rem;border-bottom:1px solid var(--rule);cursor:pointer;position:relative;
-  opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s,background .2s,color .2s}
+  transition:opacity .5s,transform .5s,background .2s,color .2s}
 .row:first-child{border-top:1px solid var(--rule)}
-.row.vis{opacity:1;transform:none}
+/* .pre is an opt-in hidden state applied by JS only when it can guarantee reveal; default is visible so no-JS/partial-JS/no-scroll contexts always show the content */
+.row.pre{opacity:0;transform:translateY(14px)}
 .row:hover{background:var(--ink);color:var(--paper)}
 .row-num{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:1.1rem;letter-spacing:-0.02em;color:var(--red);padding-top:0.15rem}
 .row-main{min-width:0}
@@ -238,6 +249,12 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;padd
   .stat:first-child{border-top:none}
   .hero-top{grid-template-columns:1fr;gap:0.6rem}.hero-top .c{display:none}
   .hero-top .r{text-align:left}
+}
+@media(prefers-reduced-motion:reduce){
+  .hline,.hero-kick{opacity:1;transform:none;animation:none}
+  .row.pre{opacity:1;transform:none}
+  .cl-track{animation:none}
+  .grain{display:none}
 }
 </style>
 </head>
@@ -422,8 +439,9 @@ const seq=NAMES.map(n=>`<span>${n}</span>`).join('');
 document.getElementById('cl').innerHTML=seq+seq;
 
 /* work index */
+const reduceMotion=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.getElementById('index').innerHTML=CASES.map((c,i)=>`
-  <li class="row" onclick="openModal(${i})" tabindex="0" role="button" aria-label="${c.title}" onkeydown="if(event.key==='Enter')openModal(${i})">
+  <li class="row${reduceMotion?'':' pre'}" onclick="openModal(${i})" tabindex="0" role="button" aria-label="${c.title}" onkeydown="if(event.key==='Enter')openModal(${i})">
     <span class="row-num">${c.num}</span>
     <div class="row-main">
       <span class="row-kind">${c.tag}</span>
@@ -476,9 +494,41 @@ function closeVideo(){
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeVideo();}});
 
-/* reveal */
-const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('vis');io.unobserve(en.target);}})},{threshold:0.1});
-document.querySelectorAll('.row').forEach(el=>io.observe(el));
+/* reveal: rows default to visible (see .pre in CSS); this only removes .pre where JS
+   opted a row into the hidden pre-state above. If IntersectionObserver throws, or a
+   row is never scrolled into view by a human, the timeout below still guarantees every
+   row becomes visible — no content stays permanently gated behind a scroll event. */
+try{
+  const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.remove('pre');io.unobserve(en.target);}})},{threshold:0.1});
+  document.querySelectorAll('.row.pre').forEach(el=>io.observe(el));
+}catch(e){
+  document.querySelectorAll('.row.pre').forEach(el=>el.classList.remove('pre'));
+}
+setTimeout(()=>document.querySelectorAll('.row.pre').forEach(el=>el.classList.remove('pre')),1200);
+
+/* nav scroll-spy */
+try{
+  const navLinks=[...document.querySelectorAll('.nav-links a')];
+  const spy=new IntersectionObserver(es=>{
+    es.forEach(en=>{
+      if(en.isIntersecting){
+        navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id));
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  ['work','about','contact'].forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el);});
+}catch(e){}
+
+/* marquee: pause on tap for touch devices (hover already pauses for mouse/trackpad) */
+const clientsEl=document.querySelector('.clients');
+if(clientsEl){
+  let paused=false;
+  clientsEl.addEventListener('touchstart',()=>{
+    paused=!paused;
+    const track=clientsEl.querySelector('.cl-track');
+    if(track)track.style.animationPlayState=paused?'paused':'running';
+  },{passive:true});
+}
 </script>
 </body>
 </html>
