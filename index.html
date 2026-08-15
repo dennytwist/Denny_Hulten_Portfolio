@@ -58,14 +58,13 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:var(
   font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
 .nav-status i{width:6px;height:6px;background:var(--red);display:block;flex:none}
 /* The hero states name, role, employer and availability in full. While it is on screen the nav would
-   only repeat it, so the nav's role and status stay collapsed until the hero has scrolled away, at
-   which point the nav becomes the only place carrying them. Nothing is duplicated, nothing is lost.
-   Width, not display, so the transition animates and no layout jump happens on the first scroll. */
-.nav-role,.nav-status{max-width:0;opacity:0;overflow:hidden;white-space:nowrap;
-  padding-left:0;margin-left:0;border-left-color:transparent;
-  transition:max-width .3s ease,opacity .25s ease,margin-left .3s ease,padding-left .3s ease}
-body.past-hero .nav-role{max-width:14rem;opacity:1;padding-left:0.6rem}
-body.past-hero .nav-status{max-width:14rem;opacity:1;margin-left:0.9rem;padding-left:0.9rem;border-left-color:var(--rule)}
+   only repeat it, so both stay invisible until the hero has scrolled away, at which point the nav
+   becomes the only place carrying them. Nothing is duplicated, nothing is lost.
+   Their space is reserved at all times and only opacity and transform animate, so crossing the
+   boundary costs no layout work and the nav never reflows mid-scroll. */
+.nav-role,.nav-status{opacity:0;transform:translateX(-5px);pointer-events:none;
+  transition:opacity .25s ease,transform .25s ease}
+body.past-hero .nav-role,body.past-hero .nav-status{opacity:1;transform:none;pointer-events:auto}
 .nav-links{display:flex;align-items:center;gap:clamp(0.9rem,2.2vw,1.8rem)}
 .nav-links a{font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;
   color:var(--ink);position:relative;padding:0.35rem 0;transition:color .15s}
