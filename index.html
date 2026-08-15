@@ -75,7 +75,7 @@ nav a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
    One screen, three bands, each with a job:
    1 hero-top  — where he works from, and the address to write to, without scrolling
    2 hero-body — name and level first, then the claim, then the games credential, then the face
-   3 hero-foot — three real projects, so the first screen shows work, not only a slogan */
+ */
 .hero{padding:3.7rem var(--pad) 1.4rem;min-height:100vh;display:flex}
 .frame{border:2px solid var(--ink);display:flex;flex-direction:column;flex:1;min-height:0}
 
@@ -145,24 +145,9 @@ nav a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .hero-photo:hover .hero-play{background:var(--ink);transform:translate(-3px,-3px)}
 .ico{flex:none;display:block}
 
-/* band 3: the proof strip. Three real projects, each one click from the case study. */
-.hero-foot{border-top:2px solid var(--ink);padding:0.7rem 1.15rem 0.85rem;
-  opacity:0;animation:rise .6s ease forwards;animation-delay:.42s}
-.foot-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:0.55rem}
-.foot-head .more{color:var(--red);display:inline-flex;align-items:center;gap:0.4rem}
-.foot-head .more:hover{text-decoration:underline}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem}
-.tile{display:block;width:100%;text-align:left;background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer}
-.tile-media{display:block;position:relative;aspect-ratio:2/1;background:var(--blue);overflow:hidden;border:1px solid var(--ink)}
-.tile-media img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.22) brightness(0.88);
-  mix-blend-mode:lighten;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
-.tile:hover .tile-media img,.tile:focus-visible .tile-media img{transform:scale(1.05)}
-.tile:focus-visible{outline:3px solid var(--red);outline-offset:3px}
-.tile-c{display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:0.86rem;line-height:1.2;margin-top:0.5rem;
-  transition:color .18s}
-.tile:hover .tile-c{color:var(--red)}
-.tile-m{display:block;font-family:'Sometype Mono',monospace;font-size:0.65rem;letter-spacing:0.055em;
-  text-transform:uppercase;color:var(--grey);margin-top:0.22rem;line-height:1.35}
+/* The hero's three-card "Selected work" strip was removed 2026-08-16. It existed to get work onto the
+   first screen back when the hero was only a slogan. The identity block and credential spine now do
+   that job, and the strip was left duplicating three of the eight cases in the index below. */
 
 /* overprint word: now used only by the About and Contact headlines */
 .op{position:relative;display:inline-block;isolation:isolate;color:transparent}
@@ -231,7 +216,11 @@ nav a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .pj.pre{opacity:0;transform:translateY(18px)}
 .pj:focus-visible{outline:3px solid var(--red);outline-offset:6px}
 .pj-media{position:relative;background:var(--blue);overflow:hidden;border:2px solid var(--ink);aspect-ratio:16/9}
-.pj.band .pj-media{aspect-ratio:2.72/1}
+/* Full-width cards are capped to a band. At 16/9 across 12 columns the image ran 737px tall and pushed
+   the client name, year and scale 775px down the card, so landing on N°01 gave a reader a picture and
+   no information at all. The cap is a hard ceiling in px as well as a ratio, because on a wide monitor
+   a ratio alone still grows without limit. Nobody is here to admire the photograph. */
+.pj.wide .pj-media,.pj.band .pj-media{aspect-ratio:3.4/1;max-height:400px}
 .pj-media img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;
   filter:grayscale(1) contrast(1.1) brightness(1.05);mix-blend-mode:lighten;display:block;
   transition:transform .55s cubic-bezier(.2,.7,.2,1)}
@@ -458,7 +447,6 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   /* the portrait is the one element that can be shrunk without losing a fact, so on a stacked
      layout it is capped: the name, the claim and the credential have to clear the fold first */
   .hero-photo{min-height:0;height:min(38vh,22rem);order:-1}
-  .tiles{grid-template-columns:1fr 1fr}
   .stats{grid-template-columns:repeat(2,1fr)}
   .stat:nth-child(3){border-left:none}
   .stat:nth-child(3),.stat:nth-child(4){border-top:1px solid var(--rule)}
@@ -469,7 +457,8 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   .ch-body{max-width:none}
   .work-wrap{grid-template-columns:1fr;row-gap:2.6rem}
   .pj,.pj.wide{grid-column:auto}
-  .pj.band .pj-media{aspect-ratio:16/9}
+  /* the desktop band cap would be a 98px sliver at phone width, so full-width cards go back to 16/9 here */
+  .pj.wide .pj-media,.pj.band .pj-media{aspect-ratio:16/9;max-height:none}
   .nav-links{gap:1.1rem}
 }
 @media(max-width:600px){
@@ -510,14 +499,12 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   .stats{grid-template-columns:1fr;} .stat{border-left:none;border-top:1px solid var(--rule);min-height:auto;padding-bottom:1rem}
   .stat:first-child{border-top:none}
   .hero-top{gap:0.3rem}
-  .tiles{grid-template-columns:1fr}
   /* the label gutter costs too much width on a phone, so the label goes back on top of its names */
   .cl-grp{grid-template-columns:minmax(0,1fr);gap:0.6rem 0}
   .cl-grp.cl-pri .cl-list li{font-size:0.95rem;padding-right:1rem}
 }
 @media(prefers-reduced-motion:reduce){
-  .hline,.hero-lead,.hero-foot,.hero-id,.hero-spine{opacity:1;transform:none;animation:none}
-  .tile-media img{transition:none}
+  .hline,.hero-lead,.hero-id,.hero-spine{opacity:1;transform:none;animation:none}
   .pj.pre{opacity:1;transform:none}
   .pj:hover .pj-media img,.pj:focus-visible .pj-media img{transform:none}
   .grain{display:none}
@@ -572,29 +559,6 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
            onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideo();}">
         <img src="images/denny.jpg" alt="Denny Hultén, portrait">
         <div class="hero-play"><svg class="ico" width="10" height="12" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg>About me, 3 min</div>
-      </div>
-    </div>
-    <div class="hero-foot">
-      <div class="foot-head lab">
-        <span>Selected work</span>
-        <a class="more" href="#work">All 8 projects <svg class="ico" width="13" height="9" viewBox="0 0 13 9" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M0 4.5h11M8 1l3.5 3.5L8 8"/></svg></a>
-      </div>
-      <div class="tiles">
-        <button class="tile" onclick="openModal(0)" aria-label="Open case study: Länsförsäkringar Gothenburg, Level 2030 game world">
-          <span class="tile-media"><img src="images/level2030.png" alt="Pixel-art map of the five yearly levels in the Level 2030 game world"></span>
-          <span class="tile-c">Länsförsäkringar Gothenburg</span>
-          <span class="tile-m">Five-year game world · 550 people · 2026</span>
-        </button>
-        <button class="tile" onclick="openModal(5)" aria-label="Open case study: Volvo Cars product launch, EMEA and APAC">
-          <span class="tile-media"><img src="images/volvo.jpeg" alt="Launch dinner seated in front of a floor-to-ceiling aquarium projection"></span>
-          <span class="tile-c">Volvo Cars</span>
-          <span class="tile-m">Launch show · EMEA &amp; APAC · 2023</span>
-        </button>
-        <button class="tile" onclick="openModal(6)" aria-label="Open case study: P3 Guld, Cleo gala performance on live television">
-          <span class="tile-media"><img src="images/p3guld.jpeg" alt="Cleo performing with dancers at the P3 Guld gala"></span>
-          <span class="tile-c">P3 Guld</span>
-          <span class="tile-m">Live national television · 2023</span>
-        </button>
       </div>
     </div>
   </div>
@@ -722,11 +686,12 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
       <span class="c-v">/in/dennyhulten<svg class="ico" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M3 9L9 3M4.5 3H9v4.5"/></svg></span>
       <span class="c-n">Full career history.</span>
     </a>
-    <!-- TODO(Denny): when a hosted CV PDF exists, swap this href for its URL and change .c-n to "PDF, 2 pages." -->
-    <a class="c-cell" href="mailto:dennyhulten@gmail.com?subject=CV%20request" aria-label="Request the CV by email">
+    <!-- Was a mailto asking for the CV, which sent the same email as the email cell two cells left and
+         therefore did nothing. It now downloads the real file. -->
+    <a class="c-cell" href="Denny-Hulten-CV.pdf" download="Denny-Hulten-CV.pdf" aria-label="Download the CV as a PDF">
       <span class="c-k">// cv</span>
-      <span class="c-v">Request the CV</span>
-      <span class="c-n">PDF, sent on request.</span>
+      <span class="c-v">Download the CV<svg class="ico" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M6 1v8M2.5 6.5L6 10l3.5-3.5M1 11h10"/></svg></span>
+      <span class="c-n">PDF, one page.</span>
     </a>
   </div>
 </section>
