@@ -211,55 +211,51 @@ nav a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .sec-head .meta{text-align:right;font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;color:var(--grey);line-height:1.5}
 .sec-head .meta b{color:var(--red);font-weight:400}
 
-/* WORK INDEX: every project is its own piece of media, sized by how much
-   of the story it carries. 12-col grid: N°01 and N°08 run full width, the
-   rest sit two-up. */
-.work-wrap{display:grid;grid-template-columns:repeat(12,1fr);list-style:none;
-  column-gap:clamp(1rem,2.4vw,2.2rem);row-gap:clamp(2.6rem,5vw,4.6rem);
-  padding-top:clamp(1.8rem,3.4vw,3rem)}
-.pj{grid-column:span 6;display:flex;flex-direction:column;cursor:pointer;position:relative;
-  transition:opacity .5s,transform .5s}
-.pj.wide{grid-column:span 12}
-/* .pre is an opt-in hidden state applied by JS only when it can guarantee reveal; default is visible so no-JS/partial-JS/no-scroll contexts always show the content */
-.pj.pre{opacity:0;transform:translateY(18px)}
-.pj:focus-visible{outline:3px solid var(--red);outline-offset:6px}
-.pj-media{position:relative;background:var(--blue);overflow:hidden;border:2px solid var(--ink);aspect-ratio:16/9}
-/* Full-width cards are capped to a band. At 16/9 across 12 columns the image ran 737px tall and pushed
-   the client name, year and scale 775px down the card, so landing on N°01 gave a reader a picture and
-   no information at all. The cap is a hard ceiling in px as well as a ratio, because on a wide monitor
-   a ratio alone still grows without limit. Nobody is here to admire the photograph. */
-.pj.wide .pj-media,.pj.band .pj-media{aspect-ratio:3.4/1;max-height:400px}
-.pj-media img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;
-  filter:grayscale(1) contrast(1.1) brightness(1.05);mix-blend-mode:lighten;display:block;
-  transition:transform .55s cubic-bezier(.2,.7,.2,1)}
-.pj:hover .pj-media img,.pj:focus-visible .pj-media img{transform:scale(1.035)}
-/* metadata band: the four things a recruiter scans, in fixed order.
-   flex:1 + margin-top:auto on the foot keeps the scale line of two side-by-side
-   projects on one baseline even when one client name wraps to two lines. */
-.pj-meta{padding-top:0.7rem;display:flex;flex-direction:column;gap:0.3rem;flex:1}
-.pj-strip{display:flex;justify-content:space-between;align-items:baseline;gap:1.2rem;
-  font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey)}
-.pj-strip .n{color:var(--red)}
-.pj-year{color:var(--ink);white-space:nowrap}
-/* overflow-wrap: "Länsförsäkringar" is 16 unbreakable characters whose min-content is 374.7px, and the
-   mobile 1fr track has an auto floor, so without this the whole document is 6px wider than a 390px phone
-   and the client name, year and OPEN CASE are clipped off the right edge of the lead card. */
-.pj-client{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;
-  letter-spacing:-0.025em;line-height:0.9;font-size:clamp(1.35rem,2.6vw,2.35rem);margin-top:0.25rem;
-  overflow-wrap:anywhere;transition:color .18s}
-.pj.wide .pj-client{font-size:clamp(1.9rem,4.6vw,4.1rem)}
-.pj-name{font-family:'Archivo',sans-serif;font-weight:600;font-size:clamp(0.95rem,1.15vw,1.12rem);line-height:1.25}
-.pj.wide .pj-name{font-size:clamp(1.05rem,1.6vw,1.35rem)}
-/* level: without it a reader cannot tell whether he ran the thing or worked on it.
-   Labelled, because the word only does its job if you know what it is naming. */
-.pj-role{font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.07em;text-transform:uppercase;
-  color:var(--ink);margin-top:0.15rem}
-.pj-role .k{color:var(--red);margin-right:0.45rem}
-.pj-foot{display:flex;justify-content:space-between;align-items:baseline;gap:1.2rem;flex-wrap:wrap;
-  margin-top:auto;padding-top:0.55rem;border-top:1px solid var(--rule-soft);
-  font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase}
-.pj-open{color:var(--red);white-space:nowrap}
-.pj:hover .pj-client{color:var(--red)}
+/* WORK INDEX: a scannable list, not a gallery. Eight rows read in one screen instead of
+   eight cards read over three, and a sticky panel carries the image for whichever row the
+   eye is on. The list is the work; the picture supports it.
+   The original version of this layout hid the panel entirely below 860px, so a recruiter on
+   a phone got eight text rows and no images at all. Here each row carries its own thumbnail
+   that appears exactly when the sticky panel goes away. */
+.work-wrap{display:grid;grid-template-columns:1.12fr 0.88fr;gap:clamp(1.5rem,4vw,3.5rem);
+  align-items:start;padding-top:clamp(1.4rem,2.6vw,2.2rem)}
+.index{list-style:none}
+.row{display:grid;grid-template-columns:3.2rem minmax(0,1fr);align-items:start;gap:0.4rem 1.2rem;
+  padding:1.15rem 0.55rem;border-bottom:1px solid var(--rule);cursor:pointer;position:relative;
+  transition:opacity .5s,transform .5s,background .2s,color .2s}
+.row:first-child{border-top:1px solid var(--rule)}
+.row.pre{opacity:0;transform:translateY(14px)}
+.row:hover,.row.on{background:var(--ink);color:var(--paper)}
+.row:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
+.row-num{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:1.1rem;
+  letter-spacing:-0.02em;color:var(--red);padding-top:0.15rem}
+.row-main{min-width:0}
+.row-kind{display:block;font-family:'Sometype Mono',monospace;font-size:0.64rem;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--red);margin-bottom:0.35rem}
+.row-title{display:block;font-family:'Archivo',sans-serif;font-weight:700;
+  font-size:clamp(1.05rem,1.8vw,1.5rem);letter-spacing:-0.01em;line-height:1.1;overflow-wrap:anywhere}
+.row-res{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  margin-top:0.4rem;font-size:0.88rem;line-height:1.4;color:var(--grey)}
+.row:hover .row-res,.row.on .row-res{color:rgba(251,247,238,0.72)}
+/* role and scale: the level and the number, kept on the row so the list still answers
+   "did he run this, and how big was it" without opening anything */
+.row-facts{display:flex;flex-wrap:wrap;gap:0.15rem 0.9rem;margin-top:0.5rem;
+  font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.07em;text-transform:uppercase}
+.row-facts .k{color:var(--red);margin-right:0.4rem}
+.row:hover .row-facts,.row.on .row-facts{color:rgba(251,247,238,0.85)}
+/* per-row thumbnail: desktop has the sticky panel, so it only exists where the panel does not */
+.row-thumb{display:none}
+
+/* sticky preview panel */
+.work-preview{position:sticky;top:5.5rem;border:2px solid var(--ink);background:var(--paper)}
+.wp-media{position:relative;aspect-ratio:4/3;background:var(--blue);overflow:hidden;border-bottom:2px solid var(--ink)}
+.wp-media img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08) brightness(1.05);
+  mix-blend-mode:lighten;display:block;transition:opacity .18s}
+.wp-body{padding:0.9rem 1rem 1rem}
+.wp-t{font-family:'Archivo',sans-serif;font-weight:700;font-size:1rem;line-height:1.14;margin-bottom:0.6rem}
+.wp-row{display:flex;justify-content:space-between;gap:1rem;font-family:'Sometype Mono',monospace;
+  font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--grey)}
+.wp-row .red{color:var(--red)}
 
 /* ABOUT
    The biggest type carries the load-bearing claim: role, place, span. The line
@@ -463,10 +459,16 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   .ch-when{display:flex;align-items:baseline;gap:0.5rem;margin-bottom:0.55rem;padding-top:0}
   .ch-y2{margin-top:0}
   .ch-body{max-width:none}
-  .work-wrap{grid-template-columns:1fr;row-gap:2.6rem}
-  .pj,.pj.wide{grid-column:auto}
+  /* the sticky panel needs a second column to exist; below this the row carries its own image
+     instead, so the phone never loses the work the way the original list did */
+  .work-wrap{grid-template-columns:minmax(0,1fr);gap:0}
+  .work-preview{display:none}
+  .row-thumb{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border:2px solid var(--ink);
+    background:var(--blue);filter:grayscale(1) contrast(1.1) brightness(1.05);margin-bottom:0.75rem}
+  .row:hover,.row.on{background:none;color:inherit}
+  .row:hover .row-res,.row.on .row-res{color:var(--grey)}
+  .row:hover .row-facts,.row.on .row-facts{color:inherit}
   /* the desktop band cap would be a 98px sliver at phone width, so full-width cards go back to 16/9 here */
-  .pj.wide .pj-media,.pj.band .pj-media{aspect-ratio:16/9;max-height:none}
   .nav-links{gap:1.1rem}
 }
 @media(max-width:600px){
@@ -513,8 +515,7 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 }
 @media(prefers-reduced-motion:reduce){
   .hline,.hero-lead,.hero-id,.hero-spine{opacity:1;transform:none;animation:none}
-  .pj.pre{opacity:1;transform:none}
-  .pj:hover .pj-media img,.pj:focus-visible .pj-media img{transform:none}
+  .row.pre{opacity:1;transform:none}
   .grain{display:none}
 }
 </style>
@@ -613,7 +614,16 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
     <h2>Work</h2>
     <div class="meta">N°02<br><b>08</b> Projects<br>2009 to 2030</div>
   </div>
-  <ol class="work-wrap" id="index"></ol>
+  <div class="work-wrap">
+    <ol class="index" id="index"></ol>
+    <aside class="work-preview" id="wp" aria-hidden="true">
+      <div class="wp-media"><img id="wp-img" src="" alt=""></div>
+      <div class="wp-body">
+        <div class="wp-t" id="wp-t"></div>
+        <div class="wp-row"><span class="red" id="wp-tag"></span><span id="wp-year"></span></div>
+      </div>
+    </aside>
+  </div>
 </section>
 
 <section class="sec" id="about">
@@ -816,20 +826,38 @@ const WORK_META=[
 ];
 const reduceMotion=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 document.getElementById('index').innerHTML=CASES.map((c,i)=>{
-  const m=WORK_META[i],period=c.period.replace(/[–—]/g,'-');
+  const m=WORK_META[i],period=c.period.replace(/[\u2013\u2014]/g,'-');
   return `
-  <li class="pj ${m.span}${reduceMotion?'':' pre'}" onclick="openModal(${i})" tabindex="0" role="button"
+  <li class="row${reduceMotion?'':' pre'}" onclick="openModal(${i})" tabindex="0" role="button"
       aria-label="Open case study: ${m.client}, ${m.name}, ${period}"
       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal(${i})}">
-    <div class="pj-media"><img src="${c.img}" alt="${m.alt}"></div>
-    <div class="pj-meta">
-      <div class="pj-strip"><span><span class="n">N°${c.num}</span> ${c.tag}</span><span class="pj-year">${period}</span></div>
-      <div class="pj-client">${m.client}</div>
-      <div class="pj-name">${m.name}</div>
-      <div class="pj-role"><span class="k">Role</span> ${m.role}</div>
-      <div class="pj-foot"><span class="pj-scale">${m.scale}</span><span class="pj-open">Open case ↗</span></div>
+    <span class="row-num">N\u00b0${c.num}</span>
+    <div class="row-main">
+      <img class="row-thumb" src="${c.img}" alt="${m.alt}" loading="lazy">
+      <span class="row-kind">${c.tag}</span>
+      <span class="row-title">${c.title}</span>
+      <span class="row-res">${c.result}</span>
+      <div class="row-facts"><span><span class="k">Role</span> ${m.role}</span><span>${m.scale}</span><span>${period}</span></div>
     </div>
   </li>`;}).join('');
+
+/* sticky preview: follows hover AND keyboard focus, so it is not a mouse-only feature */
+const wpImg=document.getElementById('wp-img'),wpT=document.getElementById('wp-t'),
+      wpTag=document.getElementById('wp-tag'),wpYear=document.getElementById('wp-year');
+const rows=document.querySelectorAll('.row');
+function setPreview(i){
+  const c=CASES[i],m=WORK_META[i];
+  wpImg.src=c.img;wpImg.alt=m.alt;
+  wpT.textContent=c.title;
+  wpTag.textContent=c.tag;
+  wpYear.textContent=c.period.replace(/[\u2013\u2014]/g,'-');
+  rows.forEach((r,n)=>r.classList.toggle('on',n===i));
+}
+rows.forEach((r,i)=>{
+  r.addEventListener('mouseenter',()=>setPreview(i));
+  r.addEventListener('focus',()=>setPreview(i));
+});
+setPreview(0);
 
 let curCase=0,lastFocus=null;
 const TOTAL=String(CASES.length).padStart(2,'0');
@@ -922,11 +950,11 @@ document.addEventListener('keydown',e=>{
    card becomes visible: no content stays permanently gated behind a scroll event. */
 try{
   const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.remove('pre');io.unobserve(en.target);}})},{threshold:0.06,rootMargin:'0px 0px -4% 0px'});
-  document.querySelectorAll('.pj.pre').forEach(el=>io.observe(el));
+  document.querySelectorAll('.row.pre').forEach(el=>io.observe(el));
 }catch(e){
-  document.querySelectorAll('.pj.pre').forEach(el=>el.classList.remove('pre'));
+  document.querySelectorAll('.row.pre').forEach(el=>el.classList.remove('pre'));
 }
-setTimeout(()=>document.querySelectorAll('.pj.pre').forEach(el=>el.classList.remove('pre')),1600);
+setTimeout(()=>document.querySelectorAll('.row.pre').forEach(el=>el.classList.remove('pre')),1600);
 
 /* nav scroll-spy */
 const navEl=document.querySelector('nav');
