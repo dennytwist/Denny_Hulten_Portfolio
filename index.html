@@ -35,7 +35,7 @@ body{font-family:'Archivo',sans-serif;background:var(--paper);color:var(--ink);l
 a{color:inherit;text-decoration:none}
 
 /* paper grain */
-.grain{position:fixed;inset:0;z-index:900;pointer-events:none;opacity:0.035;mix-blend-mode:multiply;
+.grain{position:fixed;inset:0;z-index:900;pointer-events:none;opacity:0.06;mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>")}
 
 /* label utility */
@@ -83,6 +83,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:cen
 .hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 12%;
   filter:grayscale(1) contrast(1.08) brightness(1.06);mix-blend-mode:lighten;display:block}
 .hero-photo::after{content:"";position:absolute;inset:0;background:var(--blue);mix-blend-mode:screen;opacity:0.12}
+/* halftone: a real element (not a pseudo) so it layers independently of each container's blue screen-tint */
+.halftone{position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,var(--ink) 1px,transparent 1.6px);
+  background-size:6px 6px;mix-blend-mode:multiply;opacity:0.22}
 .photo-tag{position:absolute;top:0;left:0;writing-mode:vertical-rl;font-family:'Sometype Mono',monospace;font-size:0.68rem;
   letter-spacing:0.16em;text-transform:uppercase;color:var(--paper);padding:0.8rem 0.5rem;background:var(--red);z-index:2}
 .hero-play{position:absolute;left:1rem;bottom:1rem;z-index:3;display:inline-flex;align-items:center;gap:0.5rem;
@@ -139,7 +143,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:cen
 .row:hover .row-res{color:rgba(236,231,219,0.75)}
 /* sticky preview panel */
 .work-preview{position:sticky;top:5.5rem;border:2px solid var(--ink);background:var(--paper)}
-.wp-media{aspect-ratio:4/3;background:var(--blue);overflow:hidden;border-bottom:2px solid var(--ink)}
+.wp-media{position:relative;aspect-ratio:4/3;background:var(--blue);overflow:hidden;border-bottom:2px solid var(--ink)}
 .wp-media img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08) brightness(1.05);mix-blend-mode:lighten;display:block;transition:opacity .18s}
 .wp-body{padding:0.9rem 1rem 1rem}
 .wp-t{font-family:'Archivo',sans-serif;font-weight:700;font-size:1rem;line-height:1.12;margin-bottom:0.7rem}
@@ -288,6 +292,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;padd
       </div>
       <div class="hero-photo" onclick="openVideo()" tabindex="0" role="button" aria-label="Play intro video" onkeydown="if(event.key==='Enter')openVideo()">
         <img src="images/denny.jpg" alt="Denny Hultén">
+        <div class="halftone" aria-hidden="true"></div>
         <div class="photo-tag">Denny Hultén</div>
         <div class="hero-play"><svg class="ico" width="10" height="12" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg>About me, 3 min</div>
       </div>
@@ -316,7 +321,7 @@ footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.6rem;padd
   <div class="work-wrap">
     <ol class="index" id="index"></ol>
     <aside class="work-preview" id="wp">
-      <div class="wp-media"><img id="wp-img" src="" alt=""></div>
+      <div class="wp-media"><img id="wp-img" src="" alt=""><div class="halftone" aria-hidden="true"></div></div>
       <div class="wp-body">
         <div class="wp-t" id="wp-t"></div>
         <div class="wp-row"><span class="red" id="wp-tag"></span><span id="wp-year"></span></div>
@@ -464,6 +469,7 @@ function openModal(i){
   document.getElementById('modal-content').innerHTML=`
     <div class="m-hero">
       <img src="${c.img}" alt="${c.title}">
+      <div class="halftone" aria-hidden="true"></div>
       <div class="m-fig">Case ${c.num}</div>
       <div class="m-plate">${c.num}</div>
       ${vHTML}
