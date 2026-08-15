@@ -261,11 +261,14 @@ nav a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
    The biggest type carries the load-bearing claim: role, place, span. The line
    under it is the second tier, not a footnote, so the dated span reads at the
    same glance. */
-.about-big{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-0.03em;
-  font-size:clamp(2.1rem,7.1vw,6.1rem);line-height:0.84;margin:clamp(2rem,4vw,3.2rem) 0 clamp(0.9rem,1.6vw,1.4rem)}
-.about-big .red{color:var(--red)}
+/* "Creative Director in Gothenburg." was removed 2026-08-16. It was the tallest type on the page and
+   said nothing new: the section header directly above it reads "Denny Hultén", the sticky nav is
+   showing "Creative Director" by this scroll depth, and the hero already gave the employer and city.
+   The span below it was carrying the only claim here that is stated nowhere else, a number and a
+   duration, so it takes the size instead. */
 .about-span{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;
-  letter-spacing:-0.02em;font-size:clamp(1.22rem,3.3vw,2.75rem);line-height:1;margin-bottom:clamp(1.1rem,2vw,1.7rem)}
+  letter-spacing:-0.03em;font-size:clamp(2.1rem,7.1vw,6.1rem);line-height:0.84;
+  margin:clamp(2rem,4vw,3.2rem) 0 clamp(1.1rem,2vw,1.7rem)}
 .about-span .red{color:var(--red)}
 .about-intro{max-width:52ch;font-size:clamp(1.02rem,1.45vw,1.24rem);font-weight:500;line-height:1.45;
   padding-bottom:clamp(2.2rem,4.5vw,3.8rem)}
@@ -631,8 +634,7 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
     <h2>About</h2>
     <div class="meta">N°03<br>Denny Hultén<br><b>04</b> Chapters</div>
   </div>
-  <h2 class="about-big">Creative Director<br>in Gothenburg.</h2>
-  <p class="about-span">Twenty years of live work. <span class="op"><span class="c">2004 to now.</span><span class="r" aria-hidden="true">2004 to now.</span></span></p>
+  <h2 class="about-span">Twenty years of<br>live work. <span class="op"><span class="c">2004 to now.</span><span class="r" aria-hidden="true">2004 to now.</span></span></h2>
   <p class="about-intro"><b>Game worlds, festivals, national tours and live television.</b> Concept, direction and production in the same hands, from blank page to stage.</p>
   <ol class="about-spine">
     <li class="ch">
