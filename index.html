@@ -598,6 +598,62 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   .row.pre{opacity:1;transform:none}
   .grain{display:none}
 }
+
+/* ===== v19 SIMPLIFIED LAYER (draft 2026-11-13) =====
+   One reading order: who he is, the work, how he works, the record, contact.
+   The hero loses its frame and its top band: availability joins the role line, contact
+   lives in the nav button and the contact section. The stat band and the roster band are
+   gone: every number is already printed on its work row, and the names move into two quiet
+   lines inside the hero. Fewer boxes, the same facts, the work arrives one screen sooner. */
+.hero{min-height:0;padding:clamp(5rem,9vw,7.5rem) var(--pad) clamp(2.5rem,5vw,4rem);display:block}
+.hero-body{grid-template-columns:1.6fr 0.75fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:stretch}
+.hero-typecol{border-right:none;padding:0;gap:clamp(1rem,1.8vw,1.6rem)}
+.hero-photo{min-height:360px}
+.hero-avail{display:inline-flex;align-items:center;margin-left:0.6rem;color:var(--ink)}
+.hero-avail i{display:inline-block;width:6px;height:6px;background:var(--red);margin-right:0.45rem}
+.hero-cred{margin-top:0.4rem;border-top:1px solid var(--rule);padding-top:0.9rem;display:grid;gap:0.45rem;
+  opacity:0;animation:rise .6s ease forwards;animation-delay:.34s}
+.hero-cred div{display:grid;grid-template-columns:5.2rem minmax(0,1fr);gap:0 1rem;align-items:baseline}
+.hero-cred dt{font-family:'Sometype Mono',monospace;font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey)}
+.hero-cred dd{font-size:0.88rem;line-height:1.45;color:var(--ink)}
+.hero-cred div:first-child dd{font-weight:700}
+
+/* APPROACH */
+.sec-head-long h2{font-size:clamp(1.9rem,4.6vw,3.6rem);max-width:16ch;line-height:0.9}
+.ap-intro{display:grid;grid-template-columns:1.25fr 0.75fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:end;
+  padding-top:clamp(1.6rem,3vw,2.6rem)}
+.ap-lead{font-weight:700;font-size:clamp(1.2rem,2.1vw,1.65rem);line-height:1.28;letter-spacing:-0.015em;max-width:36ch}
+.ap-sub{font-size:1rem;line-height:1.55;color:var(--ink);max-width:44ch}
+.ap-grid{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(2rem,4vw,3.2rem);
+  border-top:2px solid var(--ink)}
+.ap-grid li{padding:1.5rem 1.3rem 1.6rem;border-left:1px solid var(--rule)}
+.ap-grid li:first-child{border-left:none;padding-left:0}
+.ap-n{display:block;font-family:'Archivo Black','Archivo',sans-serif;font-size:1.1rem;color:var(--red);letter-spacing:-0.02em;margin-bottom:0.9rem}
+.ap-grid h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.15;
+  letter-spacing:-0.01em;margin-bottom:0.6rem;max-width:22ch}
+.ap-grid p{font-size:0.95rem;line-height:1.55;max-width:40ch}
+.ap-close{margin-top:clamp(2.2rem,5vw,4rem);padding-top:clamp(1.4rem,3vw,2.2rem);border-top:2px solid var(--ink);
+  font-family:'Archivo Black','Archivo',sans-serif;text-transform:uppercase;letter-spacing:-0.03em;
+  font-size:clamp(1.5rem,3.6vw,3rem);line-height:0.95;max-width:24ch}
+
+@media(max-width:860px){
+  .hero{padding-top:4.2rem}
+  .hero-typecol{border-bottom:none}
+  .hero-photo{height:min(38vh,22rem);min-height:0}
+  .ap-intro{grid-template-columns:1fr;gap:1rem}
+  .ap-grid{grid-template-columns:1fr}
+  .ap-grid li{border-left:none;border-top:1px solid var(--rule);padding:1.2rem 0}
+  .ap-grid li:first-child{border-top:none}
+}
+@media(max-width:600px){.nav-anchor-approach{display:none}}
+@media(max-width:560px){
+  .hero{padding-top:3.6rem}
+  .hero-photo{height:13rem}
+  .hero-typecol{padding:0.6rem 0 0}
+  .hero-avail{display:flex;margin:0.3rem 0 0}
+  .hero-cred div{grid-template-columns:1fr;gap:0.15rem}
+}
+@media(prefers-reduced-motion:reduce){.hero-cred{opacity:1;animation:none}}
 </style>
 </head>
 <body>
@@ -610,6 +666,7 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   </div>
   <div class="nav-links">
     <a href="#work">Work</a>
+    <a href="#approach" class="nav-anchor-approach">Approach</a>
     <a href="#about">About</a>
     <a href="#contact" class="nav-anchor-contact">Contact</a>
     <a class="nav-cta" href="mailto:dennyhulten@gmail.com">Email<span class="cta-long"> Denny</span></a>
@@ -617,67 +674,29 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 </nav>
 
 <header class="hero" id="top">
-  <div class="frame">
-    <div class="hero-top lab">
-      <span class="hero-avail"><i aria-hidden="true"></i>Open to work · Relocation<span class="strip-long"> · Works internationally</span></span>
-      <span class="hero-reach"><a href="mailto:dennyhulten@gmail.com">dennyhulten@gmail.com</a><a href="tel:+46705459066">+46 70 545 90 66</a></span>
+  <div class="hero-body">
+    <div class="hero-typecol">
+      <div class="hero-id">
+        <p class="hero-name">Denny Hultén</p>
+        <p class="hero-role"><b>Creative Director</b> · Eventity, Gothenburg <span class="hero-avail"><i aria-hidden="true"></i>Open to work · Relocation</span></p>
+      </div>
+      <h1 class="hero-h">
+        <span class="hline">I work on the <span class="brk" aria-hidden="true"></span><span class="key">problem</span></span>
+        <span class="hline">behind the <span class="brk" aria-hidden="true"></span>brief.</span>
+      </h1>
+      <p class="hero-lead">Twenty years directing live work: <b>game worlds</b>, <b>festivals</b>, <b>national tours</b> and <b>live television</b>. For <b>Play'n GO</b>, I shape how leadership communicates through a three-year employee programme serving seven countries.</p>
+      <dl class="hero-cred">
+        <div><dt>Clients</dt><dd>Volvo Cars · Länsförsäkringar · Play'n GO · P3 Guld · Riksteatern · TEDx Göteborg</dd></div>
+        <div><dt>Artists</dt><dd>Håkan Hellström · Ace of Base · Molly Sandén · Petter · Cleo · Isak Danielson · GRANT</dd></div>
+      </dl>
     </div>
-    <div class="hero-body">
-      <div class="hero-typecol">
-        <div class="hero-id">
-          <p class="hero-name">Denny Hultén</p>
-          <p class="hero-role"><b>Creative Director</b> · Eventity, Gothenburg<span class="role-long"> · Since Oct 2023</span></p>
-        </div>
-        <h1 class="hero-h">
-          <span class="hline">I work on the <span class="brk" aria-hidden="true"></span><span class="key">problem</span></span>
-          <span class="hline">behind the <span class="brk" aria-hidden="true"></span>brief.</span>
-        </h1>
-        <p class="hero-lead">Twenty years directing live work: <b>game worlds</b>, <b>festivals</b>, <b>national tours</b> and <b>live television</b>. For <b>Play'n GO</b>, I shape how leadership communicates through a three-year employee programme serving seven countries.</p>
-      </div>
-      <div class="hero-photo" onclick="openVideo()" tabindex="0" role="button" aria-label="Play the three minute intro film"
-           onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideo();}">
-        <img src="images/denny.jpg" alt="Denny Hultén, portrait">
-        <div class="hero-play"><svg class="ico" width="10" height="12" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg>About me, 3 min</div>
-      </div>
+    <div class="hero-photo" onclick="openVideo()" tabindex="0" role="button" aria-label="Play the three minute intro film"
+         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideo();}">
+      <img src="images/denny.jpg" alt="Denny Hultén, portrait">
+      <div class="hero-play"><svg class="ico" width="10" height="12" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg>About me, 3 min</div>
     </div>
   </div>
 </header>
-
-<section class="stats" aria-label="The work in numbers, each one linked to the project it comes from">
-  <a class="stat" href="#work" aria-label="Twenty plus years directing. Jump to the eight projects below.">
-    <span class="k">// experience</span><span class="v">20+</span><span class="l">Years directing</span>
-    <span class="src">08 projects<span class="src-long"> below</span></span>
-  </a>
-  <button class="stat" type="button" onclick="openModal(1)" aria-label="Seven countries delivered in. Open the Play'n GO case study.">
-    <span class="k">// reach</span><span class="v">7</span><span class="l">Countries delivered in</span>
-    <span class="src">Play'n GO<span class="src-long"> programme</span></span>
-  </button>
-  <button class="stat" type="button" onclick="openModal(3)" aria-label="Ten thousand plus live audience a year. Open the Gothenburg Dance Festival case study.">
-    <span class="k">// scale</span><span class="v">10K+</span><span class="l">Live audience a year</span>
-    <span class="src"><span class="src-long">Gothenburg </span>Dance Festival</span>
-  </button>
-  <button class="stat" type="button" onclick="openModal(0)" aria-label="Five million SEK annual budget. Open the Level 2030 case study.">
-    <span class="k">// budget</span><span class="v">5M</span><span class="l">SEK annual budget</span>
-    <span class="src"><span class="src-long">Länsförsäkringar </span>Level 2030</span>
-  </button>
-</section>
-
-<section class="clients" aria-label="Clients, stages and artists">
-  <div class="cl-grp cl-pri">
-    <p class="cl-k">// clients and stages <b>06</b></p>
-    <ul class="cl-list">
-      <li>Volvo Cars</li><li>Länsförsäkringar</li><li>Play'n GO</li><li>P3 Guld</li>
-      <li>Riksteatern</li><li>TEDx Göteborg</li>
-    </ul>
-  </div>
-  <div class="cl-grp cl-sec">
-    <p class="cl-k">// artists directed <b>07</b></p>
-    <ul class="cl-list">
-      <li>Håkan Hellström</li><li>Ace of Base</li><li>Molly Sandén</li>
-      <li>Petter</li><li>Cleo</li><li>Isak Danielson</li><li>GRANT</li>
-    </ul>
-  </div>
-</section>
 
 <section class="sec" id="work">
   <div class="sec-head">
@@ -699,10 +718,27 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   </div>
 </section>
 
+<section class="sec" id="approach">
+  <div class="sec-head sec-head-long">
+    <h2>How I help companies through change</h2>
+    <div class="meta">N°03</div>
+  </div>
+  <div class="ap-intro">
+    <p class="ap-lead">Companies change all the time. New strategies, new leaders, new ways of working. People need to understand the change, believe in it and act on it. That is where events, experiences and media do their work.</p>
+    <p class="ap-sub">I have been an artist, tour manager, producer, project manager and creative director. So when I make a creative decision, I know what it asks of the people who deliver it, and where it is likely to break.</p>
+  </div>
+  <ol class="ap-grid">
+    <li><span class="ap-n">01</span><h3>Find the real problem</h3><p>A brief usually describes the event. I look for the change behind it, and build a concept people take part in.</p></li>
+    <li><span class="ap-n">02</span><h3>Connect strategy, people and production</h3><p>Leadership, participants, artists, suppliers and the production team need different things from the same idea. I direct them toward one result.</p></li>
+    <li><span class="ap-n">03</span><h3>Build systems that give the production more reach</h3><p>I build AI-supported production workflows. Workshop texts become print material, documents and most of the screen graphics. Participant feedback is sorted and compared between events. That frees time for the decisions only people can make: what matters, what to cut and what to change next.</p></li>
+  </ol>
+  <p class="ap-close">AI expands what a production can deliver. <span class="key">It does not decide.</span> The judgment comes from knowing every role in the room.</p>
+</section>
+
 <section class="sec" id="about">
   <div class="sec-head">
     <h2>About</h2>
-    <div class="meta">N°03</div>
+    <div class="meta">N°04</div>
   </div>
   <ol class="about-spine">
     <li class="ch">
@@ -746,7 +782,7 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 <section class="contact" id="contact">
   <div class="sec-head">
     <h2>Contact</h2>
-    <div class="meta">N°04</div>
+    <div class="meta">N°05</div>
   </div>
   <div class="c-row">
     <h2 class="contact-big">Let's<br><span class="op"><span class="c">talk</span><span class="r" aria-hidden="true">talk</span></span>.</h2>
@@ -801,10 +837,11 @@ const CASES=[
    assignment:[
      {label:'Concept and content',text:"Built the programme around Play'n GO's existing self-leadership framework. In spring, leaders shared their own challenges before employees explored theirs in workshops tailored to individuals, team leaders and function leaders."},
      {label:'Coaching senior leaders',text:"Prepared the CEO, CFO and CMO through individual conversations. Helped them turn broad principles into concrete stories, gave each a distinct perspective and shaped the talk show around the people in the room. Moderated the spring conversations myself."},
-     {label:'Learning between seasons',text:"Used employee responses and feedback from the four spring stops to develop the autumn programme. The new content moves from identifying challenges to practising decisions: comparing reasoning with leadership and choosing a next step as conditions change."},
+     {label:'Early Access method',text:"Designed the programme to run like an early-access game. Every stop is a playtest, employee feedback becomes the patch notes, and the next stop ships the changes. Changes land between seasons and between stops on the same tour: after the first autumn stop, one workshop was rebuilt before the next."},
+     {label:'You said, we did',text:"In spring, the Växjö office asked for the talk show before lunch, more hands-on work, small groups with the steering group and less chaos. Autumn delivered all four. The new small-group sessions with leadership drew more unprompted praise than any other part of the day: 19 people named them, nobody criticised them."},
      {label:'Creative direction through delivery',text:"Developed speaker material, moderator handovers and facilitator guides so the programme can be delivered consistently across locations. Visual concept developed with Claes Moren; event delivery is a team effort through Eventity."}
    ],
-   result:'Spring 2026 delivered across four locations for employees from seven countries. Employee feedback informed the autumn content, developed for four further stops beginning in October 2026.',videos:[]},
+   result:'First autumn stop, Växjö, October 2026: the day scored 5.11 out of 6, and 79% rated it 5 or 6. Three autumn stops remain.',videos:[]},
   {num:'03',title:'Länsförsäkringar Östgöta: The Health Journey',img:'images/halsoresan.jpeg',period:'2024-2025',tag:'One-Year Wellness Strategy',tags:['Annual Conference','Strategic Reframe','Health Compass'],
    product:"The client asked for a company retreat. Discovery found a different need: employee wellness across the whole year, with the retreat as its centrepiece. Rebuilt the brief, built the concept, won the business. Featured Olympic swimmer Therese Alshammar.",
    assignment:[
@@ -1040,7 +1077,7 @@ try{
       }
     });
   },{rootMargin:'-45% 0px -50% 0px',threshold:0});
-  ['work','about','contact'].forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el);});
+  ['work','approach','about','contact'].forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el);});
 
   /* nav role + status reveal: the hero already says both, so they only appear once it is gone.
      Fails open, if this throws the CSS default is collapsed but the hero still carries the facts. */
