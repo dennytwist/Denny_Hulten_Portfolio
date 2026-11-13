@@ -135,6 +135,9 @@ nav a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 .hero-lead{max-width:58ch;font-size:clamp(0.98rem,1.25vw,1.1rem);line-height:1.45;color:var(--ink);
   opacity:0;animation:rise .6s ease forwards;animation-delay:.26s}
 .hero-lead b{font-weight:800}
+.hero-lead a{font-weight:800;color:var(--ink);text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:3px}
+.hero-lead a:hover{color:var(--red)}
+.hero-lead a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 
 /* The credential spine ("// games — Play'n GO, three-year international touring employee
    programme across 7 countries") was folded into .hero-lead 2026-08-16. It was a fourth text
@@ -543,13 +546,16 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   border-top:2px solid var(--ink)}
 .ap-grid li{padding:1.5rem 1.3rem 1.6rem;border-left:1px solid var(--rule)}
 .ap-grid li:first-child{border-left:none;padding-left:0}
-.ap-n{display:block;font-family:'Archivo Black','Archivo',sans-serif;font-size:1.1rem;color:var(--red);letter-spacing:-0.02em;margin-bottom:0.9rem}
+.ap-n{display:block;font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:0.9rem}
 .ap-grid h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.15;
-  letter-spacing:-0.01em;margin-bottom:0.6rem;max-width:22ch}
+  letter-spacing:-0.01em;margin-bottom:0.6rem;max-width:22ch;text-wrap:balance}
 .ap-grid p{font-size:0.95rem;line-height:1.55;max-width:40ch}
-.ap-close{margin-top:clamp(2.2rem,5vw,4rem);padding-top:clamp(1.4rem,3vw,2.2rem);border-top:2px solid var(--ink);
-  font-family:'Archivo Black','Archivo',sans-serif;text-transform:uppercase;letter-spacing:-0.03em;
-  font-size:clamp(1.5rem,3.6vw,3rem);line-height:0.95;max-width:24ch}
+.ap-go{margin-top:0.9rem;padding:0.5rem 0;min-height:44px;background:none;border:0;cursor:pointer;color:var(--red);
+  font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase}
+.ap-go b{font-weight:400;display:inline-block;transition:transform .18s}
+.ap-go:hover b,.ap-go:focus-visible b{transform:translateX(3px)}
+.ap-go:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.ap-go b{transition:none}}
 
 @media(max-width:860px){
   .hero{padding-top:4.2rem}
@@ -592,7 +598,7 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
   </div>
   <div class="nav-links">
     <a href="#work">Work</a>
-    <a href="#approach" class="nav-anchor-approach">Approach</a>
+    <a href="#approach" class="nav-anchor-approach">AI</a>
     <a href="#about">About</a>
     <a href="#contact" class="nav-anchor-contact">Contact</a>
     <a class="nav-cta" href="mailto:dennyhulten@gmail.com">Email<span class="cta-long"> Denny</span></a>
@@ -610,7 +616,7 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
         <span class="hline">I work on the <span class="brk" aria-hidden="true"></span><span class="key">problem</span></span>
         <span class="hline">behind the <span class="brk" aria-hidden="true"></span>brief.</span>
       </h1>
-      <p class="hero-lead">Twenty years directing live work: <b>game worlds</b>, <b>festivals</b>, <b>national tours</b> and <b>live television</b>. For <b>Play'n GO</b>, I shape how leadership communicates through a three-year employee programme serving seven countries.</p>
+      <p class="hero-lead">Twenty years directing live work: <b>game worlds</b>, <b>festivals</b>, <b>national tours</b> and <b>live television</b>. For <b>Play'n GO</b>, I shape how leadership communicates through a three-year employee programme serving seven countries. With <a href="#approach">AI systems I build myself</a>, I lead the work and produce it too.</p>
       <dl class="hero-cred">
         <div><dt>Clients</dt><dd>Volvo Cars · Länsförsäkringar · Play'n GO · P3 Guld · Riksteatern · TEDx Göteborg</dd></div>
         <div><dt>Artists</dt><dd>Håkan Hellström · Ace of Base · Molly Sandén · Petter · Cleo · Isak Danielson · GRANT</dd></div>
@@ -645,18 +651,17 @@ footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 
 <section class="sec" id="approach">
   <div class="sec-head sec-head-long">
-    <h2>How I help companies navigate change</h2>
+    <h2>How I help companies in the age of AI</h2>
   </div>
   <div class="ap-intro">
-    <p class="ap-lead">Companies change all the time. New strategies, new leaders, new ways of working. People need to understand the change, believe in it and act on it. That is where events, experiences and media do their work.</p>
-    <p class="ap-sub">I have been an artist, tour manager, producer, project manager and creative director. So when I make a creative decision, I know what it asks of the people who deliver it, and where it is likely to break.</p>
+    <p class="ap-lead">I build AI systems for events, experiences and media productions. AI amplifies whoever uses it. <span class="key">It does not make the decisions</span> or put them in context.</p>
+    <p class="ap-sub">That part takes someone who has done the jobs. I have been an artist, tour manager, producer, project manager and creative director. There was never time to lead a production and also produce the material. Now there is, which makes that breadth worth more than ever.</p>
   </div>
-  <ol class="ap-grid">
-    <li><span class="ap-n">01</span><h3>Find the real problem</h3><p>A brief usually describes the event. I look for the change behind it, and build a concept people take part in.</p></li>
-    <li><span class="ap-n">02</span><h3>Connect strategy, people and production</h3><p>Leadership, participants, artists, suppliers and the production team need different things from the same idea. I direct them toward one result.</p></li>
-    <li><span class="ap-n">03</span><h3>Build systems that give the production more reach</h3><p>I build AI-supported production workflows. Workshop texts become print material, documents and most of the screen graphics. Participant feedback is sorted and compared between events. That frees time for the decisions only people can make: what matters, what to cut and what to change next.</p></li>
-  </ol>
-  <p class="ap-close">AI expands what a production can deliver. <span class="key">It does not decide.</span> The judgment comes from knowing every role in the room.</p>
+  <ul class="ap-grid">
+    <li><span class="ap-n">Screen production</span><h3>The idea holds all the way to the screen</h3><p>For an insurance company's academy day I designed the visual system and produced all the moving screen content. Scripts I built with AI generate the animations. My time goes to the idea and to approving every version.</p></li>
+    <li><span class="ap-n">Programme design</span><h3>Each event learns from the last</h3><p>For Play'n GO, participant input is built into the activities. My tools compile the answers between events. I decide what they mean, and the autumn programme was built on what people said in spring.</p></li>
+    <li><span class="ap-n">Client reporting</span><h3>Decisions the client can stand behind</h3><p>The Play'n GO report lists priorities for the next event. Each one is tied to what participants said, so the proposal can be explained and defended.</p><button type="button" class="ap-go" onclick="openModal(1)">Read the Play'n GO case <b>&#8594;</b></button></li>
+  </ul>
 </section>
 
 <section class="sec" id="about">
@@ -948,7 +953,7 @@ function closeModal(){
   const o=document.getElementById('modal');
   if(!o.classList.contains('open'))return;
   o.classList.remove('open');document.body.style.overflow='';
-  if(lastFocus&&lastFocus.focus)lastFocus.focus();
+  if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
   lastFocus=null;
 }
 
