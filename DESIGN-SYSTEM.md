@@ -6,6 +6,12 @@ Reference for building anything on-brand for Denny: the portfolio site, CVs, por
 
 ---
 
+## Approved website refinement, 16 November 2026
+
+For the current `index.html`, work photography and project artefacts retain their original colours. Denny approved this so hiring managers can assess the actual art direction. The personal portrait keeps the blue duotone treatment. This supersedes the older all-photos treatment below for the website's project images.
+
+On mobile, name, role and availability lead; the optional introduction film uses a compact portrait. Case URLs use stable `#case/<slug>` fragments independent of their display order. The default opening sequence is Play'n GO, Volvo Cars and P3 Guld, followed by Level 2030, Gothenburg Dance Festival, The Health Journey, 5 Degrees and STARS.
+
 ## 1. Color tokens
 
 Use these exact values (CSS custom properties on `:root`):
