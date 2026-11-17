@@ -671,6 +671,7 @@ section{scroll-margin-top:64px}
   .m-gallery{grid-template-columns:1fr}
 }
 </style>
+<link rel="stylesheet" href="portfolio-refined.css">
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
@@ -700,11 +701,10 @@ section{scroll-margin-top:64px}
         <span class="hline">I work on the <span class="brk" aria-hidden="true"></span><span class="key">problem</span></span>
         <span class="hline">behind the <span class="brk" aria-hidden="true"></span>brief.</span>
       </h1>
-      <p class="hero-lead">Twenty years directing live work: <b>game worlds</b>, <b>festivals</b>, <b>national tours</b> and <b>live television</b>. For <b>Play'n GO</b>, I shape how leadership communicates through a three-year employee programme serving seven countries. With <a href="#approach">AI systems I build myself</a>, I lead the work and produce it too.</p>
+      <p class="hero-lead">One client asked for a company retreat. What they needed was <a href="#case/health-journey">a year of employee wellness</a>, so I rebuilt the brief. Twenty years directing live work: <b>game worlds</b>, <b>festivals</b>, <b>national tours</b> and <b>live television</b>. With <a href="#approach">AI systems I build myself</a>, I lead the work and produce it too.</p>
       <div class="hero-actions"><a href="#work">Explore the work ↓</a><a href="downloads/Denny-Hulten-CV.pdf" download>Download CV (PDF)</a></div>
       <dl class="hero-cred">
         <div><dt>Clients</dt><dd>Volvo Cars · Länsförsäkringar · Play'n GO · P3 Guld · Riksteatern · TEDx Göteborg</dd></div>
-        <div><dt>Artists</dt><dd>Håkan Hellström · Ace of Base · Molly Sandén · Petter · Cleo · Isak Danielson · GRANT</dd></div>
       </dl>
     </div>
     <div class="hero-photo" onclick="openVideo()" tabindex="0" role="button" aria-label="Play the three minute intro film"
@@ -805,14 +805,12 @@ section{scroll-margin-top:64px}
       </div>
     </li>
   </ol>
+  <dl class="artist-credits"><div><dt>Artists</dt><dd>Håkan Hellström · Ace of Base · Molly Sandén · Petter · Cleo · Isak Danielson · GRANT</dd></div></dl>
 </section>
 
 <section class="contact" id="contact">
-  <div class="sec-head">
-    <h2>Contact</h2>
-  </div>
   <div class="c-row">
-    <h2 class="contact-big">Let's<br><span class="op"><span class="c">talk</span><span class="r" aria-hidden="true">talk</span></span>.</h2>
+    <h2 class="contact-big">Let's <span class="op"><span class="c">talk</span><span class="r" aria-hidden="true">talk</span></span>.</h2>
     <dl class="c-spec">
       <div><dt>Based</dt><dd>Gothenburg, Sweden</dd></div>
       <div><dt>Open to</dt><dd class="red">Relocation</dd></div>
@@ -1194,8 +1192,8 @@ document.getElementById('index').innerHTML=CASES.map((c,i)=>{
      the number in front of the client (.row-n) and the period, unstacked, at the head of the
      scale line (.row-per). Both forms are always in the markup; CSS shows one of them. */
   const yr=period.split('-'),
-        yrs=`<span class="row-y">${yr[0]}</span>`+
-            (yr[1]?`<span class="row-y">${/ongoing/i.test(yr[1])?'ongoing':'to '+yr[1]}</span>`:'');
+        yrs=/\d{4}/.test(period)?`<span class="row-y">${yr[0]}</span>`+
+            (yr[1]?`<span class="row-y">${/ongoing/i.test(yr[1])?'ongoing':'to '+yr[1]}</span>`:''):'';
   /* the label reads the row out in the order the eye takes it, and speaks the scale figure
      with its separators as pauses rather than as a middot */
   return `
@@ -1207,7 +1205,7 @@ document.getElementById('index').innerHTML=CASES.map((c,i)=>{
       <span class="row-title"><span class="row-n">N°${c.num}</span>${m.client}</span>
       <span class="row-name">${m.name}</span>
       <span class="row-res">${c.result}</span>
-      <span class="row-scale"><span class="row-per">${period} · </span>${m.scale}</span>
+      <span class="row-scale">${/\d{4}/.test(period)?`<span class="row-per">${period} · </span>`:''}${m.scale}</span>
       <span class="row-go" aria-hidden="true">Read the case <b>&#8594;</b></span>
     </div>
   </a></li>`;}).join('');
@@ -1260,7 +1258,6 @@ function renderCase(i){
     <div class="m-bar">
       <div class="m-barl">
         <span class="m-plate">${c.num}<i>/${TOTAL}</i></span>
-        <span class="m-kind">${c.tag}</span>
       </div>
       <div class="m-nav">
         <button class="m-btn" onclick="stepCase(-1)" aria-label="Previous case">&#8592;</button>
@@ -1274,7 +1271,7 @@ function renderCase(i){
     <div class="m-head">
       <div class="m-eyebrow">${c.tag} <em>/</em> ${c.period}</div>
       <h3 class="m-title" id="m-title">${c.title}</h3>
-      <div class="m-tags">${c.tags.map(t=>`<span class="m-tag">${t}</span>`).join('')}</div>
+      <div class="m-tags">${c.tags.filter(t=>!c.tag.toLowerCase().includes(t.toLowerCase())).map(t=>`<span class="m-tag">${t}</span>`).join('')}</div>
       <a class="m-share" href="#case/${c.slug}">Link to this case <span aria-hidden="true">↗</span></a>
     </div>
     <div class="m-block invert"><div class="m-lbl">// Result</div><p class="m-result">${c.result}</p></div>
