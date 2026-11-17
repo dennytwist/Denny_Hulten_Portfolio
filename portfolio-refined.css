@@ -50,3 +50,17 @@
  .hero-h{font-size:2rem;line-height:1}
  .c-cell{padding:1rem 0}
 }
+
+/* Play'n GO evidence: three separate blocks in the case's own rail pattern, so each part reads on its own. */
+.m-evidence{padding:0;border-bottom:1px solid var(--rule)}
+.m-evidence .m-block:last-child{border-bottom:none}
+.m-evidence .ev-h{font-size:clamp(1.2rem,2vw,1.5rem);line-height:1.2;margin-bottom:1.3rem}
+.evidence-sequence{gap:1.6rem}
+.evidence-sequence li{border-top:1px solid var(--rule);padding-top:0.8rem}
+.ev-step{display:block;font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);margin-bottom:0.5rem}
+.evidence-sequence h4{font-size:1rem;font-weight:700}
+.feedback-table{margin-top:0}
+.feedback-table caption{font-family:'Sometype Mono',monospace;font-weight:400;font-size:0.7rem;letter-spacing:0.06em;color:var(--grey);padding-bottom:0.5rem}
+.feedback-table tbody tr:first-child th,.feedback-table tbody tr:first-child td{border-top:1px solid var(--rule)}
+.feedback-table th{font-weight:600}
+.m-evidence .m-gallery{margin-top:0}

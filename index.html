@@ -1290,23 +1290,26 @@ function renderCase(i){
 }
 function playngoEvidence(){
   return `<section class="m-evidence" aria-labelledby="evidence-title">
-    <h3 id="evidence-title">A request became a workshop.</h3>
-    <ol class="evidence-sequence">
-      <li><h4>The spring request</h4><p>Small discussion groups, with more personal time with the steering group.</p></li>
-      <li><h4>The autumn response</h4><p>Direction: a workplace dilemma, two viable paths and a leader at the table. Participants explain their choice before hearing the company's answer.</p></li>
-      <li><h4>What came back</h4><p>19 of 84 written responses praised Direction unprompted. My recommendation: keep it central and bring the cases closer to each function's work.</p></li>
-    </ol>
-    <table class="feedback-table">
-      <caption>Selected findings from my feedback report</caption>
-      <thead><tr><th scope="col">Växjö, 23 October 2026</th><th scope="col">Responses</th></tr></thead>
-      <tbody><tr><th scope="row">Praised Direction unprompted</th><td>19 of 84 written answers</td></tr>
-      <tr><th scope="row">Rated the day 5 or 6 out of 6</th><td>79% of 101 ratings</td></tr>
-      <tr><th scope="row">Average day rating</th><td>5.11 / 6</td></tr></tbody>
-    </table>
-    <p class="evidence-note">The written responses and day ratings are different measures. The day rating covers the whole programme, not Direction alone.</p>
-    <div class="m-gallery">
+    <div class="m-block"><div class="m-lbl">// Request to workshop</div><div>
+      <h3 id="evidence-title" class="ev-h">A request became a workshop.</h3>
+      <ol class="evidence-sequence">
+        <li><span class="ev-step">01 / Spring</span><h4>The request</h4><p>Small discussion groups, with more personal time with the steering group.</p></li>
+        <li><span class="ev-step">02 / Autumn</span><h4>The response</h4><p>Direction: a workplace dilemma, two viable paths and a leader at the table. Participants explain their choice before hearing the company's answer.</p></li>
+        <li><span class="ev-step">03 / After</span><h4>What came back</h4><p>Direction was the most praised single programme element in the written feedback. My recommendation: keep it central and bring the cases closer to each function's work.</p></li>
+      </ol>
+    </div></div>
+    <div class="m-block"><div class="m-lbl">// The numbers</div><div>
+      <table class="feedback-table">
+        <caption>From my feedback report, Växjö, 23 October 2026</caption>
+        <tbody><tr><th scope="row">Praised Direction unprompted</th><td>19 of 84 written answers</td></tr>
+        <tr><th scope="row">Rated the day 5 or 6 out of 6</th><td>79% of 101 ratings</td></tr>
+        <tr><th scope="row">Average day rating</th><td>5.11 / 6</td></tr></tbody>
+      </table>
+      <p class="evidence-note">The written responses and day ratings are different measures. The day rating covers the whole programme, not Direction alone.</p>
+    </div></div>
+    <div class="m-block"><div class="m-lbl">// On screen</div><div class="m-gallery">
       <figure><a href="images/playngo-screen.webp" target="_blank" rel="noopener" aria-label="Open the screen frame at full size"><img src="images/playngo-screen.webp" alt="Screen frame from the Växjö Gathering: the word FIKA on a red sunburst, with the day's schedule as a progress bar." width="1600" height="900" loading="lazy"></a><figcaption>A frame from the screen content for the day. Print and screen material are produced from shared workshop texts. Visual concept developed with Claes Moren.</figcaption></figure>
-    </div>
+    </div></div>
   </section>`;
 }
 
