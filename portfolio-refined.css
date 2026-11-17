@@ -67,3 +67,8 @@
 
 /* AI example: second Direction card under the first, same width */
 .ap-artifact-2{margin-top:1rem}
+/* Play'n GO case: the workshop cards side by side, caption under both */
+.ev-cards{grid-template-columns:1fr 1fr;max-width:none;gap:1rem}
+.ev-cards img{border:1px solid var(--rule)}
+.ev-cards .ev-cap{grid-column:1/-1;font-size:0.82rem;line-height:1.5;color:var(--grey);margin-top:-0.3rem}
+@media(max-width:860px){.ev-cards{grid-template-columns:1fr}}
