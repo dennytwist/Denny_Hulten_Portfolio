@@ -749,8 +749,8 @@ section{scroll-margin-top:64px}
   <p class="ap-n ap-ex-label">One example of how I work, from request to result: Play'n GO</p>
   <div class="ap-example">
     <figure class="ap-artifact">
-      <img src="images/hw-direction-case.webp" alt="A Direction case card for leading yourself: Which task gets your full time? A workplace dilemma with two paths, A and B." width="1240" height="877" loading="lazy">
-      <img class="ap-artifact-2" src="images/hw-direction-case-team.webp" alt="A Direction case card for team leaders: Who leads the client meeting? A dilemma with two paths, A and B." width="1240" height="877" loading="lazy">
+      <a class="zoomable" href="images/hw-direction-case.webp" aria-label="Enlarge the Lead yourself case card"><img src="images/hw-direction-case.webp" alt="A Direction case card for leading yourself: Which task gets your full time? A workplace dilemma with two paths, A and B." width="1240" height="877" loading="lazy"></a>
+      <a class="zoomable ap-artifact-2" href="images/hw-direction-case-team.webp" aria-label="Enlarge the Lead your team case card"><img src="images/hw-direction-case-team.webp" alt="A Direction case card for team leaders: Who leads the client meeting? A dilemma with two paths, A and B." width="1240" height="877" loading="lazy"></a>
       <figcaption>Two of the Direction cases, one for leading yourself and one for leading a team. Each level gets its own real workplace dilemma with two viable paths. The group chooses, explains why, then hears the company's answer.</figcaption>
     </figure>
     <div>
@@ -844,6 +844,7 @@ section{scroll-margin-top:64px}
   <div class="video-box" id="video-box"></div>
 </div>
 
+<dialog class="zoom" id="zoom" aria-label="Enlarged image"><button class="zoom-close" type="button" aria-label="Close the enlarged image">Close &#10005;</button></dialog>
 <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal-box" id="modal-box" role="dialog" aria-modal="true" aria-labelledby="m-title" tabindex="-1"><div id="modal-content"></div></div>
 </div>
@@ -1296,8 +1297,8 @@ function playngoEvidence(){
       </ol>
     </div></div>
     <div class="m-block"><div class="m-lbl">// The workshop</div><div class="m-gallery ev-cards">
-      <figure><a href="images/hw-direction-case.webp" target="_blank" rel="noopener" aria-label="Open the Lead yourself case card at full size"><img src="images/hw-direction-case.webp" alt="A Direction case card for leading yourself: Which task gets your full time? A workplace dilemma with two paths, A and B." width="1240" height="877" loading="lazy"></a></figure>
-      <figure><a href="images/hw-direction-case-team.webp" target="_blank" rel="noopener" aria-label="Open the Lead your team case card at full size"><img src="images/hw-direction-case-team.webp" alt="A Direction case card for team leaders: Who leads the client meeting? A dilemma with two paths, A and B." width="1240" height="877" loading="lazy"></a></figure>
+      <figure><a class="zoomable" href="images/hw-direction-case.webp" target="_blank" rel="noopener" aria-label="Open the Lead yourself case card at full size"><img src="images/hw-direction-case.webp" alt="A Direction case card for leading yourself: Which task gets your full time? A workplace dilemma with two paths, A and B." width="1240" height="877" loading="lazy"></a></figure>
+      <figure><a class="zoomable" href="images/hw-direction-case-team.webp" target="_blank" rel="noopener" aria-label="Open the Lead your team case card at full size"><img src="images/hw-direction-case-team.webp" alt="A Direction case card for team leaders: Who leads the client meeting? A dilemma with two paths, A and B." width="1240" height="877" loading="lazy"></a></figure>
       <p class="ev-cap">Two of the Direction case cards, one for leading yourself and one for leading a team. Each table gets a dilemma written for its level, talks it through, chooses A or B and tells the host why. Then a leader at the table shares the company's prepared answer.</p>
     </div></div>
     <div class="m-block"><div class="m-lbl">// The numbers</div><div>
@@ -1371,6 +1372,7 @@ function closeVideo(){
   videoFocus=null;
 }
 document.addEventListener('keydown',e=>{
+  if(document.getElementById('zoom').open)return;
   const video=document.getElementById('video-modal');
   const modal=document.getElementById('modal');
   const dialog=video.classList.contains('open')?video:modal.classList.contains('open')?modal:null;
@@ -1388,6 +1390,13 @@ document.addEventListener('keydown',e=>{
   else if(!e.shiftKey&&active===last){e.preventDefault();first.focus();}
 });
 syncCaseFromURL();
+/* zoom: any a.zoomable opens its image large in a native modal dialog; Esc, the button or a click closes it.
+   Without JS the link still opens the image itself. */
+(()=>{const z=document.getElementById('zoom'),zi=document.createElement('img');zi.id='zoom-img';
+document.addEventListener('click',e=>{const a=e.target.closest('a.zoomable');if(!a)return;e.preventDefault();
+  const im=a.querySelector('img');zi.src=a.getAttribute('href');zi.alt=im?im.alt:'';if(!zi.isConnected)z.appendChild(zi);z.showModal();});
+z.addEventListener('click',()=>z.close());})();
+
 
 /* reveal: cards default to visible (see .pre in CSS); this only removes .pre where JS
    opted a card into the hidden pre-state above. If IntersectionObserver throws, or a

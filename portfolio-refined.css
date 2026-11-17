@@ -72,3 +72,11 @@
 .ev-cards img{border:1px solid var(--rule)}
 .ev-cards .ev-cap{grid-column:1/-1;font-size:0.82rem;line-height:1.5;color:var(--grey);margin-top:-0.3rem}
 @media(max-width:860px){.ev-cards{grid-template-columns:1fr}}
+/* image zoom (Direction cards on the homepage and in the case) */
+a.zoomable{display:block;cursor:zoom-in}
+dialog.zoom{padding:0;border:0;background:transparent;max-width:none;max-height:none;overflow:visible;margin:auto}
+dialog.zoom::backdrop{background:rgba(21,21,15,0.85)}
+dialog.zoom img{display:block;width:auto;height:auto;max-width:min(94vw,1240px);max-height:86vh;background:#fff;cursor:zoom-out}
+.zoom-close{display:block;margin:0 0 0.6rem auto;background:var(--paper);color:var(--ink);border:0;cursor:pointer;
+  font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.55rem 0.8rem}
+.zoom-close:focus-visible{outline:2px solid var(--red);outline-offset:2px}
