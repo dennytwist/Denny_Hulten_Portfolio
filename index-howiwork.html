@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Denny Hultén, Creative Director</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2315150F'/%3E%3Crect x='9' y='9' width='14' height='14' fill='%23E5241D'/%3E%3C/svg%3E">
+<meta name="description" content="Denny Hultén, Creative Director. Twenty years directing live work, from urban dance festivals to five-year corporate game worlds: Volvo Cars, Gothia Cup, P3 Guld, Play'n GO, Länsförsäkringar.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Denny Hultén, Creative Director">
+<meta property="og:description" content="Twenty years directing live work, from urban dance festivals to five-year corporate game worlds: Volvo Cars, Gothia Cup, P3 Guld, Play'n GO, Länsförsäkringar.">
+<meta property="og:url" content="https://denny-hulten-portfolio.vercel.app">
+<meta property="og:image" content="https://denny-hulten-portfolio.vercel.app/images/denny.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Denny Hultén, Creative Director">
+<meta name="twitter:description" content="Twenty years directing live work, from urban dance festivals to five-year corporate game worlds: Volvo Cars, Gothia Cup, P3 Guld, Play'n GO, Länsförsäkringar.">
+<meta name="twitter:image" content="https://denny-hulten-portfolio.vercel.app/images/denny.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Black&family=Sometype+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#FBF7EE;
+  --ink:#15150F;
+  --red:#E5241D;
+  --blue:#2323DC;
+  --rule:rgba(21,21,15,0.20);
+  --rule-soft:rgba(21,21,15,0.12);
+  --grey:#726d5f;
+  --pad:clamp(1.25rem,4vw,3.5rem);
+}
+html{scroll-behavior:smooth;font-size:17px}
+body{font-family:'Archivo',sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--red);color:var(--paper)}
+a{color:inherit;text-decoration:none}
+
+/* paper grain */
+.grain{position:fixed;inset:0;z-index:900;pointer-events:none;opacity:0.06;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>")}
+
+/* label utility */
+.lab{font-family:'Sometype Mono',monospace;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;line-height:1.55}
+.lab-a{font-family:'Archivo',sans-serif;font-weight:700;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase}
+.num-big{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;letter-spacing:-0.03em;line-height:0.8}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  min-height:46px;padding:0 var(--pad);background:color-mix(in srgb,var(--paper) 90%,transparent);backdrop-filter:blur(7px);
+  border-bottom:1px solid var(--ink)}
+/* read-position rule: rides the existing hairline, reports how far through the document you are */
+nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:var(--prog,0%);background:var(--red);pointer-events:none}
+.nav-id{display:flex;align-items:center;min-width:0}
+.nav-name{font-family:'Archivo',sans-serif;font-weight:800;font-size:0.78rem;letter-spacing:0.05em;text-transform:uppercase;
+  white-space:nowrap;display:flex;align-items:center;gap:0.6rem}
+.nav-role{font-family:'Sometype Mono',monospace;font-weight:400;font-size:0.68rem;letter-spacing:0.08em;color:var(--grey);
+  padding-left:0.6rem;border-left:1px solid var(--rule)}
+.nav-status{display:inline-flex;align-items:center;gap:0.45rem;margin-left:0.9rem;padding-left:0.9rem;border-left:1px solid var(--rule);
+  font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.nav-status i{width:6px;height:6px;background:var(--red);display:block;flex:none}
+/* The hero states name, role, employer and availability in full. While it is on screen the nav would
+   only repeat it, so both stay invisible until the hero has scrolled away, at which point the nav
+   becomes the only place carrying them. Nothing is duplicated, nothing is lost.
+   Their space is reserved at all times and only opacity and transform animate, so crossing the
+   boundary costs no layout work and the nav never reflows mid-scroll. */
+.nav-role,.nav-status{opacity:0;transform:translateX(-5px);pointer-events:none;
+  transition:opacity .25s ease,transform .25s ease}
+body.past-hero .nav-role,body.past-hero .nav-status{opacity:1;transform:none;pointer-events:auto}
+.nav-links{display:flex;align-items:center;gap:clamp(0.9rem,2.2vw,1.8rem)}
+.nav-links a{font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--ink);position:relative;padding:0.35rem 0;transition:color .15s}
+.nav-links a[href^="#"]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--red);
+  transform:scaleX(0);transform-origin:left;transition:transform .18s}
+.nav-links a[href^="#"]:hover,.nav-links a[href^="#"].active{color:var(--red)}
+.nav-links a[href^="#"]:hover::after,.nav-links a[href^="#"].active::after{transform:scaleX(1)}
+.nav-links a.nav-cta{background:var(--red);color:var(--paper);font-family:'Archivo',sans-serif;font-weight:700;font-size:0.7rem;
+  letter-spacing:0.08em;padding:0.45rem 0.8rem;transition:background .15s}
+.nav-links a.nav-cta:hover{background:var(--ink);color:var(--paper)}
+nav a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+[tabindex="-1"]:focus{outline:none}
+/* Availability outranks the job title in the persistent bar: the title is stated by the hero, the
+   About spine and the page title, while "open to work" is the one fact a recruiter acts on and was
+   previously the first thing dropped. Measured: name + role + status + four links needs ~710px of
+   bar; below 860px it stops fitting, so the ROLE gives up its slot, not the status.
+   Below 600px the bar has ~65px of slack and the status needs ~141px, so nothing fits there at any
+   size that stays on one line. On a phone the hero's first line carries it instead: see .hero-avail. */
+@media(max-width:860px){.nav-role{display:none}}
+@media(max-width:600px){.nav-status{display:none}}
+
+/* HERO
+   One screen, three bands, each with a job:
+   1 hero-top  — where he works from, and the address to write to, without scrolling
+   2 hero-body — name and level first, then the claim, then the lead that carries the games
+     credential in its second sentence, then the face
+ */
+/* Deliberately short of a full viewport. At 100vh the hero owned the whole first screen and the
+   numbers underneath it were invisible until you scrolled, which cost the page its strongest proof
+   in the moment a reader decides whether to keep going. The reserved space brings the stat row over
+   the fold, so the first screen ends on evidence rather than on empty paper. The type column was
+   only about 300px of content inside a 680px frame, so this costs nothing. */
+.hero{padding:3.7rem var(--pad) 1.4rem;min-height:calc(100vh - 12rem);display:flex}
+/* same red marker as the nav status, so the two read as one signal wherever they surface */
+.hero-avail i{display:inline-block;width:6px;height:6px;background:var(--red);margin-right:0.45rem;
+  vertical-align:0.08em}
+
+/* band 2 */
+.hero-body{display:grid;grid-template-columns:1.65fr 0.8fr;flex:1;min-height:0}
+.hero-typecol{position:relative;isolation:isolate;padding:clamp(1rem,1.8vw,1.7rem) 1.15rem;
+  display:flex;flex-direction:column;justify-content:center;gap:clamp(0.8rem,1.4vw,1.3rem);
+  border-right:2px solid var(--ink)}
+
+/* identity: the name and the level, above the claim. The slogan is the biggest thing on the
+   screen but it names nobody, so the sentence that does gets the top of the column. */
+.hero-id{opacity:0;animation:rise .5s ease forwards;animation-delay:.04s}
+.hero-name{font-family:'Archivo Black','Archivo',sans-serif;text-transform:uppercase;
+  font-size:clamp(1.3rem,1.85vw,1.75rem);letter-spacing:-0.025em;line-height:1}
+.hero-role{font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--grey);margin-top:0.3rem;line-height:1.5}
+.hero-role b{font-weight:500;color:var(--ink)}
+
+.hero-h{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;
+  letter-spacing:-0.04em;line-height:0.84;font-size:clamp(2.2rem,4.45vw,4.6rem);color:var(--ink)}
+.hline{display:block;opacity:0;transform:translateY(0.16em);animation:rise .55s cubic-bezier(.2,.7,.2,1) forwards}
+.hero-h .hline:nth-child(1){animation-delay:.1s}
+.hero-h .hline:nth-child(2){animation-delay:.18s}
+/* phone-only line breaks: the sentence is set in four short lines on a narrow screen so the
+   type can stay large instead of shrinking to fit the desktop break points */
+.brk{display:none}
+@keyframes rise{to{opacity:1;transform:none}}
+/* The key word. Tried and rejected two second-ink treatments here (a plate at the baseline
+   read as an underline, a plate across the cap read as a strike-through) — both cost more
+   legibility on the headline's load-bearing word than the motif earned. The emphasis is
+   carried by colour instead: PROBLEM is the only coloured word in the headline, so the eye
+   lands on it first and the sentence still reads in one pass. */
+.key{color:var(--red)}
+.hero-lead{max-width:58ch;font-size:clamp(0.98rem,1.25vw,1.1rem);line-height:1.45;color:var(--ink);
+  opacity:0;animation:rise .6s ease forwards;animation-delay:.26s}
+.hero-lead b{font-weight:800}
+.hero-lead a{font-weight:800;color:var(--ink);text-decoration:underline;text-decoration-color:var(--red);text-decoration-thickness:2px;text-underline-offset:3px}
+.hero-lead a:hover{color:var(--red)}
+.hero-lead a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* The credential spine ("// games — Play'n GO, three-year international touring employee
+   programme across 7 countries") was folded into .hero-lead 2026-08-16. It was a fourth text
+   size and a sixth type tier on the first screen, set in its own rule-topped block with a mono
+   label gutter, and it competed with the headline for the same eye. The fact it carried is the
+   only one above the fold that names a games employer, which is the industry being targeted,
+   so it did not go anywhere: it is now the second sentence of the lead, at the lead's size,
+   with the client bolded so it is still findable in one scan. One paragraph, one tier.
+   An earlier second row ("// scope — I lead the full creative chain: pitch strategy, concept,
+   production, final sign-off") was removed the same day for a different reason: the About
+   spine's first chapter already reads "Leads the full creative chain, from pitch strategy to
+   final sign-off", and the phone cannot afford the same sentence twice. */
+
+.hero-photo{position:relative;background:var(--blue);overflow:hidden;cursor:pointer;min-height:320px}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 14%;
+  filter:grayscale(1) contrast(1.08) brightness(1.06);mix-blend-mode:lighten;display:block}
+.hero-photo::after{content:"";position:absolute;inset:0;background:var(--blue);mix-blend-mode:screen;opacity:0.12;pointer-events:none}
+.hero-photo:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
+.hero-play{position:absolute;left:1rem;bottom:1rem;z-index:3;display:inline-flex;align-items:center;gap:0.5rem;
+  background:var(--red);color:var(--paper);font-family:'Archivo',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.06em;
+  text-transform:uppercase;padding:0.6rem 0.9rem;transition:background .18s,color .18s,transform .18s}
+.hero-photo:hover .hero-play{background:var(--ink);transform:translate(-3px,-3px)}
+.ico{flex:none;display:block}
+
+/* The hero's three-card "Selected work" strip was removed 2026-08-16. It existed to get work onto the
+   first screen back when the hero was only a slogan. The identity block and credential spine now do
+   that job, and the strip was left duplicating three of the eight cases in the index below. */
+
+/* overprint word: now used only by the About and Contact headlines */
+.op{position:relative;display:inline-block;isolation:isolate;color:transparent}
+.op .c{color:var(--blue);mix-blend-mode:multiply}
+.op .r{position:absolute;top:0;left:0;color:var(--red);mix-blend-mode:multiply;transform:translate(0.05em,0.055em)}
+
+/* SECTION HEAD */
+.sec{padding:clamp(3rem,7vw,6rem) var(--pad) clamp(2rem,4vw,3.5rem)}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1rem;padding-bottom:1.1rem;border-bottom:2px solid var(--ink);flex-wrap:wrap}
+.sec-head h2{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-0.03em;
+  font-size:clamp(2rem,6vw,4.6rem);line-height:0.85}
+/* The meta used to run three lines against each heading: a section number, then two values.
+   The values were all already on the page. "08 Projects" is the stat band's own source line,
+   "Denny Hultén" is in the sticky nav two centimetres above it, "04 Chapters" counts a list the
+   reader can see, and "Get in touch" restates the word Contact next to it. What is left is the
+   section number, which is the page's index mark and matches the numbering on the work rows.
+   One line is also free: it is shorter than the heading beside it, so the head is now as tall
+   as its own type and nothing more. */
+.sec-head .meta{text-align:right;font-family:'Sometype Mono',monospace;font-size:0.72rem;letter-spacing:0.08em;color:var(--grey);line-height:1.5}
+
+/* WORK INDEX: a scannable list, not a gallery. Eight rows read in one screen instead of
+   eight cards read over three, and a sticky panel carries the image for whichever row the
+   eye is on. The list is the work; the picture supports it.
+   The original version of this layout hid the panel entirely below 860px, so a recruiter on
+   a phone got eight text rows and no images at all. Here each row carries its own thumbnail
+   that appears exactly when the sticky panel goes away.
+   A row is four facts in reading order: the picture, who it was for, what it was, and the
+   one number. Nothing in it is ever clipped to make room for the next thing — the earlier
+   version clamped the result sentence to two lines and every one of the eight overflowed,
+   so the strongest sentence on each project ended in an ellipsis mid-word. The full case is
+   one tap away, so the list states less and finishes every line it starts. */
+.work-wrap{display:grid;grid-template-columns:1.12fr 0.88fr;gap:clamp(1.5rem,4vw,3.5rem);
+  align-items:start;padding-top:clamp(1.4rem,2.6vw,2.2rem)}
+.index{list-style:none}
+.row{display:grid;grid-template-columns:3.2rem minmax(0,1fr);align-items:start;gap:0.4rem 1.2rem;
+  padding:1.15rem 0.55rem;border-bottom:1px solid var(--rule);cursor:pointer;position:relative;
+  transition:opacity .5s,transform .5s,background .2s,color .2s}
+.row-list-item:first-child .row{border-top:1px solid var(--rule)}
+.row.pre{opacity:0;transform:translateY(14px)}
+.row:hover,.row.on{background:var(--ink);color:var(--paper)}
+.row:focus-visible{outline:3px solid var(--red);outline-offset:-3px}
+/* the rail: index number and years. The dates used to sit in the text column, where on a
+   phone they took a whole line of their own; here they use the empty space under the number
+   and the list still answers "how recent is this" without spending a line on it. */
+.row-rail{padding-top:0.15rem}
+.row-num{display:block;font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:1.1rem;
+  letter-spacing:-0.02em;color:var(--red);margin-bottom:0.3rem}
+.row-y{display:block;font-family:'Sometype Mono',monospace;font-size:0.6rem;letter-spacing:0.04em;
+  text-transform:uppercase;color:var(--grey);line-height:1.45;overflow-wrap:anywhere}
+.row:hover .row-y,.row.on .row-y{color:rgba(251,247,238,0.7)}
+.row-main{min-width:0}
+/* the client is the fastest thing on the page to recognise, so it gets the line to itself.
+   The compound case titles ("Länsförsäkringar Gothenburg: Level 2030 Game World") ran to
+   three lines here and buried the recognisable half; the title still reads in full at the
+   top of the case and in the preview panel. */
+.row-title{display:block;font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:clamp(1.05rem,1.8vw,1.5rem);letter-spacing:-0.015em;line-height:1.14;overflow-wrap:anywhere}
+/* the index mark and the period, in their in-column form. Off wherever the rail exists, on
+   wherever it does not, so the fact is printed exactly once at every width. */
+.row-n,.row-per{display:none}
+.row-name{display:block;margin-top:0.3rem;font-size:0.92rem;line-height:1.3;color:var(--ink)}
+.row:hover .row-name,.row.on .row-name{color:rgba(251,247,238,0.86)}
+.row-res{margin-top:0.55rem;font-size:0.88rem;line-height:1.4;color:var(--grey)}
+.row:hover .row-res,.row.on .row-res{color:rgba(251,247,238,0.72)}
+/* scale: the one number worth reading before opening the case */
+.row-scale{display:block;margin-top:0.5rem;font-family:'Sometype Mono',monospace;font-size:0.66rem;
+  letter-spacing:0.05em;text-transform:uppercase;color:var(--grey)}
+.row:hover .row-scale,.row.on .row-scale{color:rgba(251,247,238,0.85)}
+/* per-row thumbnail: desktop has the sticky panel, so it only exists where the panel does not */
+.row-thumb{display:none}
+
+/* sticky preview panel */
+.work-preview{position:sticky;top:5.5rem;border:2px solid var(--ink);background:var(--paper)}
+.wp-media{position:relative;aspect-ratio:4/3;background:var(--blue);overflow:hidden;border-bottom:2px solid var(--ink)}
+.wp-media img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.08) brightness(1.05);
+  mix-blend-mode:lighten;display:block;transition:opacity .18s}
+.wp-body{padding:0.9rem 1rem 1rem}
+.wp-t{font-family:'Archivo',sans-serif;font-weight:700;font-size:1rem;line-height:1.14;margin-bottom:0.6rem}
+.wp-row{display:flex;justify-content:space-between;gap:1rem;font-family:'Sometype Mono',monospace;
+  font-size:0.7rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--grey)}
+.wp-row .red{color:var(--red)}
+
+/* ABOUT
+   The whole preamble is gone as of 2026-08-16. It used to run a display line
+   ("Twenty years of live work. 2004 to now.") over an intro paragraph
+   ("Game worlds, festivals, national tours and live television. Concept, direction
+   and production in the same hands, from blank page to stage."). Both were echoes:
+   the hero lead is that first sentence word for word, "twenty years" is already the
+   first number in the stat band, 2004 is the start year printed on chapter four, and
+   "blank page to stage" is chapter three's own body line. Four screens after the hero
+   a recruiter does not need the claim restated, they need the record. So About now
+   opens straight on the record: section head, then the four chapters.
+   The spine used to carry its own 2px top border; the section head's rule is 2px and
+   sits immediately above it, so the two would stack into a single 4px bar. The border
+   goes and the spine takes the same opening gap the work index uses instead. */
+.about-spine{list-style:none;margin-top:clamp(1.4rem,2.6vw,2.2rem)}
+
+/* career spine: four dated chapters, most recent first.
+   The date range is the left rail, in ink, because span is the fact a recruiter
+   is checking. The old third column mixed editions, years and headcount in one
+   slot, which invited a comparison it could not support, so each chapter now
+   carries its own evidence line instead. Chapters one and four have since had that
+   evidence line cut or trimmed: their numbers were already printed twice higher up
+   the page, in the stat band and again on the work row for the same project. What is
+   left on a chapter is only what the rest of the page never says. */
+.ch{display:grid;grid-template-columns:6.4rem minmax(0,1fr);gap:0 clamp(1.2rem,2.6vw,2.6rem);
+  align-items:start;padding:clamp(1.5rem,2.5vw,2.2rem) 0.15rem;border-bottom:1px solid var(--rule)}
+.ch-when{padding-top:0.1rem}
+.ch-y1{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:1.28rem;letter-spacing:-0.02em;
+  line-height:1;color:var(--ink)}
+.ch-y2{font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--grey);margin-top:0.28rem}
+.ch-y2.on{color:var(--red)}
+.ch-main{min-width:0}
+.ch-cat{font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--red);margin-bottom:0.4rem}
+.ch-org{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(1.15rem,1.95vw,1.6rem);letter-spacing:-0.015em;
+  line-height:1.06;margin-bottom:0.45rem}
+.ch-body{font-size:1rem;line-height:1.5;color:var(--ink);max-width:56ch}
+.ch-ev{font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.07em;text-transform:uppercase;
+  color:var(--grey);margin-top:0.75rem;line-height:1.6}
+.ch-ev b{color:var(--ink);font-weight:400}
+/* .about-status is gone. It had been the availability line, but the availability half had
+   already emptied out to a bare <span></span> and all it still rendered was a "Get in touch"
+   arrow pointing at the section that begins one rule further down the same scroll. Availability
+   itself is stated in the contact spec ("Open to: Relocation"), which is the only surviving
+   statement of it on a phone and is untouched. */
+
+/* CONTACT */
+.contact{padding:clamp(3rem,7vw,6rem) var(--pad) 0}
+.contact-big{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;text-transform:uppercase;letter-spacing:-0.03em;
+  font-size:clamp(2.2rem,8.6vw,7.6rem);line-height:0.84}
+/* the close is the headline plus the three facts a recruiter checks before writing: where he is,
+   whether he will move, which languages he works in. No prose. The routes themselves are the
+   grid below, and an email address needs no caption telling a recruiter what email is for. */
+.c-row{display:grid;grid-template-columns:1.5fr minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem);align-items:end;
+  margin-top:clamp(2rem,4vw,3.2rem)}
+.c-spec{border-top:1px solid var(--rule)}
+.c-spec div{display:flex;justify-content:space-between;gap:1rem;padding:0.6rem 0;border-bottom:1px solid var(--rule);
+  font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.04em}
+.c-spec dt{color:var(--grey);text-transform:uppercase}
+.c-spec dd{text-align:right;color:var(--ink)}
+.c-spec dd.red{color:var(--red)}
+
+/* contact grid: one cell per route, each carrying the real detail */
+.c-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+  margin:clamp(2.4rem,5vw,4rem) 0 clamp(3rem,7vw,6rem)}
+.c-cell{display:flex;flex-direction:column;padding:1.5rem 1.2rem 1.4rem;border-left:1px solid var(--rule);min-height:10rem;
+  transition:background .18s,color .18s}
+.c-cell:first-child{border-left:none}
+.c-cell:hover{background:var(--ink);color:var(--paper)}
+.c-cell:focus-visible{background:var(--ink);color:var(--paper);outline:3px solid var(--blue);outline-offset:-3px}
+.c-k{font-family:'Sometype Mono',monospace;font-size:0.64rem;letter-spacing:0.12em;color:var(--grey);margin-bottom:auto}
+.c-v{display:flex;align-items:center;gap:0.45rem;margin-top:1.2rem;font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:clamp(0.92rem,1.15vw,1.06rem);letter-spacing:-0.01em;line-height:1.15}
+/* The .c-n subline under each route is gone. It read "Best for a full brief." under an email
+   address, "Full career history." under a LinkedIn URL and "Call or text, CET." under a phone
+   number: two captions explaining what email and LinkedIn are for, to a reader who screens
+   candidates for a living. The one fact in there was the timezone, and it has moved up onto the
+   phone cell's own key line, where it costs no extra height and sits against the number it
+   applies to. Losing the third line also lets the cell go to two lines on a phone. */
+.c-cell:hover .c-k,.c-cell:focus-visible .c-k{color:rgba(251,247,238,0.72)}
+.c-cell.pri{background:var(--red);color:var(--paper);border-left-color:var(--red)}
+.c-cell.pri .c-k{color:rgba(251,247,238,0.78)}
+.c-cell.pri:hover,.c-cell.pri:focus-visible{background:var(--ink)}
+
+/* FOOTER */
+footer{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:0.6rem 1.8rem;padding:1.2rem var(--pad);
+  border-top:2px solid var(--ink);font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--grey)}
+footer a{color:var(--ink);border-bottom:1px solid var(--rule);transition:color .15s,border-color .15s}
+footer a:hover{color:var(--red);border-color:var(--red)}
+footer a:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+@media(max-width:900px){
+  .c-row{grid-template-columns:1fr;gap:1.8rem}
+  .c-grid{grid-template-columns:repeat(2,1fr)}
+  .c-cell:nth-child(3){border-left:none}
+  .c-cell:nth-child(3),.c-cell:nth-child(4){border-top:1px solid var(--rule)}
+}
+@media(max-width:560px){
+  .c-grid{grid-template-columns:1fr}
+  .c-cell{border-left:none;border-top:1px solid var(--rule);min-height:auto;padding:1.1rem 0.9rem}
+  .c-cell:first-child{border-top:none}
+  .c-v{margin-top:0.7rem}
+}
+
+/* VIDEO MODAL */
+.video-overlay{position:fixed;inset:0;z-index:1000;background:rgba(21,21,15,0.9);display:none;align-items:center;justify-content:center;padding:var(--pad)}
+.video-overlay.open{display:flex}
+.video-box{width:min(1000px,92vw);aspect-ratio:16/9;background:#000;border:2px solid var(--paper)}
+.video-box iframe{width:100%;height:100%;border:0;display:block}
+.video-close{position:fixed;top:1.1rem;right:1.1rem;z-index:1002;background:var(--red);color:var(--paper);border:none;
+  font-family:'Archivo',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.05em;text-transform:uppercase;padding:0.6rem 0.9rem;cursor:pointer;transition:background .18s,color .18s,transform .18s}
+.video-close:hover{background:var(--ink);transform:translate(-3px,-3px)}
+
+/* CASE MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(21,21,15,0.88);backdrop-filter:blur(4px);display:none;overflow-y:auto;overscroll-behavior:contain}
+.modal-overlay.open{display:block}
+.modal-box{--mpad:clamp(1.25rem,3.4vw,2.9rem);--rail:9rem;
+  max-width:1040px;margin:0 auto;background:var(--paper);border-left:2px solid var(--ink);border-right:2px solid var(--ink);position:relative}
+.modal-box:focus{outline:none}
+/* sticky case bar: says which case you are in, and gets you out or onward from anywhere in the scroll */
+.m-bar{position:sticky;top:0;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:0.55rem 0.55rem 0.55rem var(--mpad);background:var(--paper);border-bottom:2px solid var(--ink)}
+.m-barl{display:flex;align-items:baseline;gap:0.9rem;min-width:0}
+.m-plate{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:1.15rem;line-height:1;letter-spacing:-0.03em;color:var(--ink);white-space:nowrap}
+.m-plate i{font-style:normal;font-family:'Sometype Mono',monospace;font-weight:400;font-size:0.7rem;letter-spacing:0.04em;color:var(--grey)}
+.m-kind{font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--grey);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m-nav{display:flex;gap:0.35rem;flex:none}
+.m-btn{font-family:'Sometype Mono',monospace;font-size:0.74rem;letter-spacing:0.06em;text-transform:uppercase;line-height:1;
+  background:transparent;color:var(--ink);border:1.5px solid var(--ink);padding:0.5rem 0.62rem;cursor:pointer;transition:background .16s,color .16s}
+.m-btn:hover{background:var(--ink);color:var(--paper)}
+.m-btn.close{display:inline-flex;align-items:center;gap:0.5rem;background:var(--red);border-color:var(--red);color:var(--paper);font-family:'Archivo',sans-serif;font-weight:700;letter-spacing:0.05em;padding:0.5rem 0.85rem}
+.m-btn.close:hover{background:var(--ink);border-color:var(--ink)}
+.m-btn:focus-visible,.m-vid:focus-visible,.m-next:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+/* hero image: the one real artefact of the project, given the full width of the case */
+.m-hero{position:relative;background:var(--paper);border-bottom:2px solid var(--ink);overflow:hidden}
+.m-hero>img{width:100%;aspect-ratio:2/1;object-fit:cover;display:block}
+/* header band */
+.m-head{padding:clamp(1.7rem,3.2vw,2.8rem) var(--mpad) clamp(1.3rem,2.2vw,1.9rem);border-bottom:2px solid var(--ink)}
+.m-eyebrow{font-family:'Sometype Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--red);margin-bottom:1rem}
+.m-eyebrow em{font-style:normal;color:var(--grey)}
+.m-title{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:clamp(1.8rem,4.4vw,3.3rem);line-height:0.93;letter-spacing:-0.035em;max-width:17ch}
+.m-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1.4rem}
+.m-tag{font-family:'Sometype Mono',monospace;font-size:0.62rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--grey);border:1px solid var(--rule);padding:0.3rem 0.55rem}
+/* body blocks: label rail on the left sets a single spine, text column keeps a comfortable measure */
+.m-block{display:grid;grid-template-columns:var(--rail) 1fr;gap:0 clamp(1.2rem,3vw,2.4rem);
+  padding:clamp(1.6rem,3vw,2.5rem) var(--mpad);border-bottom:1px solid var(--rule)}
+.m-block:last-of-type{border-bottom:none}
+.m-lbl{font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);padding-top:0.35rem}
+.m-product{font-size:1.05rem;line-height:1.6;max-width:58ch}
+/* the result is what a recruiter is scanning for, so it is inverted and set large, directly under the title */
+.m-block.invert{background:var(--ink);color:var(--paper);border-bottom:none;padding-top:clamp(1.8rem,3.4vw,2.8rem);padding-bottom:clamp(1.8rem,3.4vw,2.8rem)}
+.m-block.invert .m-lbl{color:rgba(251,247,238,0.62)}
+.m-result{font-family:'Archivo',sans-serif;font-weight:700;font-size:clamp(1.18rem,2.2vw,1.62rem);line-height:1.28;letter-spacing:-0.018em;max-width:40ch}
+/* video links: real media rows, not chips */
+.m-vids{display:grid;gap:0}
+.m-vid{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1.1rem;
+  padding:0.85rem 0.7rem;margin-left:-0.7rem;border-top:1px solid var(--rule);transition:background .16s,color .16s}
+.m-vid:first-child{border-top:none}
+.m-vid .play{width:2.5rem;height:2.5rem;flex:none;background:var(--red);color:var(--paper);display:grid;place-items:center;transition:background .16s}
+.m-vid .lb{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:-0.01em;line-height:1.2}
+.m-vid .host{font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);white-space:nowrap}
+.m-vid:hover{background:var(--ink);color:var(--paper)}
+.m-vid:hover .host{color:rgba(251,247,238,0.7)}
+/* role: three numbered things he actually did */
+.m-assign{list-style:none;display:grid;gap:0}
+.m-assign li{display:grid;grid-template-columns:2.6rem 1fr;gap:0.4rem 1rem;padding:1.25rem 0;border-top:1px solid var(--rule-soft)}
+.m-assign li:first-child{border-top:none;padding-top:0.2rem}
+.m-anum{font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:1.05rem;color:var(--red);padding-top:0.1rem;letter-spacing:-0.02em}
+.m-atext strong{display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:1.05rem;margin-bottom:0.45rem}
+.m-atext p{font-size:0.95rem;line-height:1.6;color:var(--ink);max-width:56ch}
+/* onward: next case without going back to the index */
+.m-next{display:grid;grid-template-columns:1fr auto;align-items:center;gap:1.5rem;width:100%;text-align:left;
+  font:inherit;color:inherit;background:var(--paper);border:none;border-top:2px solid var(--ink);cursor:pointer;
+  padding:clamp(1.5rem,3vw,2.3rem) var(--mpad);transition:background .16s,color .16s}
+.m-next:hover{background:var(--ink);color:var(--paper)}
+.m-next .k{display:block;font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.13em;text-transform:uppercase;color:var(--red);margin-bottom:0.55rem}
+.m-next .t{display:block;font-family:'Archivo Black','Archivo',sans-serif;font-weight:900;font-size:clamp(1.15rem,2.4vw,1.9rem);line-height:1;letter-spacing:-0.03em;max-width:22ch}
+.m-next .arw{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.6rem;line-height:1;flex:none}
+.m-hint{font-family:'Sometype Mono',monospace;font-size:0.64rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--grey);
+  padding:0.9rem var(--mpad) 1.1rem;border-top:1px solid var(--rule)}
+@media(max-width:760px){
+  .m-block{grid-template-columns:1fr}
+  .m-lbl{padding-top:0;margin-bottom:0.9rem}
+  .m-kind{display:none}
+}
+@media(max-width:560px){
+  .m-assign li{grid-template-columns:1fr}.m-anum{padding-top:0}
+  .m-vid{grid-template-columns:auto 1fr;gap:0.9rem}
+  .m-vid .host{grid-column:2;margin-top:0.25rem}
+  .m-hero>img{aspect-ratio:4/3}
+}
+
+@media(max-width:860px){
+  .hero{min-height:0;padding-top:4rem}
+  .hero-body{grid-template-columns:1fr}
+  .hero-typecol{border-right:none;border-bottom:2px solid var(--ink)}
+  /* the portrait is the one element that can be shrunk without losing a fact, so on a stacked
+     layout it is capped: the name, the claim and the credential have to clear the fold first */
+  .hero-photo{min-height:0;height:min(38vh,22rem);order:-1}
+  /* the date rail costs too much width on a phone, so the range goes inline above the chapter */
+  .ch{grid-template-columns:minmax(0,1fr);gap:0}
+  .ch-when{display:flex;align-items:baseline;gap:0.5rem;margin-bottom:0.55rem;padding-top:0}
+  .ch-y2{margin-top:0}
+  .ch-body{max-width:none}
+  /* the sticky panel needs a second column to exist; below this the row carries its own image
+     instead, so the phone never loses the work the way the original list did */
+  .work-wrap{grid-template-columns:minmax(0,1fr);gap:0}
+  .work-preview{display:none}
+  /* the 2px-bordered image is a harder divider than any amount of white space, so the row can
+     breathe less here than it does on desktop without the list running together */
+  /* One column, no rail. The 3.2rem rail plus its 1.2rem gutter took 70px off a 390px screen —
+     about a quarter of the row — to print a serial number and a two-line date stack, and it
+     narrowed the thumbnail and every line of text behind it. Where the sticky panel is gone the
+     row is a single column: the index mark leads the client line in red, the period joins the
+     scale line, and the picture and the text get the width back. Nothing the rail held is lost. */
+  .row{padding:0.85rem 0.55rem;grid-template-columns:minmax(0,1fr)}
+  .row-rail{display:none}
+  .row-n{display:inline;color:var(--red);margin-right:0.4rem}
+  .row-per{display:inline}
+  /* the crop follows the column: at 262px wide a 16/9 thumbnail was 147px tall, and at the full
+     332px the same ratio would have added ~40px to every one of the eight rows. 2/1 spends the
+     new width on picture rather than on scroll: bigger image, one screen no longer, still a
+     standard editorial ratio and still object-fit:cover, so nothing is stretched. */
+  .row-thumb{display:block;width:100%;aspect-ratio:2/1;object-fit:cover;border:2px solid var(--ink);
+    background:var(--blue);filter:grayscale(1) contrast(1.1) brightness(1.05);margin-bottom:0.6rem}
+  /* The result is a full sentence and there is no measure for it in a 240px column: the old
+     list clamped it to two lines and all eight overflowed, so every project ended mid-sentence.
+     It is the very first thing the case shows, inverted under the title, so the row carries the
+     number instead and the sentence is read whole one tap later instead of half a tap earlier. */
+  .row-res{display:none}
+  .row:hover,.row.on{background:none;color:inherit}
+  .row:hover .row-name,.row.on .row-name{color:var(--ink)}
+  .row:hover .row-scale,.row.on .row-scale,.row:hover .row-y,.row.on .row-y{color:var(--grey)}
+  .nav-links{gap:1.1rem}
+}
+@media(max-width:600px){
+  nav{min-height:44px;padding:0 var(--pad);gap:0.6rem}
+  .nav-name{font-size:0.72rem;white-space:nowrap}
+  .nav-links{gap:1rem}
+  .nav-links a{font-size:0.7rem}
+  .nav-anchor-contact{display:none}
+  .nav-cta{font-size:0.66rem;padding:0.4rem 0.62rem}
+  .cta-long{display:none}
+  /* the .about-span overprint fallback that used to live here went with the element itself */
+}
+@media(max-width:560px){
+  /* PHONE HERO. Budget for one 844px screen: availability, portrait, name, claim, lead, games row.
+     Everything here buys vertical space for that list. */
+  .hero{padding-top:3.5rem;padding-bottom:1rem}
+  .hero-photo{height:13rem}
+  .hero-typecol{padding:0.9rem 0.85rem 1rem;gap:0.8rem}
+  .role-long{display:none}
+  .hero-name{font-size:1.35rem}
+  /* same size as the strip above it: two mono lines a hair apart read as two tiers for no
+     reason, and the first screen is counted in tiers */
+  .hero-role{font-size:0.63rem;letter-spacing:0.07em;margin-top:0.25rem}
+  /* four short lines instead of a smaller font: the claim stays big on a 314px column */
+  .brk{display:block}
+  .hero-h{font-size:2.2rem;letter-spacing:-0.045em}
+  .hero-lead{font-size:0.96rem}
+}
+@media(max-width:520px){
+}
+@media(prefers-reduced-motion:reduce){
+  .hline,.hero-lead,.hero-id{opacity:1;transform:none;animation:none}
+  .row.pre{opacity:1;transform:none}
+  .grain{display:none}
+}
+
+/* ===== v19 SIMPLIFIED LAYER (draft 2026-11-13) =====
+   One reading order: who he is, the work, how he works, the record, contact.
+   The hero loses its frame and its top band: availability joins the role line, contact
+   lives in the nav button and the contact section. The stat band and the roster band are
+   gone: every number is already printed on its work row, and the names move into two quiet
+   lines inside the hero. Fewer boxes, the same facts, the work arrives one screen sooner. */
+.hero{min-height:0;padding:clamp(5rem,9vw,7.5rem) var(--pad) clamp(2.5rem,5vw,4rem);display:block}
+.hero-body{grid-template-columns:1.6fr 0.75fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:stretch}
+.hero-typecol{border-right:none;padding:0;gap:clamp(1rem,1.8vw,1.6rem)}
+.hero-photo{min-height:360px}
+.hero-avail{display:inline-flex;align-items:center;margin-left:0.6rem;color:var(--ink)}
+.hero-avail i{display:inline-block;width:6px;height:6px;background:var(--red);margin-right:0.45rem}
+.hero-cred{margin-top:0.4rem;border-top:1px solid var(--rule);padding-top:0.9rem;display:grid;gap:0.45rem;
+  opacity:0;animation:rise .6s ease forwards;animation-delay:.34s}
+.hero-cred div{display:grid;grid-template-columns:5.2rem minmax(0,1fr);gap:0 1rem;align-items:baseline}
+.hero-cred dt{font-family:'Sometype Mono',monospace;font-size:0.64rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--grey)}
+.hero-cred dd{font-size:0.88rem;line-height:1.45;color:var(--ink)}
+.hero-cred div:first-child dd{font-weight:700}
+
+/* APPROACH */
+.sec-head-long h2{font-size:clamp(1.9rem,4.6vw,3.6rem);max-width:16ch;line-height:0.9}
+.ap-intro{display:grid;grid-template-columns:1.25fr 0.75fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:end;
+  padding-top:clamp(1.6rem,3vw,2.6rem)}
+.ap-lead{font-weight:700;font-size:clamp(1.2rem,2.1vw,1.65rem);line-height:1.28;letter-spacing:-0.015em;max-width:36ch}
+.ap-sub{font-size:1rem;line-height:1.55;color:var(--ink);max-width:44ch}
+.ap-go{margin-top:0.9rem;padding:0.5rem 0;min-height:44px;background:none;border:0;cursor:pointer;color:var(--red);
+  font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase}
+.ap-go b{font-weight:400;display:inline-block;transition:transform .18s}
+.ap-go:hover b,.ap-go:focus-visible b{transform:translateX(3px)}
+.ap-go:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.ap-go b{transition:none}}
+
+@media(max-width:860px){
+  .hero{padding-top:4.2rem}
+  .hero-body{grid-template-columns:minmax(0,1fr);gap:1.2rem}
+  .hero-typecol{border-bottom:none}
+  .hero-photo{height:min(38vh,22rem);min-height:0}
+  .ap-intro{grid-template-columns:1fr;gap:1rem}
+}
+@media(max-width:600px){.nav-anchor-approach{display:none}}
+@media(max-width:560px){
+  .hero{padding-top:3.6rem}
+  .hero-photo{height:13rem}
+  .hero-typecol{padding:0.6rem 0 0}
+  .hero-avail{display:flex;margin:0.3rem 0 0}
+  .hero-cred div{grid-template-columns:1fr;gap:0.15rem}
+}
+@media(prefers-reduced-motion:reduce){.hero-cred{opacity:1;animation:none}}
+
+/* v19.1: every row says it opens, so the entry point never depends on hover */
+.row-go{display:inline-block;margin-top:0.6rem;font-family:'Sometype Mono',monospace;font-size:0.66rem;
+  letter-spacing:0.08em;text-transform:uppercase;color:var(--red)}
+.row-go b{font-weight:400;display:inline-block;transition:transform .18s}
+.row:hover .row-go b,.row:focus-visible .row-go b{transform:translateX(3px)}
+/* touch targets: nav links fill the bar height instead of a 25px strip */
+.nav-links a{padding:0.75rem 0}
+.nav-links a.nav-cta{padding:0.6rem 0.85rem}
+@media(prefers-reduced-motion:reduce){.row-go b{transition:none}}
+
+/* Recruiter entry: role first, the work within reach, and a compact optional introduction. */
+.hero{padding-top:clamp(4.4rem,6vw,5.5rem);padding-bottom:1.6rem}
+.hero-body{align-items:center}
+.hero-photo{min-height:0;height:340px}
+.hero-typecol{gap:1.1rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:0.6rem 1.2rem;align-items:center}
+.hero-actions a,.about-cv{display:inline-flex;align-items:center;min-height:44px;font-size:0.85rem;font-weight:700;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--red)}
+.hero-actions a:focus-visible,.about-cv:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+#work{padding-top:1.6rem}
+.work-wrap{padding-top:1.2rem}
+.row-list-item{list-style:none}
+.row:focus-visible{outline:3px solid var(--blue);outline-offset:-3px}
+.wp-media{background:var(--paper)}
+.wp-media img,.row-thumb{filter:none;mix-blend-mode:normal}
+.row-thumb{background:var(--paper)}
+.row-go{color:#bf1c16}
+.row.on .row-go,.row:hover .row-go{color:#ff7770}
+.m-share{display:inline-flex;align-items:center;gap:0.5rem;min-height:44px;font-weight:700;font-size:0.85rem;text-decoration:underline;text-underline-offset:4px;margin-top:1rem}
+.m-share:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.m-btn{min-width:44px;min-height:44px}
+.m-hero img.people{object-position:50% 62%}
+.about-cv{margin-top:0.8rem}
+section{scroll-margin-top:64px}
+
+.ap-grid{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(2rem,4vw,3.2rem);
+  border-top:2px solid var(--ink)}
+.ap-grid li{padding:1.5rem 1.3rem 1.6rem;border-left:1px solid var(--rule)}
+.ap-grid li:first-child{border-left:none;padding-left:0}
+.ap-n{display:block;font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--red);margin-bottom:0.9rem}
+.ap-grid h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.15;
+  letter-spacing:-0.01em;margin-bottom:0.6rem;max-width:22ch;text-wrap:balance}
+.ap-grid p{font-size:0.95rem;line-height:1.55;max-width:40ch}
+@media(max-width:860px){
+  .ap-grid{grid-template-columns:1fr}
+  .ap-grid li{border-left:none;border-top:1px solid var(--rule);padding:1.2rem 0}
+  .ap-grid li:first-child{border-top:none}
+}
+.ap-ex-label{margin-top:clamp(2rem,4vw,3rem);margin-bottom:0}
+/* One real example connects workshop design, production and the feedback report. */
+.ap-intro{grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);align-items:start}
+.sec-head-long h2{max-width:22ch}
+.ap-example{display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1.2fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:start;margin-top:2rem}
+.ap-artifact{margin:0}
+.ap-artifact img{display:block;width:100%;height:auto;border:1px solid var(--rule)}
+.ap-artifact figcaption,.m-gallery figcaption{font-size:0.82rem;line-height:1.5;margin-top:0.65rem;color:var(--grey)}
+.ap-steps{list-style:none;border-top:2px solid var(--ink)}
+.ap-steps li{padding:1.1rem 0;border-bottom:1px solid var(--rule)}
+.ap-steps h3{font-size:1.14rem;line-height:1.2;margin-bottom:0.45rem}
+.ap-steps p{font-size:0.98rem;line-height:1.55;max-width:60ch}
+.ap-go{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.75rem;color:var(--ink);letter-spacing:0.04em;text-decoration:underline;text-decoration-color:var(--red);text-underline-offset:4px}
+.m-evidence{padding:clamp(1.5rem,3vw,2.5rem) var(--mpad);border-bottom:1px solid var(--rule)}
+.m-evidence h3{font-size:clamp(1.3rem,2.4vw,1.8rem);line-height:1.15;max-width:28ch;margin-bottom:1.2rem}
+.evidence-sequence{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.3rem;list-style:none}
+.evidence-sequence h4{font-size:1rem;margin-bottom:0.4rem}
+.evidence-sequence p{font-size:0.94rem;line-height:1.55}
+.evidence-note{font-size:0.8rem;color:var(--grey);line-height:1.5;margin-top:1rem}
+.feedback-table{width:100%;border-collapse:collapse;font-size:0.9rem;margin-top:1.5rem}
+.feedback-table caption{text-align:left;font-weight:700;padding-bottom:0.6rem}
+.feedback-table th,.feedback-table td{padding:0.7rem 0.4rem;border-bottom:1px solid var(--rule);text-align:left}
+.feedback-table th:last-child,.feedback-table td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.feedback-table thead{font-size:0.78rem;color:var(--grey)}
+.m-gallery{display:grid;grid-template-columns:1fr;max-width:720px;gap:1.5rem;margin-top:1.8rem;align-items:start}
+.m-gallery img{display:block;width:100%;height:auto}
+.m-gallery a:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+.video-close:focus-visible{outline:3px solid var(--paper);outline-offset:4px}
+@media(max-width:860px){
+  .hero-body{display:block;position:relative}
+  .hero-typecol{display:flex;padding:0;gap:1rem}
+  .hero-id{min-height:82px;padding-right:92px;display:flex;flex-direction:column;justify-content:center}
+  .hero-role{font-size:0.65rem}
+  .hero-photo{position:absolute;right:0;top:0;width:76px;height:82px;min-height:0}
+  .hero-photo .hero-play{left:0;right:0;bottom:0;padding:0.3rem 0.2rem;font-size:0.55rem;justify-content:center}
+  .hero-photo .intro-long{display:none}
+  .hero-photo .ico{width:7px;height:9px}
+  .hero-avail{display:flex;margin:0.3rem 0 0}
+  .hero-h{font-size:clamp(2.2rem,5.8vw,3.1rem);letter-spacing:-0.035em}
+  .hero-cred div{grid-template-columns:4.4rem minmax(0,1fr);gap:0.6rem}
+  .hero-cred dd{font-size:0.79rem}
+  .row.on .row-go,.row:hover .row-go{color:#bf1c16}
+  .ap-intro,.ap-example{grid-template-columns:1fr}
+  .ap-artifact{max-width:none}
+  .ap-example{gap:1.5rem}
+  .evidence-sequence{grid-template-columns:1fr;gap:1rem}
+}
+@media(max-width:560px){
+  .hero{padding-top:3.7rem;padding-bottom:0.5rem}
+  .hero-typecol{gap:0.9rem}
+  .hero-name{font-size:1.2rem}
+  .hero-role{font-size:0.59rem;letter-spacing:0.025em}
+  .hero-cred{padding-top:0.6rem;margin-top:0}
+  .hero-cred div{grid-template-columns:1fr;gap:0.1rem}
+  .m-gallery{grid-template-columns:1fr}
+}
+
+/* HOW I WORK: three worked examples, one per row. Draft 2026-11-17. */
+.hw-list{list-style:none;margin-top:clamp(2rem,4vw,3rem);border-top:2px solid var(--ink)}
+.hw-item{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:start;
+  padding:clamp(1.5rem,3vw,2.4rem) 0;border-bottom:1px solid var(--rule)}
+.hw-fig{margin:0}
+.hw-fig img{display:block;width:100%;height:auto;border:1px solid var(--rule)}
+.hw-pair{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem}
+.hw-fig figcaption{font-size:0.82rem;line-height:1.5;margin-top:0.65rem;color:var(--grey)}
+.hw-text h3{font-family:'Archivo',sans-serif;font-weight:800;font-size:clamp(1.15rem,1.8vw,1.45rem);line-height:1.15;
+  letter-spacing:-0.01em;margin-bottom:0.6rem;max-width:26ch;text-wrap:balance}
+.hw-text p{font-size:0.98rem;line-height:1.55;max-width:60ch}
+.hw-text p.hw-status{margin-top:0.9rem;font-family:'Sometype Mono',monospace;font-size:0.66rem;letter-spacing:0.1em;
+  text-transform:uppercase;color:var(--grey)}
+.tbc{background:none;color:var(--red);outline:1px dashed var(--red);outline-offset:2px}
+@media(max-width:860px){.hw-item{grid-template-columns:1fr;gap:1rem}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<nav aria-label="Primary">
+  <div class="nav-id">
+    <a href="#top" class="nav-name">Denny Hultén<span class="nav-role">Creative Director</span></a>
+    <span class="nav-status"><i aria-hidden="true"></i>Open to work</span>
+  </div>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#approach" class="nav-anchor-approach">How I work</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="nav-anchor-contact">Contact</a>
+    <a class="nav-cta" href="mailto:dennyhulten@gmail.com">Email<span class="cta-long"> Denny</span></a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-body">
+    <div class="hero-typecol">
+      <div class="hero-id">
+        <p class="hero-name">Denny Hultén</p>
+        <p class="hero-role"><b>Creative Director, live experiences</b> · Eventity, Gothenburg <span class="hero-avail"><i aria-hidden="true"></i>Open to work · Relocation</span></p>
+      </div>
+      <h1 class="hero-h">
+        <span class="hline">I work on the <span class="brk" aria-hidden="true"></span><span class="key">problem</span></span>
+        <span class="hline">behind the <span class="brk" aria-hidden="true"></span>brief.</span>
+      </h1>
+      <p class="hero-lead">Twenty years directing live work: <b>game worlds</b>, <b>festivals</b>, <b>national tours</b> and <b>live television</b>. For <b>Play'n GO</b>, I shape how leadership communicates through a three-year employee programme serving seven countries. With <a href="#approach">AI systems I build myself</a>, I lead the work and produce it too.</p>
+      <div class="hero-actions"><a href="#work">Explore the work ↓</a><a href="downloads/Denny-Hulten-CV.pdf" download>Download CV (PDF)</a></div>
+      <dl class="hero-cred">
+        <div><dt>Clients</dt><dd>Volvo Cars · Länsförsäkringar · Play'n GO · P3 Guld · Riksteatern · TEDx Göteborg</dd></div>
+        <div><dt>Artists</dt><dd>Håkan Hellström · Ace of Base · Molly Sandén · Petter · Cleo · Isak Danielson · GRANT</dd></div>
+      </dl>
+    </div>
+    <div class="hero-photo" onclick="openVideo()" tabindex="0" role="button" aria-label="Play the three minute intro film"
+         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideo();}">
+      <img src="images/denny.webp" alt="Denny Hultén, portrait" width="1200" height="1200" fetchpriority="high">
+      <div class="hero-play"><svg class="ico" width="10" height="12" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0l10 6-10 6z"/></svg><span class="intro-long">About me, </span>3 min</div>
+    </div>
+  </div>
+</header>
+
+<section class="sec" id="work">
+  <div class="sec-head">
+    <h2>Work</h2>
+  </div>
+  <div class="work-wrap">
+    <ol class="index" id="index"></ol>
+    <aside class="work-preview" id="wp" aria-hidden="true">
+      <!-- Seed the first project so the work is visible while JavaScript starts. -->
+      <div class="wp-media"><img id="wp-img" src="images/playngo-evening.webp"
+           alt="Play'n GO's evening venue in Växjö: red and blue draping, long tables and two screens showing the event graphics."></div>
+      <div class="wp-body">
+        <div class="wp-t" id="wp-t"></div>
+        <div class="wp-row"><span class="red" id="wp-tag"></span><span id="wp-year"></span></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section class="sec" id="approach">
+  <div class="sec-head">
+    <h2>How I work</h2>
+  </div>
+  <div class="ap-intro">
+    <p class="ap-lead">I make an idea visible early, so the client can react to something real <span class="key">before anything is built</span>.</p>
+    <p class="ap-sub">Three examples from three projects. Around them I build my own AI tools: scripts that generate screen animations, and tools that compile participant feedback between events. My time goes to the idea and to approving every version.</p>
+  </div>
+  <ol class="hw-list">
+    <li class="hw-item">
+      <figure class="hw-fig">
+        <img src="images/hw-direction-case.webp" alt="A Direction case card: a real work dilemma, with the instruction to choose path A or B together and name one downside." width="1240" height="877" loading="lazy">
+        <figcaption>One of the 15 case cards I wrote, on three levels: Lead Yourself, Your Team, Your Function.</figcaption>
+      </figure>
+      <div class="hw-text">
+        <span class="ap-n">01 / Play'n GO / Workshop / Autumn 2026</span>
+        <h3>A request became a workshop.</h3>
+        <p>In spring, employees asked for small discussion groups with the steering group. I designed Direction: a steering group member hosts each table and reads a real work dilemma. The group picks path A or B, explains why and names one downside. Then the host shares the path Play'n GO takes. In Växjö, 19 of 84 written answers praised it unprompted, more than any other part of the day.</p>
+        <p class="hw-status">Delivered in Växjö and Malta</p>
+        <a class="ap-go" href="#case/playngo">See the workshop and feedback <b aria-hidden="true">→</b></a>
+      </div>
+    </li>
+    <li class="hw-item">
+      <figure class="hw-fig">
+        <img src="images/hw-fortnox-station.webp" alt="SketchUp model of a company event in Fortnox Arena: a table built as giant stacked bricks beside the line Ni byggde detta, with long tables, food trucks and screens behind." width="1149" height="781" loading="lazy">
+        <figcaption>The brick station in the SketchUp model of the arena.</figcaption>
+      </figure>
+      <div class="hw-text">
+        <span class="ap-n">02 / Fortnox Arena / Company event / Concept</span>
+        <h3>The client walked the event before it was built.</h3>
+        <p>I modelled the whole event in SketchUp on the venue drawings: entrance, stage and screens, food, bar and activity zones. In the activity zone, a table of giant bricks stands under the line &ldquo;Ni byggde detta&rdquo; (You built this), with a display case of what the company has built over the years. <mark class="tbc">TBC: what the station was meant to say to their people, and why bricks.</mark></p>
+        <p class="hw-status">Approved concept. Production postponed by the client</p>
+        <a class="ap-go" href="downloads/Denny-Hulten-Fortnox-Arena-Concept.pdf" target="_blank" rel="noopener">Open the concept sheet (PDF) <b aria-hidden="true">→</b></a>
+      </div>
+    </li>
+    <li class="hw-item">
+      <figure class="hw-fig">
+        <div class="hw-pair">
+          <img src="images/hw-lingmerths-sketch.webp" alt="FigJam storyboard sketch: a hand-drawn house with the line Allt samlat i en lösning." width="928" height="585" loading="lazy">
+          <img src="images/hw-lingmerths-film.webp" alt="The same scene in the animated film: an orange roof and the line Snabb personlig hjälp inom resor, möten och event." width="928" height="583" loading="lazy">
+        </div>
+        <figcaption>Left: my FigJam sketch. Right: the same scene in the film.</figcaption>
+      </figure>
+      <div class="hw-text">
+        <span class="ap-n">03 / Lingmerths + Eventity / Brand film / 73 seconds</span>
+        <h3>From a FigJam sketch to an animated film.</h3>
+        <p>I sketched the story scene by scene in FigJam and pitched it as a storyboard. When it was approved, I animated, voiced and produced the film myself. <mark class="tbc">TBC: who the client was, and whether v11 is the final film.</mark></p>
+        <p class="hw-status">Pitched and approved <mark class="tbc">TBC: final or draft</mark></p>
+        <a class="ap-go" href="downloads/Denny-Hulten-Storyboard-to-Film.pdf" target="_blank" rel="noopener">Open the storyboard and film frames (PDF) <b aria-hidden="true">→</b></a>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<section class="sec" id="about">
+  <div class="sec-head">
+    <h2>About</h2>
+    <a class="about-cv" href="downloads/Denny-Hulten-CV.pdf" download>Download CV (PDF)</a>
+  </div>
+  <ol class="about-spine">
+    <li class="ch">
+      <div class="ch-when"><div class="ch-y1">2023</div><div class="ch-y2 on">to now</div></div>
+      <div class="ch-main">
+        <div class="ch-cat">Event agency</div>
+        <div class="ch-org">Creative Director, Eventity</div>
+        <p class="ch-body">Helped rebuild a logistics event company into a creative strategy agency. Leads the full creative chain, from pitch strategy to final sign-off.</p>
+      </div>
+    </li>
+    <li class="ch">
+      <div class="ch-when"><div class="ch-y1">2021</div><div class="ch-y2">to 2023</div></div>
+      <div class="ch-main">
+        <div class="ch-cat">Production studio</div>
+        <div class="ch-org">Creative producer and director, DAT Production</div>
+        <p class="ch-body">My own company, run in parallel with the Eventity role. Owned concept to delivery for brand clients across international markets.</p>
+        <p class="ch-ev">Volvo Cars, <b>EMEA and APAC</b> · P3 Guld, <b>live national television</b></p>
+      </div>
+    </li>
+    <li class="ch">
+      <div class="ch-when"><div class="ch-y1">2015</div><div class="ch-y2">to 2022</div></div>
+      <div class="ch-main">
+        <div class="ch-cat">National touring production</div>
+        <div class="ch-org">Writer and director, 5 Degrees</div>
+        <p class="ch-body">Took an original production from blank page to the national stage. Wrote it, directed it, choreographed it and produced the entire tour.</p>
+        <p class="ch-ev"><b>7 years touring</b> · Riksteatern and Dansnät Sverige · Kulturrådet funded</p>
+      </div>
+    </li>
+    <li class="ch">
+      <div class="ch-when"><div class="ch-y1">2004</div><div class="ch-y2">to 2022</div></div>
+      <div class="ch-main">
+        <div class="ch-cat">Live platform</div>
+        <div class="ch-org">Founder and artistic director, Twisted Feet and Gothenburg Dance Festival</div>
+        <p class="ch-body">Built and ran a commercially operating cultural institution for 18 years, and the festival that grew out of it.</p>
+        <p class="ch-ev">Academy of <b>2,000 students a year</b></p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<section class="contact" id="contact">
+  <div class="sec-head">
+    <h2>Contact</h2>
+  </div>
+  <div class="c-row">
+    <h2 class="contact-big">Let's<br><span class="op"><span class="c">talk</span><span class="r" aria-hidden="true">talk</span></span>.</h2>
+    <dl class="c-spec">
+      <div><dt>Based</dt><dd>Gothenburg, Sweden</dd></div>
+      <div><dt>Open to</dt><dd class="red">Relocation</dd></div>
+      <div><dt>Working in</dt><dd>Swedish, English</dd></div>
+    </dl>
+  </div>
+  <div class="c-grid">
+    <a class="c-cell pri" href="mailto:dennyhulten@gmail.com">
+      <span class="c-k">// email</span>
+      <span class="c-v">dennyhulten@gmail.com</span>
+    </a>
+    <a class="c-cell" href="tel:+46705459066">
+      <span class="c-k">// phone · CET</span>
+      <span class="c-v">+46 70 545 90 66</span>
+    </a>
+    <a class="c-cell" href="https://www.linkedin.com/in/dennyhulten/" target="_blank" rel="noopener">
+      <span class="c-k">// linkedin</span>
+      <span class="c-v">/in/dennyhulten<svg class="ico" width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true"><path d="M3 9L9 3M4.5 3H9v4.5"/></svg></span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Denny Hultén</span>
+  <span><a href="#top">Back to top ↑</a></span>
+</footer>
+
+<div class="video-overlay" id="video-modal" role="dialog" aria-modal="true" aria-label="About Denny, three-minute introduction" tabindex="-1" onclick="if(event.target===this)closeVideo()">
+  <button class="video-close" onclick="closeVideo()">Close ✕</button>
+  <div class="video-box" id="video-box"></div>
+</div>
+
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box" id="modal-box" role="dialog" aria-modal="true" aria-labelledby="m-title" tabindex="-1"><div id="modal-content"></div></div>
+</div>
+
+<script>
+const CASES=[
+  {
+    "num": "01",
+    "title": "Play'n GO: Early Access",
+    "img": "images/playngo-evening.webp",
+    "period": "2026-Ongoing",
+    "tag": "Creative Direction & Leadership Communication",
+    "tags": [
+      "Creative Direction",
+      "Leadership Communication",
+      "7 Countries",
+      "3-Year Programme"
+    ],
+    "product": "Creative direction for a three-year employee programme serving seven countries. I shape how Play'n GO's leadership communicates the company's direction through its events, connecting leadership conversations, workshops and employee feedback across spring and autumn.",
+    "assignment": [
+      {
+        "label": "Concept and content",
+        "text": "Built the programme around Play'n GO's existing self-leadership framework. In spring, leaders shared their own challenges before employees explored theirs in workshops tailored to individuals, team leaders and function leaders."
+      },
+      {
+        "label": "Coaching senior leaders",
+        "text": "Prepared the CEO, CFO and CMO through individual conversations. Helped them turn broad principles into concrete stories, gave each a distinct perspective and shaped the talk show around the people in the room. Moderated the spring conversations myself."
+      },
+      {
+        "label": "Early Access method",
+        "text": "Designed the programme to run like an early-access game. Every stop is a playtest, employee feedback becomes the patch notes, and the next stop ships the changes. Changes land between seasons and between stops on the same tour: after the first autumn stop, one workshop was rebuilt before the next."
+      },
+      {
+        "label": "You said, we did",
+        "text": "In spring, the Växjö office asked for the talk show before lunch, more hands-on work, small groups with the steering group and less chaos. Autumn delivered all four. The new small-group sessions with leadership drew more unprompted praise than any other part of the day: 19 people named them, nobody criticised them."
+      },
+      {
+        "label": "Direction: the new workshop",
+        "text": "The small-group sessions became Direction. I designed workplace dilemmas with two viable choices. Each group chooses, explains the trade-off, then hears the company's prepared answer from a leader at the table."
+      },
+      {
+        "label": "Production and feedback tools",
+        "text": "Built AI-supported tools to produce print material and screen content from shared workshop texts, and to compile and compare participant feedback. I interpret the responses and turn them into recommendations. The report links each proposed change to the evidence behind it."
+      },
+      {
+        "label": "Creative direction through delivery",
+        "text": "Developed speaker material, moderator handovers and facilitator guides so the programme can be delivered consistently across locations. Visual concept developed with Claes Moren; event delivery is a team effort through Eventity."
+      }
+    ],
+    "result": "Växjö, 23 October 2026: 5.11 out of 6 from 101 day ratings. 79% rated the day 5 or 6. Direction was the most praised single programme element in the written feedback.",
+    "videos": [
+      {
+        "label": "Eventity event reel",
+        "url": "https://www.instagram.com/eventity.se/reel/DZJzh93slNR/"
+      }
+    ],
+    "client": "Play'n GO",
+    "name": "Early Access: shaping how leadership communicates",
+    "scale": "7 countries · 3-year programme",
+    "alt": "Play'n GO's evening venue in Växjö: red and blue draping, long tables and two screens showing the event graphics.",
+    "slug": "playngo"
+  },
+  {
+    "num": "02",
+    "title": "Volvo Cars Product Launch EMEA & APAC",
+    "img": "images/volvo.webp",
+    "period": "EMEA / APAC",
+    "tag": "Product Launch",
+    "tags": [
+      "International",
+      "Live Production",
+      "Show Direction",
+      "EMEA & APAC"
+    ],
+    "product": "The entertainment show for Volvo Cars' international product launch, delivered with the lead agency. Two week-long events, 300 attendees each, across multiple countries and cultures. I was brought in to own the show: one concept that had to work for every language in the room. EMEA featured Ace of Base, Isak Danielson and GRANT.",
+    "assignment": [
+      {
+        "label": "Concept",
+        "text": "A three-part entertainment narrative carried by visual storytelling, movement and music, with no reliance on shared language or cultural reference. Built to connect across borders without losing its edge."
+      },
+      {
+        "label": "Show direction",
+        "text": "Led the show from concept to stage across both week-long events: live audio, lighting, on-site direction, performer direction. Worked hand in hand with the agency's production team, Volvo's team and the technical crews."
+      },
+      {
+        "label": "Second market",
+        "text": "Built the show to travel: no local rewrite, no restaging between markets."
+      }
+    ],
+    "result": "Volvo reused the EMEA concept for APAC at least a year later.",
+    "videos": [
+      {
+        "label": "Compilation of Event Footage",
+        "url": "https://youtu.be/Z2uKj7mzEy8"
+      }
+    ],
+    "client": "Volvo Cars",
+    "name": "Two week-long launch events, one entertainment show",
+    "scale": "300 guests · EMEA and APAC",
+    "alt": "Volvo Cars product launch event.",
+    "slug": "volvo"
+  },
+  {
+    "num": "03",
+    "title": "P3 Guld: Cleo Show",
+    "img": "images/p3guld.webp",
+    "period": "2023",
+    "tag": "Live Television",
+    "tags": [
+      "Gala Performance",
+      "Choreography",
+      "Performance Coaching",
+      "National Broadcast"
+    ],
+    "product": "Cleo's gala performance at P3 Guld 2023, co-produced for live national television. One performance, two very different audiences at once: the crowd in the venue and the viewers at home.",
+    "assignment": [
+      {
+        "label": "Concept",
+        "text": "Built the visual and narrative concept. Music, choreography and staging worked as one piece that told a story rather than accompanying a song."
+      },
+      {
+        "label": "Choreography and coaching",
+        "text": "Designed all movement for two contexts at once: the venue floor and the camera, which need different spatial thinking. Directed Cleo's delivery, energy and stage presence throughout."
+      },
+      {
+        "label": "Broadcast",
+        "text": "Worked with TV producers, directors and camera teams on shot design and transitions. Every element locked to broadcast standard before going live."
+      }
+    ],
+    "result": "Broadcast live to one of Sweden's largest annual television audiences. No second take.",
+    "videos": [
+      {
+        "label": "Broadcast video",
+        "url": "https://youtu.be/2LU2xnp6zrY?si=AcwH3T0wMxghb7QZ"
+      }
+    ],
+    "client": "P3 Guld",
+    "name": "Cleo's gala, built for the room and the camera at once",
+    "scale": "Live national TV · one take",
+    "alt": "Cleo performing at the P3 Guld gala.",
+    "slug": "p3-guld"
+  },
+  {
+    "num": "04",
+    "title": "Länsförsäkringar Gothenburg: Level 2030 Game World",
+    "img": "images/level2030.webp",
+    "period": "2026-2030",
+    "tag": "5-Year Communication Strategy",
+    "tags": [
+      "Employee Programme",
+      "Game Mechanics",
+      "Concept Design",
+      "550 Employees"
+    ],
+    "product": "A five-year strategy for 550 employees, built as a game world. Each year is a level with its own environment and a boss fight standing for the company's biggest goal that year. Ability Cards carry forward to the 2030 final boss. Reference points: Super Mario, Minecraft, Farmville.",
+    "assignment": [
+      {
+        "label": "Concept",
+        "text": "Replaced the conference format with game mechanics: same strategic content, different energy. Built from a blank page into a five-year arc where every level, boss and ability maps to a real annual goal."
+      },
+      {
+        "label": "Narrative system",
+        "text": "Designed the touchpoints that keep the world alive between events. Office glitches in December, boss-defeat films in January, Ability Cards unlocked at each level. Something new to notice every month, not only at the annual event."
+      },
+      {
+        "label": "Event direction",
+        "text": "Directed the full Year 1 event day, which Veronica Maggio headlined."
+      }
+    ],
+    "result": "Five-year programme, 5 million SEK annual budget, 550 participants. Veronica Maggio headlined Year 1 in September 2026.",
+    "videos": [],
+    "client": "Länsförsäkringar Gothenburg",
+    "name": "Level 2030: five years of strategy, built as a game world",
+    "scale": "550 people · 5M SEK a year",
+    "alt": "Illustrated game-world map for Länsförsäkringar Gothenburg's Level 2030 programme.",
+    "slug": "level2030"
+  },
+  {
+    "num": "05",
+    "title": "Gothenburg Dance Festival",
+    "img": "images/gothenburg.webp",
+    "period": "2009-2017",
+    "tag": "Festival Production",
+    "tags": [
+      "Cultural Festival",
+      "10,000+ Participants",
+      "Eight Editions",
+      "Built From Zero"
+    ],
+    "product": "One of Scandinavia's largest urban expression competitions, co-created and produced across eight consecutive editions. 10,000+ spectators and participants a year, staged as part of the Gothenburg City Culture Festival.",
+    "assignment": [
+      {
+        "label": "Format design",
+        "text": "Designed the competition from scratch: categories, judging criteria, qualification rounds, finals. Refined it every year. Booked international dancers, judges and workshop leaders from the global urban dance community."
+      },
+      {
+        "label": "Partnerships",
+        "text": "Built partnerships with Gothenburg's cultural institutions and created the talent pipeline that fed the wider urban culture movement in western Sweden. The festival worked as infrastructure for a scene."
+      },
+      {
+        "label": "Media direction",
+        "text": "Scripted and directed all festival media across eight years: trailers, documentation, promotional content. The visual identity was built through media as much as through the live production."
+      }
+    ],
+    "result": "The community credibility it built led directly to the Gothia Cup opening ceremony at Ullevi years later.",
+    "videos": [
+      {
+        "label": "Dance Festival Trailer",
+        "url": "https://youtu.be/Aa0SzGL3Dhw?si=5O7hiawmEPPjMuRy"
+      }
+    ],
+    "client": "Gothenburg Dance Festival",
+    "name": "Co-created, produced and directed from zero",
+    "scale": "10,000+ a year · 8 editions",
+    "alt": "Dancers on stage at Gothenburg Dance Festival.",
+    "slug": "gothenburg-dance-festival"
+  },
+  {
+    "num": "06",
+    "title": "Länsförsäkringar Östgöta: The Health Journey",
+    "img": "images/halsoresan.webp",
+    "period": "2024-2025",
+    "tag": "One-Year Wellness Strategy",
+    "tags": [
+      "Annual Conference",
+      "Strategic Reframe",
+      "Health Compass"
+    ],
+    "product": "The client asked for a company retreat. Discovery found a different need: employee wellness across the whole year, with the retreat as its centrepiece. Rebuilt the brief, built the concept, won the business. Featured Olympic swimmer Therese Alshammar.",
+    "assignment": [
+      {
+        "label": "Discovery and reframe",
+        "text": "Ran a discovery process before touching the concept, and it changed what we were building. The Health Compass, four dimensions of health, became the framework for a full year rather than a single event."
+      },
+      {
+        "label": "Dual-audience pitch",
+        "text": "Two parallel narratives in one deck. Employees got purpose, growth and inclusion. The steering board got sick leave reduction, cost savings and measurable outcomes."
+      },
+      {
+        "label": "Client ownership",
+        "text": "Let the client's internal team own the success publicly. They took the standing ovation at the retreat for creative work Eventity had done behind the scenes."
+      }
+    ],
+    "result": "Highest-earning and highest-profit project in Eventity's history. Won the client off their incumbent supplier on the concept alone.",
+    "videos": [],
+    "client": "Länsförsäkringar Östgöta",
+    "name": "The Health Journey: a year of wellness, not a retreat",
+    "scale": "Won off the incumbent supplier",
+    "alt": "The Health Journey conference stage.",
+    "slug": "health-journey"
+  },
+  {
+    "num": "07",
+    "title": "5 Degrees & Passion for Climate",
+    "img": "images/passion.webp",
+    "period": "2015-2022",
+    "tag": "Theatre and Climate Programme",
+    "tags": [
+      "Theatre Direction",
+      "Seven-Year Run",
+      "Social Impact",
+      "Government Funded"
+    ],
+    "product": "Two linked bodies of work. 5 Degrees: an original 75-minute production, written, directed and choreographed from scratch. Street dance against live technology, projections and scripted narrative. Developed with Chalmers University, funded by Kulturrådet, toured nationally through Riksteatern and Dansnät Sverige for seven years. Passion for Climate: a three-year national programme funded by Arvsfonden, merging climate science with live performance. 5 Degrees was its cultural centrepiece, the piece that made the science land with teenagers.",
+    "assignment": [
+      {
+        "label": "Writing and direction",
+        "text": "Lead writer and director on 5 Degrees across its full seven-year run: concept, script, ensemble direction, composer, audio engineer, production lead. Took it from a blank page to national stages with a small team and no institutional backing beyond the initial grant."
+      },
+      {
+        "label": "Funding",
+        "text": "Wrote the proposal that secured three years of government funding from Arvsfonden for Passion for Climate. The format did not exist yet: climate science, live performance and behavioural change in one configuration."
+      },
+      {
+        "label": "Speaking",
+        "text": "Presented the work several times at TEDx Göteborg, on the intersection of climate science, live performance and behavioural change. Used the platform to build reach for the touring programme."
+      }
+    ],
+    "result": "Seven years of national touring on one production. Three years of government funding for the programme it anchored.",
+    "videos": [
+      {
+        "label": "Theatre show",
+        "url": "https://youtu.be/tH-J_zeeGbg?si=L4Xgqvt3rwlbCdR0&t=14"
+      },
+      {
+        "label": "TEDx talk",
+        "url": "https://youtu.be/_eVDLqogkFI"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/passionforclimate/"
+      }
+    ],
+    "client": "5 Degrees & Passion for Climate",
+    "name": "Written, directed and choreographed from scratch",
+    "scale": "7 years touring · state funded",
+    "alt": "The TEDx Göteborg stage, where the Passion for Climate programme was presented.",
+    "slug": "5-degrees"
+  },
+  {
+    "num": "08",
+    "title": "Länsförsäkringar Gothenburg: STARS Summit",
+    "img": "images/stars.webp",
+    "period": "2024",
+    "tag": "5-Year Partnership",
+    "tags": [
+      "Corporate Gala",
+      "Live Entertainment",
+      "Art Direction"
+    ],
+    "product": "Annual summit for 550 employees, inside a five-year partnership. The 2024 edition used astrology as structure: zodiac signs set the team groupings, the entertainment sequence, and how the narrative connected back to company strategy. Live performances by Petter, Molly Sandén and Niklas Källner. Svante Randlert on keynote.",
+    "assignment": [
+      {
+        "label": "Concept",
+        "text": "Astrology as structure. Zodiac signs decided team groupings and entertainment sequencing, and tied the event narrative back to the company's strategic direction."
+      },
+      {
+        "label": "Entertainment direction",
+        "text": "Curated and directed every performer, briefing each act on the concept so the evening ran as one show rather than a conference with a band at the end."
+      },
+      {
+        "label": "Production lead",
+        "text": "Led all production across the event: video content, sound design, presenter direction, environment, and bespoke animation cut into the live performances."
+      }
+    ],
+    "result": "Participants rated STARS the best summit in the partnership's five-year history.",
+    "videos": [
+      {
+        "label": "Behind-the-scenes footage",
+        "url": "https://youtu.be/iSVYipaUSYQ"
+      }
+    ],
+    "client": "Länsförsäkringar Gothenburg",
+    "name": "STARS Summit: the annual gala, built on astrology",
+    "scale": "550 guests · 5-year partnership",
+    "alt": "STARS Summit stage design.",
+    "slug": "stars"
+  }
+];
+
+const reduceMotion=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+document.getElementById('index').innerHTML=CASES.map((c,i)=>{
+  const m=c,period=c.period.replace(/[\u2013\u2014]/g,'-');
+  /* the years go in the rail, stacked the way the About spine stacks them: start year, then
+     where it ends. A single-year project prints one line and nothing else.
+     Below 860px the rail is gone and both of its facts print inside the text column instead:
+     the number in front of the client (.row-n) and the period, unstacked, at the head of the
+     scale line (.row-per). Both forms are always in the markup; CSS shows one of them. */
+  const yr=period.split('-'),
+        yrs=`<span class="row-y">${yr[0]}</span>`+
+            (yr[1]?`<span class="row-y">${/ongoing/i.test(yr[1])?'ongoing':'to '+yr[1]}</span>`:'');
+  /* the label reads the row out in the order the eye takes it, and speaks the scale figure
+     with its separators as pauses rather than as a middot */
+  return `
+  <li class="row-list-item"><a class="row${reduceMotion?'':' pre'}" href="#case/${c.slug}"
+      aria-label="Open case study: ${m.client}. ${m.name}. ${m.scale.replace(/ \u00b7 /g,', ')}. ${period}.">
+    <div class="row-rail"><span class="row-num">N\u00b0${c.num}</span>${yrs}</div>
+    <div class="row-main">
+      <img class="row-thumb" src="${c.img}" alt="${m.alt}" loading="lazy">
+      <span class="row-title"><span class="row-n">N°${c.num}</span>${m.client}</span>
+      <span class="row-name">${m.name}</span>
+      <span class="row-res">${c.result}</span>
+      <span class="row-scale"><span class="row-per">${period} · </span>${m.scale}</span>
+      <span class="row-go" aria-hidden="true">Read the case <b>&#8594;</b></span>
+    </div>
+  </a></li>`;}).join('');
+
+/* sticky preview: follows hover AND keyboard focus, so it is not a mouse-only feature */
+const wpImg=document.getElementById('wp-img'),wpT=document.getElementById('wp-t'),
+      wpTag=document.getElementById('wp-tag'),wpYear=document.getElementById('wp-year');
+const rows=document.querySelectorAll('.row');
+function setPreview(i){
+  const c=CASES[i],m=c;
+  wpImg.src=c.img;wpImg.alt=m.alt;
+  wpT.textContent=c.title;
+  wpTag.textContent=c.tag;
+  wpYear.textContent=c.period.replace(/[\u2013\u2014]/g,'-');
+  rows.forEach((r,n)=>r.classList.toggle('on',n===i));
+}
+rows.forEach((r,i)=>{
+  r.addEventListener('mouseenter',()=>setPreview(i));
+  r.addEventListener('focus',()=>setPreview(i));
+});
+setPreview(0);
+
+let curCase=0,lastFocus=null;
+const pageTitle=document.title;
+const pageNodes=[...document.querySelectorAll('body > nav,body > header,body > section,body > footer')];
+function setPageInert(value){pageNodes.forEach(node=>node.inert=value);}
+const TOTAL=String(CASES.length).padStart(2,'0');
+function videoHost(u){
+  if(/youtu/.test(u))return 'YouTube';
+  if(/instagram/.test(u))return 'Instagram';
+  try{return new URL(u).hostname.replace(/^www\./,'');}catch(e){return 'Watch';}
+}
+function renderCase(i){
+  const o=document.getElementById('modal');
+  if(!o.classList.contains('open')){
+    const active=document.activeElement;
+    lastFocus=active&&active!==document.body?active:rows[i];
+  }
+  curCase=((i%CASES.length)+CASES.length)%CASES.length;
+  const c=CASES[curCase],nx=CASES[(curCase+1)%CASES.length];
+  const aHTML=c.assignment.map((a,idx)=>`<li><span class="m-anum">${String(idx+1).padStart(2,'0')}</span><div class="m-atext"><strong>${a.label}</strong><p>${a.text}</p></div></li>`).join('');
+  const vHTML=c.videos.length?`<div class="m-block"><div class="m-lbl">// Watch</div><div class="m-vids">${c.videos.map(v=>`
+      <a href="${v.url}" class="m-vid" target="_blank" rel="noopener">
+        <span class="play" aria-hidden="true"><svg width="11" height="13" viewBox="0 0 10 12" fill="currentColor"><path d="M0 0l10 6-10 6z"/></svg></span>
+        <span class="lb">${v.label}</span>
+        <span class="host">${videoHost(v.url).toLowerCase()===v.label.toLowerCase()?'':videoHost(v.url)+' '}&#8599;</span>
+      </a>`).join('')}</div></div>`:'';
+  const evidenceHTML=c.slug==='playngo'?playngoEvidence():'';
+  document.getElementById('modal-content').innerHTML=`
+    <div class="m-bar">
+      <div class="m-barl">
+        <span class="m-plate">${c.num}<i>/${TOTAL}</i></span>
+        <span class="m-kind">${c.tag}</span>
+      </div>
+      <div class="m-nav">
+        <button class="m-btn" onclick="stepCase(-1)" aria-label="Previous case">&#8592;</button>
+        <button class="m-btn" onclick="stepCase(1)" aria-label="Next case">&#8594;</button>
+        <button class="m-btn close" onclick="closeModal()">Close<span aria-hidden="true">&#10005;</span></button>
+      </div>
+    </div>
+    <div class="m-hero">
+      <img src="${c.img}" alt="${c.alt}" class="${c.slug==='playngo'?'people':''}">
+    </div>
+    <div class="m-head">
+      <div class="m-eyebrow">${c.tag} <em>/</em> ${c.period}</div>
+      <h3 class="m-title" id="m-title">${c.title}</h3>
+      <div class="m-tags">${c.tags.map(t=>`<span class="m-tag">${t}</span>`).join('')}</div>
+      <a class="m-share" href="#case/${c.slug}">Link to this case <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="m-block invert"><div class="m-lbl">// Result</div><p class="m-result">${c.result}</p></div>
+    ${vHTML}
+    <div class="m-block"><div class="m-lbl">// The project</div><p class="m-product">${c.product}</p></div>
+    ${evidenceHTML}
+    <div class="m-block"><div class="m-lbl">// My role</div><ol class="m-assign">${aHTML}</ol></div>
+    <button class="m-next" onclick="stepCase(1)">
+      <span><span class="k">Next case / N&deg;${nx.num}</span><span class="t">${nx.title}</span></span>
+      <span class="arw" aria-hidden="true">&#8594;</span>
+    </button>
+    <div class="m-hint">Esc closes &middot; &#8592; &#8594; move between cases</div>`;
+  o.classList.add('open');o.scrollTop=0;document.body.style.overflow='hidden';
+  setPageInert(true);document.title=c.title+' | Denny Hultén';
+  document.getElementById('modal-box').focus();
+}
+function playngoEvidence(){
+  return `<section class="m-evidence" aria-labelledby="evidence-title">
+    <h3 id="evidence-title">A request became a workshop.</h3>
+    <ol class="evidence-sequence">
+      <li><h4>The spring request</h4><p>Small discussion groups, with more personal time with the steering group.</p></li>
+      <li><h4>The autumn response</h4><p>Direction: a workplace dilemma, two viable paths and a leader at the table. Participants explain their choice before hearing the company's answer.</p></li>
+      <li><h4>What came back</h4><p>19 of 84 written responses praised Direction unprompted. My recommendation: keep it central and bring the cases closer to each function's work.</p></li>
+    </ol>
+    <table class="feedback-table">
+      <caption>Selected findings from my feedback report</caption>
+      <thead><tr><th scope="col">Växjö, 23 October 2026</th><th scope="col">Responses</th></tr></thead>
+      <tbody><tr><th scope="row">Praised Direction unprompted</th><td>19 of 84 written answers</td></tr>
+      <tr><th scope="row">Rated the day 5 or 6 out of 6</th><td>79% of 101 ratings</td></tr>
+      <tr><th scope="row">Average day rating</th><td>5.11 / 6</td></tr></tbody>
+    </table>
+    <p class="evidence-note">The written responses and day ratings are different measures. The day rating covers the whole programme, not Direction alone.</p>
+    <div class="m-gallery">
+      <figure><a href="images/playngo-screen.webp" target="_blank" rel="noopener" aria-label="Open the screen frame at full size"><img src="images/playngo-screen.webp" alt="Screen frame from the Växjö Gathering: the word FIKA on a red sunburst, with the day's schedule as a progress bar." width="1600" height="900" loading="lazy"></a><figcaption>A frame from the screen content for the day. Print and screen material are produced from shared workshop texts. Visual concept developed with Claes Moren.</figcaption></figure>
+    </div>
+  </section>`;
+}
+
+function openModal(i){
+  const index=((i%CASES.length)+CASES.length)%CASES.length;
+  const hash='#case/'+CASES[index].slug;
+  const alreadyOpen=document.getElementById('modal').classList.contains('open');
+  if(location.hash!==hash){
+    if(alreadyOpen)history.replaceState(history.state,'',hash);
+    else history.pushState({portfolioCase:true},'',hash);
+  }
+  renderCase(index);
+}
+function stepCase(d){openModal(curCase+d);}
+function hideCase(){
+  const o=document.getElementById('modal');
+  if(!o.classList.contains('open'))return;
+  o.classList.remove('open');document.body.style.overflow='';setPageInert(false);
+  document.title=pageTitle;
+  if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
+  lastFocus=null;
+}
+function closeModal(){
+  if(!document.getElementById('modal').classList.contains('open'))return;
+  if(history.state&&history.state.portfolioCase){history.back();}
+  else{history.replaceState(null,'','#work');hideCase();}
+}
+function syncCaseFromURL(){
+  const slug=location.hash.startsWith('#case/')?location.hash.slice(6):'';
+  const i=CASES.findIndex(c=>c.slug===slug);
+  if(i<0){hideCase();return;}
+  if(document.getElementById('modal').classList.contains('open')&&curCase===i)return;
+  renderCase(i);
+}
+document.addEventListener('click',e=>{
+  const link=e.target.closest('a[href^="#case/"]');
+  if(!link||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+  const i=CASES.findIndex(c=>'#case/'+c.slug===link.getAttribute('href'));
+  if(i<0)return;
+  e.preventDefault();openModal(i);
+});
+window.addEventListener('popstate',syncCaseFromURL);
+window.addEventListener('hashchange',syncCaseFromURL);
+
+const INTRO_VIDEO_ID='FcYKbmeggyM';
+let videoFocus=null;
+function openVideo(){
+  videoFocus=document.activeElement;
+  document.getElementById('video-box').innerHTML=`<iframe title="Denny Hultén: three-minute introduction" src="https://www.youtube.com/embed/${INTRO_VIDEO_ID}?autoplay=1&rel=0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+  document.getElementById('video-modal').classList.add('open');document.body.style.overflow='hidden';
+  setPageInert(true);document.querySelector('.video-close').focus();
+}
+function closeVideo(){
+  const dialog=document.getElementById('video-modal');
+  if(!dialog.classList.contains('open'))return;
+  dialog.classList.remove('open');document.getElementById('video-box').innerHTML='';
+  document.body.style.overflow='';setPageInert(false);
+  if(videoFocus&&videoFocus.focus)videoFocus.focus({preventScroll:true});
+  videoFocus=null;
+}
+document.addEventListener('keydown',e=>{
+  const video=document.getElementById('video-modal');
+  const modal=document.getElementById('modal');
+  const dialog=video.classList.contains('open')?video:modal.classList.contains('open')?modal:null;
+  if(!dialog)return;
+  if(e.key==='Escape'){e.preventDefault();dialog===video?closeVideo():closeModal();return;}
+  if(dialog===modal){
+    if(e.key==='ArrowRight'){e.preventDefault();stepCase(1);return;}
+    if(e.key==='ArrowLeft'){e.preventDefault();stepCase(-1);return;}
+  }
+  if(e.key!=='Tab')return;
+  const f=[...dialog.querySelectorAll('a[href],button,iframe')].filter(el=>el.offsetWidth||el.offsetHeight);
+  if(!f.length)return;
+  const first=f[0],last=f[f.length-1],active=document.activeElement;
+  if(e.shiftKey&&(active===first||active===dialog||active===document.getElementById('modal-box'))){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&active===last){e.preventDefault();first.focus();}
+});
+syncCaseFromURL();
+
+/* reveal: cards default to visible (see .pre in CSS); this only removes .pre where JS
+   opted a card into the hidden pre-state above. If IntersectionObserver throws, or a
+   card is never scrolled into view by a human, the fallback below still guarantees every
+   card becomes visible: no content stays permanently gated behind a scroll event. */
+try{
+  const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting){en.target.classList.remove('pre');io.unobserve(en.target);}})},{threshold:0.06,rootMargin:'0px 0px -4% 0px'});
+  document.querySelectorAll('.row.pre').forEach(el=>io.observe(el));
+}catch(e){
+  document.querySelectorAll('.row.pre').forEach(el=>el.classList.remove('pre'));
+}
+setTimeout(()=>document.querySelectorAll('.row.pre').forEach(el=>el.classList.remove('pre')),1600);
+
+/* nav scroll-spy */
+const navEl=document.querySelector('nav');
+try{
+  const navLinks=[...document.querySelectorAll('.nav-links a[href^="#"]')];
+  const spy=new IntersectionObserver(es=>{
+    es.forEach(en=>{
+      if(en.isIntersecting){
+        navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+en.target.id));
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  ['work','approach','about','contact'].forEach(id=>{const el=document.getElementById(id);if(el)spy.observe(el);});
+
+  /* nav role + status reveal: the hero already says both, so they only appear once it is gone.
+     Fails open, if this throws the CSS default is collapsed but the hero still carries the facts. */
+  const heroEl=document.querySelector('.hero');
+  if(heroEl){
+    const heroSpy=new IntersectionObserver(es=>{
+      es.forEach(en=>document.body.classList.toggle('past-hero',!en.isIntersecting));
+    },{threshold:0});
+    heroSpy.observe(heroEl);
+  }
+}catch(e){}
+
+/* read-position rule: fills the nav's bottom hairline in proportion to scroll depth,
+   so the persistent chrome reports document length and position at zero pixel cost. */
+if(navEl){
+  let ticking=false;
+  const setProg=()=>{
+    ticking=false;
+    const d=document.documentElement;
+    const max=d.scrollHeight-d.clientHeight;
+    const p=max>4?Math.min(1,Math.max(0,(window.scrollY||d.scrollTop)/max)):0;
+    navEl.style.setProperty('--prog',(p*100).toFixed(2)+'%');
+  };
+  const onScroll=()=>{if(!ticking){ticking=true;requestAnimationFrame(setProg);}};
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  setProg();
+
+  /* in-page nav links land below the fixed bar instead of under it, and move keyboard
+     focus to the section they jump to. */
+  navEl.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const t=document.getElementById(a.getAttribute('href').slice(1));
+      if(!t)return;
+      e.preventDefault();
+      history.replaceState(null,'',a.getAttribute('href'));
+      const y=t.getBoundingClientRect().top+window.scrollY-(navEl.offsetHeight+10);
+      const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+      window.scrollTo({top:Math.max(0,y),behavior:reduce?'auto':'smooth'});
+      t.setAttribute('tabindex','-1');
+      t.focus({preventScroll:true});
+    });
+  });
+}
+
+</script>
+</body>
+</html>
